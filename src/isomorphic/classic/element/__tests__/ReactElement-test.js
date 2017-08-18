@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -28,9 +28,9 @@ describe('ReactElement', () => {
     originalSymbol = global.Symbol;
     global.Symbol = undefined;
 
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
     // NOTE: We're explicitly not using JSX here. This is intended to test
     // classic JS without JSX.
@@ -85,7 +85,7 @@ describe('ReactElement', () => {
       'Child: `key` is not a prop. Trying to access it will result ' +
         'in `undefined` being returned. If you need to access the same ' +
         'value within the child component, you should pass it as a different ' +
-        'prop. (https://fb.me/react-special-props)',
+        'prop. (https://fb.me/reacc-special-props)',
     );
   });
 
@@ -99,7 +99,7 @@ describe('ReactElement', () => {
       'div: `key` is not a prop. Trying to access it will result ' +
         'in `undefined` being returned. If you need to access the same ' +
         'value within the child component, you should pass it as a different ' +
-        'prop. (https://fb.me/react-special-props)',
+        'prop. (https://fb.me/reacc-special-props)',
     );
   });
 
@@ -127,7 +127,7 @@ describe('ReactElement', () => {
       'Child: `ref` is not a prop. Trying to access it will result ' +
         'in `undefined` being returned. If you need to access the same ' +
         'value within the child component, you should pass it as a different ' +
-        'prop. (https://fb.me/react-special-props)',
+        'prop. (https://fb.me/reacc-special-props)',
     );
   });
 
@@ -442,7 +442,7 @@ describe('ReactElement', () => {
       return OTHER_SYMBOL;
     };
     global.Symbol.for = function(key) {
-      if (key === 'react.element') {
+      if (key === 'reacc.element') {
         return REACT_ELEMENT_TYPE;
       }
       return OTHER_SYMBOL;
@@ -450,7 +450,7 @@ describe('ReactElement', () => {
 
     jest.resetModules();
 
-    React = require('react');
+    React = require('reacc');
 
     class Component extends React.Component {
       render() {
@@ -479,9 +479,9 @@ describe('comparing jsx vs .createFactory() vs .createElement()', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
     Child = jest.genMockFromModule('ReactElementTestChild');
   });
 

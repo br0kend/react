@@ -56,7 +56,7 @@ if (__DEV__) {
 
     var currentComponentErrorInfo =
       'Each child in an array or iterator should have a unique ' +
-      '"key" prop. See https://fb.me/react-warning-keys for ' +
+      '"key" prop. See https://fb.me/reacc-warning-keys for ' +
       'more information.' +
       (getCurrentFiberStackAddendum() || '');
     if (ownerHasKeyUseWarning[currentComponentErrorInfo]) {
@@ -67,7 +67,7 @@ if (__DEV__) {
     warning(
       false,
       'Each child in an array or iterator should have a unique ' +
-        '"key" prop. See https://fb.me/react-warning-keys for ' +
+        '"key" prop. See https://fb.me/reacc-warning-keys for ' +
         'more information.%s',
       getCurrentFiberStackAddendum(),
     );
@@ -103,7 +103,7 @@ const FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
 // The Symbol used to tag the ReactElement type. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
 const REACT_ELEMENT_TYPE =
-  (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
+  (typeof Symbol === 'function' && Symbol.for && Symbol.for('reacc.element')) ||
   0xeac7;
 
 function getIteratorFn(maybeIterable: ?any): ?() => ?Iterator<*> {
@@ -172,7 +172,7 @@ function coerceRef(current: Fiber | null, element: ReactElement) {
         element._owner,
         'Element ref was specified as a string (%s) but no owner was ' +
           'set. You may have multiple copies of React loaded. ' +
-          '(details: https://fb.me/react-refs-must-have-owner).',
+          '(details: https://fb.me/reacc-refs-must-have-owner).',
         mixedRef,
       );
     }

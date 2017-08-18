@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reacc';
 
 import FixtureSet from '../../FixtureSet';
 import TestCase from '../../TestCase';

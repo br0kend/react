@@ -35,10 +35,10 @@ describe('dev-expression', () => {
     process.env.NODE_ENV = oldEnv;
   });
 
-  it("should add `reactProdInvariant` when it finds `require('invariant')`", () => {
+  it("should add `reaccProdInvariant` when it finds `require('invariant')`", () => {
     compare(
       "var invariant = require('invariant');",
-      `var _prodInvariant = require('reactProdInvariant');
+      `var _prodInvariant = require('reaccProdInvariant');
 
 var invariant = require('invariant');`
     );
@@ -47,7 +47,7 @@ var invariant = require('invariant');`
   it('should replace simple invariant calls', () => {
     compare(
       "invariant(condition, 'Do not override existing functions.');",
-      "var _prodInvariant = require('reactProdInvariant');\n\n" +
+      "var _prodInvariant = require('reaccProdInvariant');\n\n" +
         '!condition ? ' +
         '__DEV__ ? ' +
         "invariant(false, 'Do not override existing functions.') : " +
@@ -55,7 +55,7 @@ var invariant = require('invariant');`
     );
   });
 
-  it('should only add `reactProdInvariant` once', () => {
+  it('should only add `reaccProdInvariant` once', () => {
     var expectedInvariantTransformResult =
       '!condition ? ' +
       '__DEV__ ? ' +
@@ -66,7 +66,7 @@ var invariant = require('invariant');`
       `var invariant = require('invariant');
 invariant(condition, 'Do not override existing functions.');
 invariant(condition, 'Do not override existing functions.');`,
-      `var _prodInvariant = require('reactProdInvariant');
+      `var _prodInvariant = require('reaccProdInvariant');
 
 var invariant = require('invariant');
 ${expectedInvariantTransformResult}
@@ -77,7 +77,7 @@ ${expectedInvariantTransformResult}`
   it('should support invariant calls with args', () => {
     compare(
       "invariant(condition, 'Expected %s target to be an array; got %s', 'foo', 'bar');",
-      "var _prodInvariant = require('reactProdInvariant');\n\n" +
+      "var _prodInvariant = require('reaccProdInvariant');\n\n" +
         '!condition ? ' +
         '__DEV__ ? ' +
         "invariant(false, 'Expected %s target to be an array; got %s', 'foo', 'bar') : " +
@@ -88,7 +88,7 @@ ${expectedInvariantTransformResult}`
   it('should support invariant calls with a concatenated template string and args', () => {
     compare(
       "invariant(condition, 'Expected a component class, ' + 'got %s.' + '%s', 'Foo', 'Bar');",
-      "var _prodInvariant = require('reactProdInvariant');\n\n" +
+      "var _prodInvariant = require('reaccProdInvariant');\n\n" +
         '!condition ? ' +
         '__DEV__ ? ' +
         "invariant(false, 'Expected a component class, got %s.%s', 'Foo', 'Bar') : " +

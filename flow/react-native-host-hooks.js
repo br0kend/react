@@ -36,7 +36,7 @@ declare module 'UIManager' {
   declare var customBubblingEventTypes : Object;
   declare var customDirectEventTypes : Object;
   declare function createView(
-    reactTag : number,
+    reaccTag : number,
     viewName : string,
     rootTag : number,
     props : ?Object,
@@ -65,10 +65,10 @@ declare module 'UIManager' {
   declare function replaceExistingNonRootView() : void;
   declare function setChildren(
     containerTag : number,
-    reactTags : Array<number>,
+    reaccTags : Array<number>,
   ) : void;
   declare function updateView(
-    reactTag : number,
+    reaccTag : number,
     viewName : string,
     props : ?Object,
   ) : void;

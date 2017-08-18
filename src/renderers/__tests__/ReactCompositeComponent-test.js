@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -26,13 +26,13 @@ var shallowCompare;
 describe('ReactCompositeComponent', () => {
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-    ReactDOMServer = require('react-dom/server');
-    ReactCurrentOwner = require('react')
+    ReactDOMServer = require('reacc-dom/server');
+    ReactCurrentOwner = require('reacc')
       .__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner;
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
     PropTypes = require('prop-types');
     shallowEqual = require('fbjs/lib/shallowEqual');
 
@@ -146,7 +146,7 @@ describe('ReactCompositeComponent', () => {
     }
   });
 
-  it('should react to state changes from callbacks', () => {
+  it('should reacc to state changes from callbacks', () => {
     var instance = ReactTestUtils.renderIntoDocument(<MorphingComponent />);
     var el = ReactDOM.findDOMNode(instance);
     expect(el.tagName).toBe('A');

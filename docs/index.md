@@ -19,7 +19,7 @@ id: home
     <div class="marketing-col">
       <h3>Learn Once, Write Anywhere</h3>
       <p>We don't make assumptions about the rest of your technology stack, so you can develop new features in React without rewriting existing code.</p>
-      <p>React can also render on the server using Node and power mobile apps using <a href="https://facebook.github.io/react-native/">React Native</a>.</p>
+      <p>React can also render on the server using Node and power mobile apps using <a href="https://facebook.github.io/reacc-native/">React Native</a>.</p>
     </div>
   </div>
 </section>
@@ -73,10 +73,10 @@ id: home
     </div>
   </div>
   <script src="https://unpkg.com/remarkable@1.7.1/dist/remarkable.min.js"></script>
-  <script src="/react/js/examples/hello.js"></script>
-  <script src="/react/js/examples/timer.js"></script>
-  <script src="/react/js/examples/todo.js"></script>
-  <script src="/react/js/examples/markdown.js"></script>
+  <script src="/reacc/js/examples/hello.js"></script>
+  <script src="/reacc/js/examples/timer.js"></script>
+  <script src="/reacc/js/examples/todo.js"></script>
+  <script src="/reacc/js/examples/markdown.js"></script>
 </section>
 <hr class="home-divider" />
 <section class="home-bottom-section">

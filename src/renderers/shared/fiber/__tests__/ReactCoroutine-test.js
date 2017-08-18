@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -19,8 +19,8 @@ var ReactFeatureFlags;
 describe('ReactCoroutine', () => {
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactNoop = require('react-noop-renderer');
+    React = require('reacc');
+    ReactNoop = require('reacc-noop-renderer');
     // TODO: can we express this test with only public API?
     ReactCoroutine = require('ReactCoroutine');
     ReactFeatureFlags = require('ReactFeatureFlags');

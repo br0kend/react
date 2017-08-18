@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import semver from 'semver';
-import React from 'react';
+import React from 'reacc';
 import PropTypes from 'prop-types';
 import {parse} from 'query-string';
 import {semverString} from './propTypes';
@@ -66,7 +66,7 @@ class TestCase extends React.Component {
           {introducedIn &&
             <dd>
               <a
-                href={'https://github.com/facebook/react/tag/v' + introducedIn}>
+                href={'https://github.com/facebook/reacc/tag/v' + introducedIn}>
                 <code>{introducedIn}</code>
               </a>
             </dd>}
@@ -74,7 +74,7 @@ class TestCase extends React.Component {
           {resolvedIn && <dt>First supported in: </dt>}
           {resolvedIn &&
             <dd>
-              <a href={'https://github.com/facebook/react/tag/v' + resolvedIn}>
+              <a href={'https://github.com/facebook/reacc/tag/v' + resolvedIn}>
                 <code>{resolvedIn}</code>
               </a>
             </dd>}
@@ -84,7 +84,7 @@ class TestCase extends React.Component {
             <dd>
               <a
                 href={
-                  'https://github.com/facebook/react/pull/' +
+                  'https://github.com/facebook/reacc/pull/' +
                     resolvedBy.slice(1)
                 }>
                 <code>{resolvedBy}</code>

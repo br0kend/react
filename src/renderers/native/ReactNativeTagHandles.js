@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule ReactNativeTagHandles
+ * @providesModule ReaccNativeTagHandles
  * @flow
  */
 'use strict';
@@ -27,32 +27,32 @@ var invariant = require('fbjs/lib/invariant');
  * unmount a component with a `rootNodeID`, then mount a new one in its place,
  */
 var INITIAL_TAG_COUNT = 1;
-var ReactNativeTagHandles = {
+var ReaccNativeTagHandles = {
   tagsStartAt: INITIAL_TAG_COUNT,
   tagCount: INITIAL_TAG_COUNT,
 
   allocateTag: function(): number {
     // Skip over root IDs as those are reserved for native
-    while (this.reactTagIsNativeTopRootID(ReactNativeTagHandles.tagCount)) {
-      ReactNativeTagHandles.tagCount++;
+    while (this.reaccTagIsNativeTopRootID(ReaccNativeTagHandles.tagCount)) {
+      ReaccNativeTagHandles.tagCount++;
     }
-    var tag = ReactNativeTagHandles.tagCount;
-    ReactNativeTagHandles.tagCount++;
+    var tag = ReaccNativeTagHandles.tagCount;
+    ReaccNativeTagHandles.tagCount++;
     return tag;
   },
 
   assertRootTag: function(tag: number): void {
     invariant(
-      this.reactTagIsNativeTopRootID(tag),
+      this.reaccTagIsNativeTopRootID(tag),
       'Expect a native root tag, instead got %s',
       tag,
     );
   },
 
-  reactTagIsNativeTopRootID: function(reactTag: number): boolean {
+  reaccTagIsNativeTopRootID: function(reactTag: number): boolean {
     // We reserve all tags that are 1 mod 10 for native root views
-    return reactTag % 10 === 1;
+    return reaccTag % 10 === 1;
   },
 };
 
-module.exports = ReactNativeTagHandles;
+module.exports = ReaccNativeTagHandles;

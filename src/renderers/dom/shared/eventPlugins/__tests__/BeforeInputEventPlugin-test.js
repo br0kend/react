@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
-var ReactTestUtils = require('react-dom/test-utils');
+var React = require('reacc');
+var ReactTestUtils = require('reacc-dom/test-utils');
 
 var EventMapping = {
   compositionstart: 'topCompositionStart',
@@ -48,7 +48,7 @@ describe('BeforeInputEventPlugin', function() {
 
     // Modules which have dependency on BeforeInputEventPlugin are stored
     // in ModuleCache so that we can use these modules ouside test functions.
-    this.ReactDOM = require('react-dom');
+    this.ReactDOM = require('reacc-dom');
 
     // TODO: can we express this test with only public API?
     this.ReactDOMComponentTree = require('ReactDOMComponentTree');

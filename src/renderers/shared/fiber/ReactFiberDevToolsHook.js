@@ -50,7 +50,7 @@ function injectInternals(internals: Object): boolean {
         false,
         'The installed version of React DevTools is too old and will not work ' +
           'with the current version of React. Please update React DevTools. ' +
-          'https://fb.me/react-devtools',
+          'https://fb.me/reacc-devtools',
       );
     }
     // DevTools exists, even though it doesn't support Fiber.

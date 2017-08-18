@@ -30,7 +30,7 @@ module.exports = function(vorpal, app) {
               message: `${chalk.bold('GitHub token?')} ${chalk.grey('(needs "repo" privs)')} `,
             },
             {
-              name: 'reactPath',
+              name: 'reaccPath',
               type: 'input',
               message: `${chalk.bold('Location of local React checkout?')} `,
               validate: input => {

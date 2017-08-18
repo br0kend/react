@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 // NOTE: We're explicitly not using JSX here. This is intended to test
@@ -25,8 +25,8 @@ describe('ReactChildReconciler', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   function createIterable(array) {

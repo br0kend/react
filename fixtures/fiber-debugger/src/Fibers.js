@@ -1,8 +1,8 @@
-import React from 'react';
-import {Motion, spring} from 'react-motion';
+import React from 'reacc';
+import {Motion, spring} from 'reacc-motion';
 import dagre from 'dagre';
 // import prettyFormat from 'pretty-format';
-// import reactElement from 'pretty-format/plugins/ReactElement';
+// import reaccElement from 'pretty-format/plugins/ReactElement';
 
 function getFiberColor(fibers, id) {
   if (fibers.currentIDs.indexOf(id) > -1) {
@@ -295,7 +295,7 @@ export default function Fibers({fibers, show, graphSettings, ...rest}) {
                 backgroundColor: getFiberColor(fibers, fiber.id),
               }}
               title={
-                /*prettyFormat(fiber, { plugins: [reactElement ]})*/
+                /*prettyFormat(fiber, { plugins: [reaccElement ]})*/
                 'todo: this was hanging last time I tried to pretty print'
               }>
               <small>{fiber.tag} #{fiber.id}</small>

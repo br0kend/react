@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -26,9 +26,9 @@ describe('ReactComponentTreeHook', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
     ReactInstanceMap = require('ReactInstanceMap');
     ReactDebugCurrentFiber = require('ReactDebugCurrentFiber');
     ReactComponentTreeHook = require('ReactComponentTreeHook');
@@ -140,7 +140,7 @@ describe('ReactComponentTreeHook', () => {
       });
 
       it('is created during mounting', () => {
-        // https://github.com/facebook/react/issues/7187
+        // https://github.com/facebook/reacc/issues/7187
         var el = document.createElement('div');
         var portalEl = document.createElement('div');
         class Foo extends React.Component {
@@ -155,7 +155,7 @@ describe('ReactComponentTreeHook', () => {
       });
 
       it('is created when calling renderToString during render', () => {
-        // https://github.com/facebook/react/issues/7190
+        // https://github.com/facebook/reacc/issues/7190
         var el = document.createElement('div');
         class Foo extends React.Component {
           render() {
@@ -2107,9 +2107,9 @@ describe('ReactComponentTreeHook', () => {
 
       jest.resetModules();
 
-      React = require('react');
-      ReactDOM = require('react-dom');
-      ReactDOMServer = require('react-dom/server');
+      React = require('reacc');
+      ReactDOM = require('reacc-dom');
+      ReactDOMServer = require('reacc-dom/server');
       ReactInstanceMap = require('ReactInstanceMap');
       ReactComponentTreeHook = require('ReactComponentTreeHook');
       ReactComponentTreeTestUtils = require('ReactComponentTreeTestUtils');

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -20,20 +20,20 @@ var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
 describe('ReactServerRenderingBrowser', () => {
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactDOMServer = require('reacc-dom/server');
     // For extra isolation between what would be two bundles on npm
     jest.resetModuleRegistry();
-    ReactDOMServerBrowser = require('react-dom/server.browser');
+    ReactDOMServerBrowser = require('reacc-dom/server.browser');
   });
 
-  it('provides the same top-level API as react-dom/server', () => {
+  it('provides the same top-level API as reacc-dom/server', () => {
     expect(Object.keys(ReactDOMServerBrowser)).toEqual(
       Object.keys(ReactDOMServer),
     );
   });
 
-  it('returns the same results as react-dom/server', () => {
+  it('returns the same results as reacc-dom/server', () => {
     class Nice extends React.Component {
       render() {
         return <h2>I am feeling very good today, thanks, how are you?</h2>;

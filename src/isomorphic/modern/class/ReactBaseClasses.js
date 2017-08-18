@@ -100,7 +100,7 @@ if (__DEV__) {
     replaceState: [
       'replaceState',
       'Refactor your code to use setState instead (see ' +
-        'https://github.com/facebook/react/issues/3236).',
+        'https://github.com/facebook/reacc/issues/3236).',
     ],
   };
   var defineDeprecationWarning = function(methodName, info) {

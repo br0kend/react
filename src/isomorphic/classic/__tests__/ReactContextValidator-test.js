@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 // This test doesn't really have a good home yet. I'm leaving it here since this
@@ -31,9 +31,9 @@ describe('ReactContextValidator', () => {
     jest.resetModules();
 
     PropTypes = require('prop-types');
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   // TODO: This behavior creates a runtime dependency on propTypes. We should

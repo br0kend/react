@@ -19,8 +19,8 @@ const ReactDOMUnstableNativeDependencies = {
   ResponderTouchHistoryStore,
 };
 
-// Inject react-dom's ComponentTree into this module.
-const ReactDOM = require('react-dom');
+// Inject reacc-dom's ComponentTree into this module.
+const ReactDOM = require('reacc-dom');
 const {
   ReactDOMComponentTree,
 } = ReactDOM.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;

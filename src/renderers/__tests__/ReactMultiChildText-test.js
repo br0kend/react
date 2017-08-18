@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+var React = require('reacc');
+var ReactDOM = require('reacc-dom');
 var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-var ReactTestUtils = require('react-dom/test-utils');
+var ReactTestUtils = require('reacc-dom/test-utils');
 
 // Helpers
 var testAllPermutations = function(testCases) {
@@ -67,7 +67,7 @@ var expectChildren = function(container, children) {
           openingCommentNode = outerNode.childNodes[mountIndex];
 
           expect(openingCommentNode.nodeType).toBe(8);
-          expect(openingCommentNode.nodeValue).toMatch(/ react-text: [0-9]+ /);
+          expect(openingCommentNode.nodeValue).toMatch(/ reacc-text: [0-9]+ /);
 
           if (child === '') {
             textNode = null;
@@ -85,7 +85,7 @@ var expectChildren = function(container, children) {
           }
 
           expect(closingCommentNode.nodeType).toBe(8);
-          expect(closingCommentNode.nodeValue).toBe(' /react-text ');
+          expect(closingCommentNode.nodeValue).toBe(' /reacc-text ');
         }
       } else {
         var elementDOMNode = outerNode.childNodes[mountIndex];

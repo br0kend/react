@@ -25,7 +25,7 @@ function compile(content, contentFilename) {
     getSourceFile(filename, languageVersion) {
       var source;
       var jestRegex = /jest\.d\.ts/;
-      var reactRegex = /(?:React|ReactDOM|PropTypes)(?:\.d)?\.ts$/;
+      var reaccRegex = /(?:React|ReactDOM|PropTypes)(?:\.d)?\.ts$/;
 
       // `path.normalize` is used to turn forward slashes in
       // the file path into backslashes on Windows.
@@ -38,7 +38,7 @@ function compile(content, contentFilename) {
         source = fs.readFileSync(path.join(__dirname, 'jest.d.ts')).toString();
       } else if (filename === contentFilename) {
         source = content;
-      } else if (reactRegex.test(filename)) {
+      } else if (reaccRegex.test(filename)) {
         // TypeScript will look for the .d.ts files in each ancestor directory,
         // so there may not be a file at the referenced path as it climbs the
         // hierarchy.

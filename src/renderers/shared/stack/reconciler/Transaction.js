@@ -57,7 +57,7 @@ var OBSERVED_ERROR = {};
  * - Preserving the input selection ranges before/after reconciliation.
  *   Restoring selection even in the event of an unexpected error.
  * - Deactivating events while rearranging the DOM, preventing blurs/focuses,
- *   while guaranteeing that afterwards, the event system is reactivated.
+ *   while guaranteeing that afterwards, the event system is reaccivated.
  * - Flushing a queue of collected DOM mutations to the main UI thread after a
  *   reconciliation takes place in a worker thread.
  * - Invoking any collected `componentDidUpdate` callbacks after rendering new

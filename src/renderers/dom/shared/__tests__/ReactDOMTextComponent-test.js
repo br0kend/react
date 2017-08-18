@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -27,9 +27,9 @@ function filterOutComments(nodeList) {
 
 describe('ReactDOMTextComponent', () => {
   beforeEach(() => {
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
   });
 
@@ -116,25 +116,25 @@ describe('ReactDOMTextComponent', () => {
 
   it('can reconcile text from pre-rendered markup', () => {
     var el = document.createElement('div');
-    var reactEl = <div>{'foo'}{'bar'}{'baz'}</div>;
-    el.innerHTML = ReactDOMServer.renderToString(reactEl);
+    var reaccEl = <div>{'foo'}{'bar'}{'baz'}</div>;
+    el.innerHTML = ReactDOMServer.renderToString(reaccEl);
 
     if (ReactDOMFeatureFlags.useFiber) {
-      ReactDOM.hydrate(reactEl, el);
+      ReactDOM.hydrate(reaccEl, el);
     } else {
-      ReactDOM.render(reactEl, el);
+      ReactDOM.render(reaccEl, el);
     }
     expect(el.textContent).toBe('foobarbaz');
 
     ReactDOM.unmountComponentAtNode(el);
 
-    reactEl = <div>{''}{''}{''}</div>;
-    el.innerHTML = ReactDOMServer.renderToString(reactEl);
+    reaccEl = <div>{''}{''}{''}</div>;
+    el.innerHTML = ReactDOMServer.renderToString(reaccEl);
 
     if (ReactDOMFeatureFlags.useFiber) {
-      ReactDOM.hydrate(reactEl, el);
+      ReactDOM.hydrate(reaccEl, el);
     } else {
-      ReactDOM.render(reactEl, el);
+      ReactDOM.render(reaccEl, el);
     }
     expect(el.textContent).toBe('');
   });

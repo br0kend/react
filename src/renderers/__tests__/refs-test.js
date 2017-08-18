@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-var ReactTestUtils = require('react-dom/test-utils');
+var ReactTestUtils = require('reacc-dom/test-utils');
 
 /**
  * Counts clicks and has a renders an item for each click. Each item rendered
@@ -111,11 +111,11 @@ var expectClickLogsLengthToBe = function(instance, length) {
   expect(Object.keys(instance.refs.myCounter.refs).length).toBe(length);
 };
 
-describe('reactiverefs', () => {
+describe('reacciverefs', () => {
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   /**
@@ -170,8 +170,8 @@ describe('ref swapping', () => {
   let RefHopsAround;
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     RefHopsAround = class extends React.Component {
       state = {count: 0};
@@ -311,8 +311,8 @@ describe('ref swapping', () => {
 describe('string refs between fiber and stack', () => {
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   it('attaches, detaches from fiber component with stack layer', () => {
@@ -400,7 +400,7 @@ describe('root level refs', () => {
   });
 
   it('attaches and detaches root refs', () => {
-    var ReactDOM = require('react-dom');
+    var ReactDOM = require('reacc-dom');
     var inst = null;
 
     // host node
@@ -493,26 +493,26 @@ describe('creating element with ref in constructor', () => {
     'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' +
     "be adding a ref to a component that was not created inside a component's " +
     '`render` method, or you have multiple copies of React loaded ' +
-    '(details: https://fb.me/react-refs-must-have-owner).';
+    '(details: https://fb.me/reacc-refs-must-have-owner).';
 
   var prodErrorMessage =
     'Minified React error #119; visit ' +
-    'http://facebook.github.io/react/docs/error-decoder.html?invariant=119 for the full message ' +
+    'http://facebook.github.io/reacc/docs/error-decoder.html?invariant=119 for the full message ' +
     'or use the non-minified dev environment for full errors and additional helpful warnings.';
 
   var fiberDevErrorMessage =
     'Element ref was specified as a string (p) but no owner was ' +
     'set. You may have multiple copies of React loaded. ' +
-    '(details: https://fb.me/react-refs-must-have-owner).';
+    '(details: https://fb.me/reacc-refs-must-have-owner).';
 
   var fiberProdErrorMessage =
     'Minified React error #149; visit ' +
-    'http://facebook.github.io/react/docs/error-decoder.html?invariant=149&args[]=p ' +
+    'http://facebook.github.io/reacc/docs/error-decoder.html?invariant=149&args[]=p ' +
     'for the full message or use the non-minified dev environment for full errors and additional ' +
     'helpful warnings.';
 
   it('throws an error when __DEV__ = true', () => {
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     var originalDev = __DEV__;
     __DEV__ = true;
@@ -529,7 +529,7 @@ describe('creating element with ref in constructor', () => {
   });
 
   it('throws an error when __DEV__ = false', () => {
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     var originalDev = __DEV__;
     __DEV__ = false;

@@ -1,11 +1,11 @@
-import React from 'react';
-import {renderToString} from 'react-dom/server';
+import React from 'reacc';
+import {renderToString} from 'reacc-dom/server';
 
 import App from '../src/components/App';
 
 let assets;
 if (process.env.NODE_ENV === 'development') {
-  // Use the bundle from create-react-app's server in development mode.
+  // Use the bundle from create-reacc-app's server in development mode.
   assets = {
     'main.js': '/static/js/bundle.js',
     'main.css': '',

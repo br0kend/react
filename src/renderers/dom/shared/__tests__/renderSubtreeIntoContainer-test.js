@@ -6,17 +6,17 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 var PropTypes = require('prop-types');
-var ReactDOM = require('react-dom');
+var ReactDOM = require('reacc-dom');
 var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-var ReactTestUtils = require('react-dom/test-utils');
-var renderSubtreeIntoContainer = require('react-dom')
+var ReactTestUtils = require('reacc-dom/test-utils');
+var renderSubtreeIntoContainer = require('reacc-dom')
   .unstable_renderSubtreeIntoContainer;
 
 describe('renderSubtreeIntoContainer', () => {
@@ -310,9 +310,9 @@ describe('renderSubtreeIntoContainer', () => {
       }
       const c = ReactDOM.render(<C />, document.createElement('div'));
       // React 15 calls this:
-      // https://github.com/facebook/react/blob/77b71fc3c4/src/renderers/dom/client/ReactMount.js#L478-L479
+      // https://github.com/facebook/reacc/blob/77b71fc3c4/src/renderers/dom/client/ReactMount.js#L478-L479
       expect(() => {
-        c._reactInternalInstance._processChildContext({});
+        c._reaccInternalInstance._processChildContext({});
       }).toThrow(
         '_processChildContext is not available in React 16+. This likely ' +
           'means you have multiple copies of React and are attempting to nest ' +

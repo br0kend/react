@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -30,9 +30,9 @@ describe('ReactElementValidator', () => {
     jest.resetModules();
 
     PropTypes = require('prop-types');
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
     ComponentClass = class extends React.Component {
       render() {
         return React.createElement('div');
@@ -94,7 +94,7 @@ describe('ReactElementValidator', () => {
     expectDev(console.error.calls.count()).toBe(1);
     expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
       'Warning: Each child in an array or iterator should have a unique ' +
-        '"key" prop. See https://fb.me/react-warning-keys for more information.\n' +
+        '"key" prop. See https://fb.me/reacc-warning-keys for more information.\n' +
         '    in div (at **)',
     );
   });
@@ -109,7 +109,7 @@ describe('ReactElementValidator', () => {
     expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
       'Warning: Each child in an array or iterator should have a unique ' +
         '"key" prop.\n\nCheck the top-level render call using <div>. See ' +
-        'https://fb.me/react-warning-keys for more information.\n' +
+        'https://fb.me/reacc-warning-keys for more information.\n' +
         '    in div (at **)',
     );
   });
@@ -135,7 +135,7 @@ describe('ReactElementValidator', () => {
     expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
       'Warning: Each child in an array or iterator should have a unique ' +
         '"key" prop.\n\nCheck the render method of `Component`. See ' +
-        'https://fb.me/react-warning-keys for more information.\n' +
+        'https://fb.me/reacc-warning-keys for more information.\n' +
         '    in div (at **)\n' +
         '    in Component (at **)\n' +
         '    in Parent (at **)\n' +

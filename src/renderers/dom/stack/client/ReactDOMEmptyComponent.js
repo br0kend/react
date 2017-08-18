@@ -35,7 +35,7 @@ Object.assign(ReactDOMEmptyComponent.prototype, {
     this._hostParent = hostParent;
     this._hostContainerInfo = hostContainerInfo;
 
-    var nodeValue = ' react-empty: ' + this._domID + ' ';
+    var nodeValue = ' reacc-empty: ' + this._domID + ' ';
     if (transaction.useCreateElement) {
       var ownerDocument = hostContainerInfo._ownerDocument;
       var node = ownerDocument.createComment(nodeValue);

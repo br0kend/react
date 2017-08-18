@@ -17,7 +17,7 @@ var {
   getChildNamespace,
 } = require('DOMNamespaces');
 var DOMMarkupOperations = require('DOMMarkupOperations');
-var React = require('react');
+var React = require('reacc');
 var ReactControlledValuePropTypes = require('ReactControlledValuePropTypes');
 
 var assertValidProps = require('assertValidProps');
@@ -584,7 +584,7 @@ class ReactDOMServerRenderer {
               '(specify either the checked prop, or the defaultChecked prop, but not ' +
               'both). Decide between using a controlled or uncontrolled input ' +
               'element and remove one of these props. More info: ' +
-              'https://fb.me/react-controlled-components',
+              'https://fb.me/reacc-controlled-components',
             'A component',
             props.type,
           );
@@ -602,7 +602,7 @@ class ReactDOMServerRenderer {
               '(specify either the value prop, or the defaultValue prop, but not ' +
               'both). Decide between using a controlled or uncontrolled input ' +
               'element and remove one of these props. More info: ' +
-              'https://fb.me/react-controlled-components',
+              'https://fb.me/reacc-controlled-components',
             'A component',
             props.type,
           );
@@ -640,7 +640,7 @@ class ReactDOMServerRenderer {
               '(specify either the value prop, or the defaultValue prop, but not ' +
               'both). Decide between using a controlled or uncontrolled textarea ' +
               'and remove one of these props. More info: ' +
-              'https://fb.me/react-controlled-components',
+              'https://fb.me/reacc-controlled-components',
           );
           didWarnDefaultTextareaValue = true;
         }
@@ -727,7 +727,7 @@ class ReactDOMServerRenderer {
               '(specify either the value prop, or the defaultValue prop, but not ' +
               'both). Decide between using a controlled or uncontrolled select ' +
               'element and remove one of these props. More info: ' +
-              'https://fb.me/react-controlled-components',
+              'https://fb.me/reacc-controlled-components',
           );
           didWarnDefaultSelectValue = true;
         }

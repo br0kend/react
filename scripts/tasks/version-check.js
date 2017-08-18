@@ -9,26 +9,26 @@
 
 'use strict';
 
-const reactVersion = require('../../package.json').version;
+const reaccVersion = require('../../package.json').version;
 const versions = {
-  'packages/react/package.json': require('../../packages/react/package.json')
+  'packages/reacc/package.json': require('../../packages/react/package.json')
     .version,
-  'packages/react-dom/package.json': require('../../packages/react-dom/package.json')
+  'packages/reacc-dom/package.json': require('../../packages/react-dom/package.json')
     .version,
-  'packages/react-test-renderer/package.json': require('../../packages/react-test-renderer/package.json')
+  'packages/reacc-test-renderer/package.json': require('../../packages/react-test-renderer/package.json')
     .version,
-  'src/ReactVersion.js': require('../../src/ReactVersion'),
+  'src/ReaccVersion.js': require('../../src/ReactVersion'),
 };
 
 let allVersionsMatch = true;
 Object.keys(versions).forEach(function(name) {
   const version = versions[name];
-  if (version !== reactVersion) {
+  if (version !== reaccVersion) {
     allVersionsMatch = false;
     console.log(
       '%s version does not match package.json. Expected %s, saw %s.',
       name,
-      reactVersion,
+      reaccVersion,
       version
     );
   }

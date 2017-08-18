@@ -19,8 +19,8 @@ import type {ReactCoroutine, ReactNodeList, ReactYield} from 'ReactTypes';
 var REACT_COROUTINE_TYPE;
 var REACT_YIELD_TYPE;
 if (typeof Symbol === 'function' && Symbol.for) {
-  REACT_COROUTINE_TYPE = Symbol.for('react.coroutine');
-  REACT_YIELD_TYPE = Symbol.for('react.yield');
+  REACT_COROUTINE_TYPE = Symbol.for('reacc.coroutine');
+  REACT_YIELD_TYPE = Symbol.for('reacc.yield');
 } else {
   REACT_COROUTINE_TYPE = 0xeac8;
   REACT_YIELD_TYPE = 0xeac9;

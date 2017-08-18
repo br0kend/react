@@ -11,7 +11,7 @@
 
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 var ReactComponentEnvironment = require('ReactComponentEnvironment');
 var ReactCompositeComponentTypes = require('ReactCompositeComponentTypes');
 var ReactErrorUtils = require('ReactErrorUtils');

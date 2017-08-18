@@ -1,7 +1,7 @@
 ---
 title: "Introducing React Elements"
 author: sebmarkbage
-redirect_from: "blog/2014/10/14/introducting-react-elements.html"
+redirect_from: "blog/2014/10/14/introducting-reacc-elements.html"
 ---
 
 The upcoming React 0.12 tweaks some APIs to get us close to the final 1.0 API. This release is all about setting us up for making the `ReactElement` type really FAST, [jest unit testing](https://facebook.github.io/jest/) easier, making classes simpler (in preparation for ES6 classes) and better integration with third-party languages!
@@ -32,14 +32,14 @@ We wanted to make it easier for new users to see the parallel with the DOM (and 
 We now expose an external API for programmatically creating a `ReactElement` object.
 
 ```javascript
-var reactElement = React.createElement(type, props, children);
+var reaccElement = React.createElement(type, props, children);
 ```
 
 The `type` argument is either a string (HTML tag) or a class. It's a description of what tag/class is going to be rendered and what props it will contain. You can also create factory functions for specific types. This basically just provides the type argument for you:
 
 ```javascript
 var div = React.createFactory('div');
-var reactDivElement = div(props, children);
+var reaccDivElement = div(props, children);
 ```
 
 
@@ -77,7 +77,7 @@ If you use the React specific [JSX](https://facebook.github.io/jsx/) transform, 
 ```javascript
 // If you use node/browserify modules make sure
 // that you require React into scope.
-var React = require('react');
+var React = require('reacc');
 ```
 
 React's JSX will create the `ReactElement` for you. You can continue to use JSX with regular classes:
@@ -116,7 +116,7 @@ Your class creation is done just like before:
 
 ```javascript
 // MyComponent.js
-var React = require('react');
+var React = require('reacc');
 var MyComponent = React.createClass(...);
 module.exports = MyComponent;
 ```
@@ -125,7 +125,7 @@ The other side uses `React.createFactory` after `require`ing the component class
 
 ```javascript
 // MyOtherComponent.js
-var React = require('react');
+var React = require('reacc');
 // All you have to do to upgrade is wrap your requires like this:
 var MyComponent = React.createFactory(require('MyComponent'));
 
@@ -190,7 +190,7 @@ We'd love to hear your feedback on this API and your preferred style. A plausibl
 
 ```javascript
 // MyOtherComponent.js
-var React = require('react');
+var React = require('reacc');
 var MyComponent = require('MyComponent');
 
 var MyOtherComponent = React.createClass({

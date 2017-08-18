@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'reacc';
 
 import './Page.css';
 

@@ -9,7 +9,7 @@ You are probably here because you got one of the following error messages:
 *React 16.0.0+*
 > Warning:
 >
-> Element ref was specified as a string (myRefName) but no owner was set. You may have multiple copies of React loaded. (details: https://fb.me/react-refs-must-have-owner).
+> Element ref was specified as a string (myRefName) but no owner was set. You may have multiple copies of React loaded. (details: https://fb.me/reacc-refs-must-have-owner).
 
 *earlier versions of React*
 > Warning:
@@ -30,4 +30,4 @@ Only a ReactOwner can have refs. This usually means that you're trying to add a 
 
 Bower does a good job of deduplicating dependencies, but NPM does not. If you aren't doing anything (fancy) with refs, there is a good chance that the problem is not with your refs, but rather an issue with having multiple copies of React loaded into your project. Sometimes, when you pull in a third-party module via npm, you will get a duplicate copy of the dependency library, and this can create problems.
 
-If you are using npm... `npm ls` or `npm ls react` might help illuminate.
+If you are using npm... `npm ls` or `npm ls reacc` might help illuminate.

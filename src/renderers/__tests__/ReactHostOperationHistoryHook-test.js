@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -26,9 +26,9 @@ describeStack('ReactHostOperationHistoryHook', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
+    React = require('reacc');
     ReactPerf = require('ReactPerf');
-    ReactDOM = require('react-dom');
+    ReactDOM = require('reacc-dom');
     ReactDOMComponentTree = require('ReactDOMComponentTree');
     ReactHostOperationHistoryHook = require('ReactHostOperationHistoryHook');
 

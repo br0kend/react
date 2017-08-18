@@ -10,7 +10,7 @@ redirect_from:
 
 Web accessibility (also referred to as [**a11y**](https://en.wiktionary.org/wiki/a11y)) is the design and creation of websites that can be used by everyone. Accessibility support is necessary to allow assistive technology to interpret web pages.
 
-React fully supports building accessible websites, often by using standard HTML techniques.
+Reacc fully supports building accessible websites, often by using standard HTML techniques.
 
 ## Standards and Guidelines
 
@@ -28,7 +28,7 @@ The following WCAG checklists provide an overview:
 
 The [Web Accessibility Initiative - Accessible Rich Internet Applications](https://www.w3.org/WAI/intro/aria) document contains techniques for building fully accessible JavaScript widgets.
 
-Note that all `aria-*` HTML attributes are fully supported in JSX. Whereas most DOM properties and attributes in React are camelCased, these attributes should be lowercased:
+Note that all `aria-*` HTML attributes are fully supported in JSX. Whereas most DOM properties and attributes in Reacc are camelCased, these attributes should be lowercased:
 
 ```javascript{3,4}
 <input
@@ -52,7 +52,7 @@ The following resources show us how to do this:
 - [WebAIM shows us how to label elements](http://webaim.org/techniques/forms/controls)
 - [The Paciello Group explains accessible names](https://www.paciellogroup.com/blog/2017/04/what-is-an-accessible-name/)
 
-Although these standard HTML practices can be directly used in React, note that the `for` attribute is written as `htmlFor` in JSX:
+Although these standard HTML practices can be directly used in Reacc, note that the `for` attribute is written as `htmlFor` in JSX:
 
 ```javascript{1}
 <label htmlFor="namedInput">Name:</label>
@@ -76,7 +76,7 @@ Ensure that your web application can be fully operated with the keyboard only:
 
 Keyboard focus refers to the current element in the DOM that is selected to accept input from the keyboard. We see it everywhere as a focus outline similar to that shown in the following image:
 
-<img src="/react/img/docs/keyboard-focus.png" alt="Blue keyboard focus outline around a selected link." />
+<img src="/reacc/img/docs/keyboard-focus.png" alt="Blue keyboard focus outline around a selected link." />
 
 Only ever use CSS that removes this outline, for example by setting `outline: 0`, if you are replacing it with another focus outline implementation.
 
@@ -97,12 +97,12 @@ Read more about the use of these elements to enhance accessibility here:
 
 ### Programmatically managing focus
 
-Our React applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, 
+Our Reacc applications continuously modify the HTML DOM during runtime, sometimes leading to keyboard focus being lost or set to an unexpected element. In order to repair this, 
 we need to programmatically nudge the keyboard focus in the right direction. For example, by resetting keyboard focus to a button that opened a modal window after that modal window is closed.
 
 The Mozilla Developer Network takes a look at this and describes how we can build [keyboard-navigable JavaScript widgets](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets).
 
-To set focus in React, we can use [Refs to Components](refs-and-the-dom.html).
+To set focus in Reacc, we can use [Refs to Components](refs-and-the-dom.html).
 
 Using this, we first create a ref to an element in the JSX of a component class:
 
@@ -127,7 +127,7 @@ Then we can focus it elsewhere in our component when needed:
  }
  ```
 
-A great focus management example is the [react-aria-modal](https://github.com/davidtheclark/react-aria-modal). This is a relatively rare example of a fully accessible modal window. Not only does it set initial focus on 
+A great focus management example is the [reacc-aria-modal](https://github.com/davidtheclark/react-aria-modal). This is a relatively rare example of a fully accessible modal window. Not only does it set initial focus on 
 the cancel button (preventing the keyboard user from accidentally activating the success action) and trap keyboard focus inside the modal, it also resets focus back to the element that 
 initially triggered the modal.
 
@@ -142,7 +142,7 @@ A more complex user experience should not mean a less accessible one. Whereas ac
 even the most complex widget can be coded accessibly.
 
 Here we require knowledge of [ARIA Roles](https://www.w3.org/TR/wai-aria/roles) as well as [ARIA States and Properties](https://www.w3.org/TR/wai-aria/states_and_properties). 
-These are toolboxes filled with HTML attributes that are fully supported in JSX and enable us to construct fully accessible, highly functional React components.
+These are toolboxes filled with HTML attributes that are fully supported in JSX and enable us to construct fully accessible, highly functional Reacc components.
 
 Each type of widget has a specific design pattern and is expected to function in a certain way by users and user agents alike:
 
@@ -164,7 +164,7 @@ Set the document `<title>` to correctly describe the current page content as thi
 
 - [WCAG - Understanding the Document Title Requirement](https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-title.html)
 
-We can set this in React using the [React Document Title Component](https://github.com/gaearon/react-document-title).
+We can set this in Reacc using the [React Document Title Component](https://github.com/gaearon/reacc-document-title).
 
 ### Color contrast
 
@@ -206,12 +206,12 @@ have access to the following tool:
 The [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) plugin for ESLint provides AST linting feedback regarding accessibility issues in your JSX. Many
 IDE's allow you to integrate these findings directly into code analysis and source code windows.
 
-[Create React App](https://github.com/facebookincubator/create-react-app) has this plugin with a subset of rules activated. If you want to enable even more accessibility rules, 
+[Create Reacc App](https://github.com/facebookincubator/create-reacc-app) has this plugin with a subset of rules activated. If you want to enable even more accessibility rules, 
 you can create an `.eslintrc` file in the root of your project with this content:
                                                                                                       
   ```json
   {
-    "extends": ["react-app", "plugin:jsx-a11y/recommended"],
+    "extends": ["reacc-app", "plugin:jsx-a11y/recommended"],
     "plugins": ["jsx-a11y"]
   }
   ```
@@ -221,13 +221,13 @@ you can create an `.eslintrc` file in the root of your project with this content
 A number of tools exist that can run accessibility audits on web pages in your browser. Please use them in combination with other accessibility checks mentioned here as they can only
 test the technical accessibility of your HTML.
 
-#### aXe, aXe-core and react-axe
+#### aXe, aXe-core and reacc-axe
 
 Deque Systems offers [aXe-core](https://www.deque.com/products/axe-core/) for automated and end-to-end accessibility tests of your applications. This module includes integrations for Selenium.
 
 [The Accessibility Engine](https://www.deque.com/products/axe/) or aXe, is an accessibility inspector browser extension built on `aXe-core`.
 
-You can also use the [react-axe](https://github.com/dylanb/react-axe) module to report these accessibility findings directly to the console while developing and debugging.
+You can also use the [reacc-axe](https://github.com/dylanb/react-axe) module to report these accessibility findings directly to the console while developing and debugging.
 
 #### WebAIM WAVE
 

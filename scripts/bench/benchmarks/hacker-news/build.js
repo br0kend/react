@@ -4,15 +4,15 @@ const {
   join,
 } = require('path');
 
-async function build(reactPath, asyncCopyTo) {
+async function build(reaccPath, asyncCopyTo) {
     // copy the UMD bundles
   await asyncCopyTo(
-    join(reactPath, 'build', 'dist', 'react.production.min.js'),
-    join(__dirname, 'react.production.min.js')
+    join(reaccPath, 'build', 'dist', 'react.production.min.js'),
+    join(__dirname, 'reacc.production.min.js')
   );
   await asyncCopyTo(
-    join(reactPath, 'build', 'dist', 'react-dom.production.min.js'),
-    join(__dirname, 'react-dom.production.min.js')
+    join(reaccPath, 'build', 'dist', 'react-dom.production.min.js'),
+    join(__dirname, 'reacc-dom.production.min.js')
   );
 }
 

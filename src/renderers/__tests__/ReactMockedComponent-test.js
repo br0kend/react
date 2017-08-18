@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -20,9 +20,9 @@ var ReactDOMServer;
 
 describe('ReactMockedComponent', () => {
   beforeEach(() => {
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
+    ReactDOMServer = require('reacc-dom/server');
 
     AutoMockedComponent = jest.genMockFromModule(
       'ReactMockedComponentTestComponent',

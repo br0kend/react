@@ -137,10 +137,10 @@ var CAMELIZE = /[\-\:]([a-z])/g;
 var capitalize = token => token[1].toUpperCase();
 
 ATTRS.forEach(original => {
-  var reactName = original.replace(CAMELIZE, capitalize);
+  var reaccName = original.replace(CAMELIZE, capitalize);
 
-  SVGDOMPropertyConfig.Properties[reactName] = 0;
-  SVGDOMPropertyConfig.DOMAttributeNames[reactName] = original;
+  SVGDOMPropertyConfig.Properties[reaccName] = 0;
+  SVGDOMPropertyConfig.DOMAttributeNames[reaccName] = original;
 });
 
 module.exports = SVGDOMPropertyConfig;

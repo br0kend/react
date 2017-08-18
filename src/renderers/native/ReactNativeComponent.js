@@ -13,7 +13,7 @@
 
 'use strict';
 
-const React = require('react');
+const React = require('reacc');
 const ReactNativeAttributePayload = require('ReactNativeAttributePayload');
 const ReactNativeFeatureFlags = require('ReactNativeFeatureFlags');
 const TextInputState = require('TextInputState');

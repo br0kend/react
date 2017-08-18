@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -16,8 +16,8 @@ var ReactDOM;
 
 describe('ReactPureComponent', () => {
   beforeEach(() => {
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
   });
 
   it('should render', () => {

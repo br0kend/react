@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "react-release-manager",
+  "name": "reacc-release-manager",
   "version": "1.0.0",
   "description": "Tool to manage React releases",
   "main": "cli.js",

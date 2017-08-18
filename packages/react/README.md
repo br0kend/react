@@ -1,6 +1,6 @@
-# react
+# reacc
 
-An npm package to get you immediate access to [React](https://facebook.github.io/react/),
+An npm package to get you immediate access to [React](https://facebook.github.io/reacc/),
 without also requiring the JSX transformer. This is especially useful for cases where you
 want to [`browserify`](https://github.com/substack/node-browserify) your module using
 `React`.
@@ -12,5 +12,5 @@ To use React in production mode, set the environment variable `NODE_ENV` to `pro
 ## Example Usage
 
 ```js
-var React = require('react');
+var React = require('reacc');
 ```

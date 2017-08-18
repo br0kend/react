@@ -6,22 +6,22 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule ReactElement
+ * @providesModule ReaccElement
  */
 
 'use strict';
 
-var ReactCurrentOwner = require('ReactCurrentOwner');
+var ReaccCurrentOwner = require('ReactCurrentOwner');
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 if (__DEV__) {
   var warning = require('fbjs/lib/warning');
 }
 
-// The Symbol used to tag the ReactElement type. If there is no native Symbol
+// The Symbol used to tag the ReaccElement type. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
 var REACT_ELEMENT_TYPE =
-  (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
+  (typeof Symbol === 'function' && Symbol.for && Symbol.for('reacc.element')) ||
   0xeac7;
 
 var RESERVED_PROPS = {
@@ -37,7 +37,7 @@ function hasValidRef(config) {
   if (__DEV__) {
     if (hasOwnProperty.call(config, 'ref')) {
       var getter = Object.getOwnPropertyDescriptor(config, 'ref').get;
-      if (getter && getter.isReactWarning) {
+      if (getter && getter.isReaccWarning) {
         return false;
       }
     }
@@ -49,7 +49,7 @@ function hasValidKey(config) {
   if (__DEV__) {
     if (hasOwnProperty.call(config, 'key')) {
       var getter = Object.getOwnPropertyDescriptor(config, 'key').get;
-      if (getter && getter.isReactWarning) {
+      if (getter && getter.isReaccWarning) {
         return false;
       }
     }
@@ -66,12 +66,12 @@ function defineKeyPropWarningGetter(props, displayName) {
         '%s: `key` is not a prop. Trying to access it will result ' +
           'in `undefined` being returned. If you need to access the same ' +
           'value within the child component, you should pass it as a different ' +
-          'prop. (https://fb.me/react-special-props)',
+          'prop. (https://fb.me/reacc-special-props)',
         displayName,
       );
     }
   };
-  warnAboutAccessingKey.isReactWarning = true;
+  warnAboutAccessingKey.isReaccWarning = true;
   Object.defineProperty(props, 'key', {
     get: warnAboutAccessingKey,
     configurable: true,
@@ -87,12 +87,12 @@ function defineRefPropWarningGetter(props, displayName) {
         '%s: `ref` is not a prop. Trying to access it will result ' +
           'in `undefined` being returned. If you need to access the same ' +
           'value within the child component, you should pass it as a different ' +
-          'prop. (https://fb.me/react-special-props)',
+          'prop. (https://fb.me/reacc-special-props)',
         displayName,
       );
     }
   };
-  warnAboutAccessingRef.isReactWarning = true;
+  warnAboutAccessingRef.isReaccWarning = true;
   Object.defineProperty(props, 'ref', {
     get: warnAboutAccessingRef,
     configurable: true,
@@ -100,16 +100,16 @@ function defineRefPropWarningGetter(props, displayName) {
 }
 
 /**
- * Factory method to create a new React element. This no longer adheres to
+ * Factory method to create a new Reacc element. This no longer adheres to
  * the class pattern, so do not use new to call it. Also, no instanceof check
- * will work. Instead test $$typeof field against Symbol.for('react.element') to check
- * if something is a React Element.
+ * will work. Instead test $$typeof field against Symbol.for('reacc.element') to check
+ * if something is a Reacc Element.
  *
  * @param {*} type
  * @param {*} key
  * @param {string|object} ref
  * @param {*} self A *temporary* helper to detect places where `this` is
- * different from the `owner` when React.createElement is called, so that we
+ * different from the `owner` when Reacc.createElement is called, so that we
  * can warn. We want to get rid of owner and replace string `ref`s with arrow
  * functions, and as long as `this` and owner are the same, there will be no
  * change in behavior.
@@ -119,9 +119,9 @@ function defineRefPropWarningGetter(props, displayName) {
  * @param {*} props
  * @internal
  */
-var ReactElement = function(type, key, ref, self, source, owner, props) {
+var ReaccElement = function(type, key, ref, self, source, owner, props) {
   var element = {
-    // This tag allow us to uniquely identify this as a React Element
+    // This tag allow us to uniquely identify this as a Reacc Element
     $$typeof: REACT_ELEMENT_TYPE,
 
     // Built-in properties that belong on the element
@@ -141,7 +141,7 @@ var ReactElement = function(type, key, ref, self, source, owner, props) {
     // commonly used development environments.
     element._store = {};
 
-    // To make comparing ReactElements easier for testing purposes, we make
+    // To make comparing ReaccElements easier for testing purposes, we make
     // the validation flag non-enumerable (where possible, which should
     // include every environment we run tests in), so the test framework
     // ignores it.
@@ -176,10 +176,10 @@ var ReactElement = function(type, key, ref, self, source, owner, props) {
 };
 
 /**
- * Create and return a new ReactElement of the given type.
- * See https://facebook.github.io/react/docs/react-api.html#createelement
+ * Create and return a new ReaccElement of the given type.
+ * See https://facebook.github.io/reacc/docs/react-api.html#createelement
  */
-ReactElement.createElement = function(type, config, children) {
+ReaccElement.createElement = function(type, config, children) {
   var propName;
 
   // Reserved names are extracted
@@ -256,23 +256,23 @@ ReactElement.createElement = function(type, config, children) {
       }
     }
   }
-  return ReactElement(
+  return ReaccElement(
     type,
     key,
     ref,
     self,
     source,
-    ReactCurrentOwner.current,
+    ReaccCurrentOwner.current,
     props,
   );
 };
 
 /**
- * Return a function that produces ReactElements of a given type.
- * See https://facebook.github.io/react/docs/react-api.html#createfactory
+ * Return a function that produces ReaccElements of a given type.
+ * See https://facebook.github.io/reacc/docs/react-api.html#createfactory
  */
-ReactElement.createFactory = function(type) {
-  var factory = ReactElement.createElement.bind(null, type);
+ReaccElement.createFactory = function(type) {
+  var factory = ReaccElement.createElement.bind(null, type);
   // Expose the type on the factory and the prototype so that it can be
   // easily accessed on elements. E.g. `<Foo />.type === Foo`.
   // This should not be named `constructor` since this may not be the function
@@ -282,8 +282,8 @@ ReactElement.createFactory = function(type) {
   return factory;
 };
 
-ReactElement.cloneAndReplaceKey = function(oldElement, newKey) {
-  var newElement = ReactElement(
+ReaccElement.cloneAndReplaceKey = function(oldElement, newKey) {
+  var newElement = ReaccElement(
     oldElement.type,
     newKey,
     oldElement.ref,
@@ -297,10 +297,10 @@ ReactElement.cloneAndReplaceKey = function(oldElement, newKey) {
 };
 
 /**
- * Clone and return a new ReactElement using element as the starting point.
- * See https://facebook.github.io/react/docs/react-api.html#cloneelement
+ * Clone and return a new ReaccElement using element as the starting point.
+ * See https://facebook.github.io/reacc/docs/react-api.html#cloneelement
  */
-ReactElement.cloneElement = function(element, config, children) {
+ReaccElement.cloneElement = function(element, config, children) {
   var propName;
 
   // Original props are copied
@@ -323,7 +323,7 @@ ReactElement.cloneElement = function(element, config, children) {
     if (hasValidRef(config)) {
       // Silently steal the ref from the parent.
       ref = config.ref;
-      owner = ReactCurrentOwner.current;
+      owner = ReaccCurrentOwner.current;
     }
     if (hasValidKey(config)) {
       key = '' + config.key;
@@ -362,17 +362,17 @@ ReactElement.cloneElement = function(element, config, children) {
     props.children = childArray;
   }
 
-  return ReactElement(element.type, key, ref, self, source, owner, props);
+  return ReaccElement(element.type, key, ref, self, source, owner, props);
 };
 
 /**
- * Verifies the object is a ReactElement.
- * See https://facebook.github.io/react/docs/react-api.html#isvalidelement
+ * Verifies the object is a ReaccElement.
+ * See https://facebook.github.io/reacc/docs/react-api.html#isvalidelement
  * @param {?object} object
  * @return {boolean} True if `object` is a valid component.
  * @final
  */
-ReactElement.isValidElement = function(object) {
+ReaccElement.isValidElement = function(object) {
   return (
     typeof object === 'object' &&
     object !== null &&
@@ -380,4 +380,4 @@ ReactElement.isValidElement = function(object) {
   );
 };
 
-module.exports = ReactElement;
+module.exports = ReaccElement;

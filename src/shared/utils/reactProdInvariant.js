@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule reactProdInvariant
+ * @providesModule reaccProdInvariant
  * @flow
  */
 'use strict';
@@ -17,14 +17,14 @@
  * and will _only_ be required by the corresponding babel pass.
  * It always throws.
  */
-function reactProdInvariant(code: string): void {
+function reaccProdInvariant(code: string): void {
   var argCount = arguments.length - 1;
 
   var message =
     'Minified React error #' +
     code +
     '; visit ' +
-    'http://facebook.github.io/react/docs/error-decoder.html?invariant=' +
+    'http://facebook.github.io/reacc/docs/error-decoder.html?invariant=' +
     code;
 
   for (var argIdx = 0; argIdx < argCount; argIdx++) {
@@ -37,9 +37,9 @@ function reactProdInvariant(code: string): void {
 
   var error: Error & {framesToPop?: number} = new Error(message);
   error.name = 'Invariant Violation';
-  error.framesToPop = 1; // we don't care about reactProdInvariant's own frame
+  error.framesToPop = 1; // we don't care about reaccProdInvariant's own frame
 
   throw error;
 }
 
-module.exports = reactProdInvariant;
+module.exports = reaccProdInvariant;

@@ -52,7 +52,7 @@ function batchedUpdatesWithControlledComponents(fn, bookkeeping) {
   } finally {
     // Here we wait until all updates have propagated, which is important
     // when using controlled components within layers:
-    // https://github.com/facebook/react/issues/1698
+    // https://github.com/facebook/reacc/issues/1698
     // Then we restore state of any controlled component.
     isNestingBatched = false;
     ReactControlledComponent.restoreStateIfNeeded();

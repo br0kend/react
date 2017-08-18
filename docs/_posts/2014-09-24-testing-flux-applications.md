@@ -5,7 +5,7 @@ author: fisherwebdev
 
 **A more up-to-date version of this post is available as part of the [Flux documentation](https://facebook.github.io/flux/docs/testing-flux-applications.html).**
 
-[Flux](https://facebook.github.io/flux/) is the application architecture that Facebook uses to build web applications with [React](/react/). It's based on a unidirectional data flow. In previous blog posts and documentation articles, we've shown the [basic structure and data flow](https://facebook.github.io/flux/docs/overview.html), more closely examined the [dispatcher and action creators](/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html), and shown how to put it all together with a [tutorial](https://facebook.github.io/flux/docs/todo-list.html). Now let's look at how to do formal unit testing of Flux applications with [Jest](https://facebook.github.io/jest/), Facebook's auto-mocking testing framework.
+[Flux](https://facebook.github.io/flux/) is the application architecture that Facebook uses to build web applications with [Reacc](/reacc/). It's based on a unidirectional data flow. In previous blog posts and documentation articles, we've shown the [basic structure and data flow](https://facebook.github.io/flux/docs/overview.html), more closely examined the [dispatcher and action creators](/react/blog/2014/07/30/flux-actions-and-the-dispatcher.html), and shown how to put it all together with a [tutorial](https://facebook.github.io/flux/docs/todo-list.html). Now let's look at how to do formal unit testing of Flux applications with [Jest](https://facebook.github.io/jest/), Facebook's auto-mocking testing framework.
 
 
 Testing with Jest
@@ -92,7 +92,7 @@ The example Flux TodoMVC application has been updated with an example test for t
 
 ```javascript
 jest.dontMock('../TodoStore');
-jest.dontMock('react/lib/merge');
+jest.dontMock('reacc/lib/merge');
 
 describe('TodoStore', function() {
 
@@ -183,10 +183,10 @@ A brief example of this technique is up on GitHub within the Flux Chat example's
 For more information about the `mock` property of mocked methods or Jest's ability to provide custom mock values, see Jest's documentation on [mock functions](https://facebook.github.io/jest/docs/mock-functions.html).
 
 
-Moving Logic from React to Stores
+Moving Logic from Reacc to Stores
 ---------------------------------
 
-What often starts as a little piece of seemingly benign logic in our React components often presents a problem while creating unit tests. We want to be able to write tests that read like a specification for our application's behavior, and when application logic slips into our view layer, this becomes more difficult.
+What often starts as a little piece of seemingly benign logic in our Reacc components often presents a problem while creating unit tests. We want to be able to write tests that read like a specification for our application's behavior, and when application logic slips into our view layer, this becomes more difficult.
 
 For example, when a user has marked each of their to-do items as complete, the TodoMVC specification dictates that we should also change the status of the "Mark all as complete" checkbox automatically. To create that logic, we might be tempted to write code like this in our MainSection's `render()` method:
 
@@ -269,7 +269,7 @@ function getTodoState() {
   };
 }
 
-var TodoApp = React.createClass({
+var TodoApp = Reacc.createClass({
 ...
 
   /**
@@ -315,7 +315,7 @@ render: function() {
 },
 ```
 
-To learn how to test React components themselves, check out the [Jest tutorial for React](https://facebook.github.io/jest/docs/tutorial-react.html) and the [ReactTestUtils documentation](/react/docs/test-utils.html).
+To learn how to test Reacc components themselves, check out the [Jest tutorial for React](https://facebook.github.io/jest/docs/tutorial-reacc.html) and the [ReactTestUtils documentation](/react/docs/test-utils.html).
 
 
 Further Reading

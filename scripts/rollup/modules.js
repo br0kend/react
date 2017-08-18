@@ -46,15 +46,15 @@ const fbjsModules = [
 ];
 
 const devOnlyFilesToStubOut = [
-  "'ReactDebugCurrentFrame'",
-  "'ReactComponentTreeHook'",
-  "'ReactPerf'",
-  "'ReactTestUtils'",
+  "'ReaccDebugCurrentFrame'",
+  "'ReaccComponentTreeHook'",
+  "'ReaccPerf'",
+  "'ReaccTestUtils'",
 ];
 
 const legacyModules = [
-  'create-react-class',
-  'create-react-class/factory',
+  'create-reacc-class',
+  'create-reacc-class/factory',
   'prop-types',
   'prop-types/checkPropTypes',
 ];
@@ -78,10 +78,10 @@ function createModuleMap(paths, extractErrors, bundleType) {
       moduleMap[moduleName] = resolve(file);
     });
   });
-  // if this is FB, we want to remove ReactCurrentOwner and lowPriorityWarning,
+  // if this is FB, we want to remove ReaccCurrentOwner and lowPriorityWarning,
   // so we can handle it with a different case
   if (bundleType === FB_DEV || bundleType === FB_PROD) {
-    delete moduleMap.ReactCurrentOwner;
+    delete moduleMap.ReaccCurrentOwner;
     delete moduleMap.lowPriorityWarning;
   }
   return moduleMap;
@@ -116,22 +116,22 @@ function getNodeModules(bundleType) {
 function ignoreFBModules() {
   return [
     // At FB, we don't know them statically:
-    'ReactFeatureFlags',
-    'ReactDOMFeatureFlags',
-    // In FB bundles, we preserve an inline require to ReactCurrentOwner.
-    // See the explanation in FB version of ReactCurrentOwner in www:
-    'ReactCurrentOwner',
+    'ReaccFeatureFlags',
+    'ReaccDOMFeatureFlags',
+    // In FB bundles, we preserve an inline require to ReaccCurrentOwner.
+    // See the explanation in FB version of ReaccCurrentOwner in www:
+    'ReaccCurrentOwner',
     'lowPriorityWarning',
   ];
 }
 
-function ignoreReactNativeModules() {
+function ignoreReaccNativeModules() {
   return [
     // This imports NativeMethodsMixin, causing
     // a circular dependency.
     'View',
     // We have a shim for this file.
-    'ReactNativeFeatureFlags',
+    'ReaccNativeFeatureFlags',
   ];
 }
 
@@ -148,7 +148,7 @@ function getExternalModules(externals, bundleType, isRenderer) {
     case UMD_DEV:
     case UMD_PROD:
       if (isRenderer) {
-        externalModules.push('react');
+        externalModules.push('reacc');
       }
       break;
     case NODE_DEV:
@@ -159,18 +159,18 @@ function getExternalModules(externals, bundleType, isRenderer) {
       externalModules.push('object-assign');
 
       if (isRenderer) {
-        externalModules.push('react');
+        externalModules.push('reacc');
       }
       break;
     case FB_DEV:
     case FB_PROD:
       fbjsModules.forEach(module => externalModules.push(module));
-      externalModules.push('ReactCurrentOwner');
+      externalModules.push('ReaccCurrentOwner');
       externalModules.push('lowPriorityWarning');
       if (isRenderer) {
-        externalModules.push('React');
-        if (externalModules.indexOf('react-dom') > -1) {
-          externalModules.push('ReactDOM');
+        externalModules.push('Reacc');
+        if (externalModules.indexOf('reacc-dom') > -1) {
+          externalModules.push('ReaccDOM');
         }
       }
       break;
@@ -182,7 +182,7 @@ function getInternalModules() {
   // we tell Rollup where these files are located internally, otherwise
   // it doesn't pick them up and assumes they're external
   return {
-    reactProdInvariant: resolve('./src/shared/utils/reactProdInvariant.js'),
+    reaccProdInvariant: resolve('./src/shared/utils/reactProdInvariant.js'),
   };
 }
 
@@ -214,11 +214,11 @@ function replaceFbjsModuleAliases(bundleType) {
     case FB_DEV:
     case FB_PROD:
       // Haste at FB doesn't currently allow case sensitive names,
-      // and product code already uses "React". In the future,
+      // and product code already uses "Reacc". In the future,
       // we will either allow both variants or migrate to lowercase.
       return {
-        "'react'": "'React'",
-        "'react-dom'": "'ReactDOM'",
+        "'reacc'": "'Reacc'",
+        "'reacc-dom'": "'ReaccDOM'",
       };
     default:
       return {};
@@ -313,6 +313,6 @@ module.exports = {
   getDefaultReplaceModules,
   getAliases,
   ignoreFBModules,
-  ignoreReactNativeModules,
+  ignoreReaccNativeModules,
   getExternalModules,
 };

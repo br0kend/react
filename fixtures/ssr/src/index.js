@@ -1,5 +1,5 @@
-import React from 'react';
-import {render} from 'react-dom';
+import React from 'reacc';
+import {render} from 'reacc-dom';
 
 import App from './components/App';
 

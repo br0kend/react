@@ -95,13 +95,13 @@ const ReactNativeFiber: ReactNativeType = {
     // Used as a mixin in many createClass-based components
     NativeMethodsMixin: require('NativeMethodsMixin'),
 
-    // Used by react-native-github/Libraries/ components
+    // Used by reacc-native-github/Libraries/ components
     ReactGlobalSharedState: require('ReactGlobalSharedState'), // Systrace
     ReactNativeComponentTree: require('ReactNativeComponentTree'), // InspectorUtils, ScrollResponder
     ReactNativePropRegistry: require('ReactNativePropRegistry'), // flattenStyle, Stylesheet
     TouchHistoryMath: require('TouchHistoryMath'), // PanResponder
     createReactNativeComponentClass: require('createReactNativeComponentClass'), // eg Text
-    takeSnapshot: require('takeSnapshot'), // react-native-implementation
+    takeSnapshot: require('takeSnapshot'), // reacc-native-implementation
   },
 };
 

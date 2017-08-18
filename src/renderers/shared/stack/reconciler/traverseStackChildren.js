@@ -19,7 +19,7 @@ var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
 // The Symbol used to tag the ReactElement type. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
 var REACT_ELEMENT_TYPE =
-  (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
+  (typeof Symbol === 'function' && Symbol.for && Symbol.for('reacc.element')) ||
   0xeac7;
 
 if (__DEV__) {

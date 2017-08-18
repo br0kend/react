@@ -4,7 +4,7 @@ set -e
 
 if [ "$CIRCLE_BRANCH" = "$REACT_WEBSITE_BRANCH" ]; then
 
-  GH_PAGES_DIR=`pwd`/../react-gh-pages
+  GH_PAGES_DIR=`pwd`/../reacc-gh-pages
 
   # check if directory exists (restored from cache)
   if [ -d $GH_PAGES_DIR ]; then
@@ -13,7 +13,7 @@ if [ "$CIRCLE_BRANCH" = "$REACT_WEBSITE_BRANCH" ]; then
     popd
   else
     git clone --branch gh-pages --depth=1 \
-      https://reactjs-bot@github.com/facebook/react.git \
+      https://reaccjs-bot@github.com/facebook/react.git \
       $GH_PAGES_DIR
   fi
 

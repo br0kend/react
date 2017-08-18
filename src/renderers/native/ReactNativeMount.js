@@ -11,7 +11,7 @@
  */
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 var ReactInstrumentation = require('ReactInstrumentation');
 var ReactNativeContainerInfo = require('ReactNativeContainerInfo');
 var ReactNativeTagHandles = require('ReactNativeTagHandles');
@@ -122,7 +122,7 @@ var ReactNativeMount = {
       }
     }
 
-    if (!ReactNativeTagHandles.reactTagIsNativeTopRootID(containerTag)) {
+    if (!ReactNativeTagHandles.reaccTagIsNativeTopRootID(containerTag)) {
       console.error('You cannot render into anything but a top root');
       return null;
     }
@@ -185,7 +185,7 @@ var ReactNativeMount = {
    * component at this time.
    */
   unmountComponentAtNode: function(containerTag: number): boolean {
-    if (!ReactNativeTagHandles.reactTagIsNativeTopRootID(containerTag)) {
+    if (!ReactNativeTagHandles.reaccTagIsNativeTopRootID(containerTag)) {
       console.error('You cannot render into anything but a top root');
       return false;
     }

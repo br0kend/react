@@ -22,8 +22,8 @@ const facebookWWWSrcDependencies = [
   'src/renderers/dom/shared/eventPlugins/TapEventPlugin.js',
 ];
 
-// these files need to be copied to the react-native build
-const reactNativeSrcDependencies = [
+// these files need to be copied to the reacc-native build
+const reaccNativeSrcDependencies = [
   // TODO: copy this to RN repository and delete from React
   'src/renderers/shared/stack/PooledClass.js',
   'src/renderers/shared/fiber/isomorphic/ReactTypes.js',
@@ -38,19 +38,19 @@ function getPackageName(name) {
 }
 
 function createReactNativeBuild() {
-  // create the react-native folder for FB bundles
-  fs.mkdirSync(join('build', 'react-native'));
-  // create the react-native shims folder for FB shims
-  fs.mkdirSync(join('build', 'react-native', 'shims'));
-  // copy in all the shims from build/rollup/shims/react-native
-  const from = join('scripts', 'rollup', 'shims', 'react-native');
-  const to = join('build', 'react-native', 'shims');
+  // create the reacc-native folder for FB bundles
+  fs.mkdirSync(join('build', 'reacc-native'));
+  // create the reacc-native shims folder for FB shims
+  fs.mkdirSync(join('build', 'reacc-native', 'shims'));
+  // copy in all the shims from build/rollup/shims/reacc-native
+  const from = join('scripts', 'rollup', 'shims', 'reacc-native');
+  const to = join('build', 'reacc-native', 'shims');
 
   return asyncCopyTo(from, to).then(() => {
     let promises = [];
     // we also need to copy over some specific files from src
-    // defined in reactNativeSrcDependencies
-    for (const srcDependency of reactNativeSrcDependencies) {
+    // defined in reaccNativeSrcDependencies
+    for (const srcDependency of reaccNativeSrcDependencies) {
       promises.push(
         asyncCopyTo(resolve(srcDependency), join(to, basename(srcDependency)))
       );
@@ -156,7 +156,7 @@ function getPackageDestination(config, bundleType, filename) {
   } else if (bundleType === UMD_DEV || bundleType === UMD_PROD) {
     dest = `${config.destDir}dist/${filename}`;
   } else if (bundleType === RN_DEV || bundleType === RN_PROD) {
-    dest = `${config.destDir}react-native/${filename}`;
+    dest = `${config.destDir}reacc-native/${filename}`;
   }
   return dest;
 }

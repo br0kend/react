@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -30,9 +30,9 @@ describe('rendering React components at document', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
     getTestDocument = require('getTestDocument');
   });
 
@@ -261,8 +261,8 @@ describe('rendering React components at document', () => {
             'quirks by rendering at the document root. You should look for ' +
             'environment dependent code in your components and ensure ' +
             'the props are the same client and server side:\n' +
-            ' (client) dy data-reactid="4">Hello world</body></\n' +
-            ' (server) dy data-reactid="4">Goodbye world</body>',
+            ' (client) dy data-reaccid="4">Hello world</body></\n' +
+            ' (server) dy data-reaccid="4">Goodbye world</body>',
         );
       }
     });

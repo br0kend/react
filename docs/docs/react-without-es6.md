@@ -1,39 +1,39 @@
 ---
-id: react-without-es6
-title: React Without ES6
-permalink: docs/react-without-es6.html
+id: reacc-without-es6
+title: Reacc Without ES6
+permalink: docs/reacc-without-es6.html
 ---
 
-Normally you would define a React component as a plain JavaScript class:
+Normally you would define a Reacc component as a plain JavaScript class:
 
 ```javascript
-class Greeting extends React.Component {
+class Greeting extends Reacc.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
 }
 ```
 
-If you don't use ES6 yet, you may use the `create-react-class` module instead:
+If you don't use ES6 yet, you may use the `create-reacc-class` module instead:
 
 
 ```javascript
-var createReactClass = require('create-react-class');
-var Greeting = createReactClass({
+var createReaccClass = require('create-reacc-class');
+var Greeting = createReaccClass({
   render: function() {
     return <h1>Hello, {this.props.name}</h1>;
   }
 });
 ```
 
-The API of ES6 classes is similar to `createReactClass()` with a few exceptions.
+The API of ES6 classes is similar to `createReaccClass()` with a few exceptions.
 
 ## Declaring Default Props
 
 With functions and ES6 classes `defaultProps` is defined as a property on the component itself:
 
 ```javascript
-class Greeting extends React.Component {
+class Greeting extends Reacc.Component {
   // ...
 }
 
@@ -42,10 +42,10 @@ Greeting.defaultProps = {
 };
 ```
 
-With `createReactClass()`, you need to define `getDefaultProps()` as a function on the passed object:
+With `createReaccClass()`, you need to define `getDefaultProps()` as a function on the passed object:
 
 ```javascript
-var Greeting = createReactClass({
+var Greeting = createReaccClass({
   getDefaultProps: function() {
     return {
       name: 'Mary'
@@ -62,7 +62,7 @@ var Greeting = createReactClass({
 In ES6 classes, you can define the initial state by assigning `this.state` in the constructor:
 
 ```javascript
-class Counter extends React.Component {
+class Counter extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {count: props.initialCount};
@@ -71,10 +71,10 @@ class Counter extends React.Component {
 }
 ```
 
-With `createReactClass()`, you have to provide a separate `getInitialState` method that returns the initial state:
+With `createReaccClass()`, you have to provide a separate `getInitialState` method that returns the initial state:
 
 ```javascript
-var Counter = createReactClass({
+var Counter = createReaccClass({
   getInitialState: function() {
     return {count: this.props.initialCount};
   },
@@ -84,10 +84,10 @@ var Counter = createReactClass({
 
 ## Autobinding
 
-In React components declared as ES6 classes, methods follow the same semantics as regular ES6 classes. This means that they don't automatically bind `this` to the instance. You'll have to explicitly use `.bind(this)` in the constructor:
+In Reacc components declared as ES6 classes, methods follow the same semantics as regular ES6 classes. This means that they don't automatically bind `this` to the instance. You'll have to explicitly use `.bind(this)` in the constructor:
 
 ```javascript
-class SayHello extends React.Component {
+class SayHello extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {message: 'Hello!'};
@@ -110,10 +110,10 @@ class SayHello extends React.Component {
 }
 ```
 
-With `createReactClass()`, this is not necessary because it binds all methods:
+With `createReaccClass()`, this is not necessary because it binds all methods:
 
 ```javascript
-var SayHello = createReactClass({
+var SayHello = createReaccClass({
   getInitialState: function() {
     return {message: 'Hello!'};
   },
@@ -138,7 +138,7 @@ If the boilerplate code is too unattractive to you, you may enable the **experim
 
 
 ```javascript
-class SayHello extends React.Component {
+class SayHello extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {message: 'Hello!'};
@@ -165,21 +165,21 @@ If you'd rather play it safe, you have a few options:
 
 * Bind methods in the constructor.
 * Use arrow functions, e.g. `onClick={(e) => this.handleClick(e)}`.
-* Keep using `createReactClass`.
+* Keep using `createReaccClass`.
 
 ## Mixins
 
 >**Note:**
 >
->ES6 launched without any mixin support. Therefore, there is no support for mixins when you use React with ES6 classes.
+>ES6 launched without any mixin support. Therefore, there is no support for mixins when you use Reacc with ES6 classes.
 >
->**We also found numerous issues in codebases using mixins, [and don't recommend using them in the new code](/react/blog/2016/07/13/mixins-considered-harmful.html).**
+>**We also found numerous issues in codebases using mixins, [and don't recommend using them in the new code](/reacc/blog/2016/07/13/mixins-considered-harmful.html).**
 >
 >This section exists only for the reference.
 
-Sometimes very different components may share some common functionality. These are sometimes called [cross-cutting concerns](https://en.wikipedia.org/wiki/Cross-cutting_concern). [`createReactClass`](/react/docs/top-level-api.html#react.createclass) lets you use a legacy `mixins` system for that.
+Sometimes very different components may share some common functionality. These are sometimes called [cross-cutting concerns](https://en.wikipedia.org/wiki/Cross-cutting_concern). [`createReaccClass`](/reacc/docs/top-level-api.html#react.createclass) lets you use a legacy `mixins` system for that.
 
-One common use case is a component wanting to update itself on a time interval. It's easy to use `setInterval()`, but it's important to cancel your interval when you don't need it anymore to save memory. React provides [lifecycle methods](/react/docs/working-with-the-browser.html#component-lifecycle) that let you know when a component is about to be created or destroyed. Let's create a simple mixin that uses these methods to provide an easy `setInterval()` function that will automatically get cleaned up when your component is destroyed.
+One common use case is a component wanting to update itself on a time interval. It's easy to use `setInterval()`, but it's important to cancel your interval when you don't need it anymore to save memory. Reacc provides [lifecycle methods](/reacc/docs/working-with-the-browser.html#component-lifecycle) that let you know when a component is about to be created or destroyed. Let's create a simple mixin that uses these methods to provide an easy `setInterval()` function that will automatically get cleaned up when your component is destroyed.
 
 ```javascript
 var SetIntervalMixin = {
@@ -194,9 +194,9 @@ var SetIntervalMixin = {
   }
 };
 
-var createReactClass = require('create-react-class');
+var createReaccClass = require('create-reacc-class');
 
-var TickTock = createReactClass({
+var TickTock = createReaccClass({
   mixins: [SetIntervalMixin], // Use the mixin
   getInitialState: function() {
     return {seconds: 0};
@@ -210,13 +210,13 @@ var TickTock = createReactClass({
   render: function() {
     return (
       <p>
-        React has been running for {this.state.seconds} seconds.
+        Reacc has been running for {this.state.seconds} seconds.
       </p>
     );
   }
 });
 
-ReactDOM.render(
+ReaccDOM.render(
   <TickTock />,
   document.getElementById('example')
 );

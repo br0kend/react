@@ -101,7 +101,7 @@ function manualDispatchChangeEvent(nativeEvent) {
   // elements instead of directly on the input). Without this, controlled
   // components don't work properly in conjunction with event bubbling because
   // the component is rerendered and the value reverted before all the event
-  // handlers can run. See https://github.com/facebook/react/issues/708.
+  // handlers can run. See https://github.com/facebook/reacc/issues/708.
   ReactGenericBatching.batchedUpdates(runEventInBatch, event);
 }
 

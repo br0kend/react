@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reacc';
 
 import Fixture from '../../Fixture';
 

@@ -148,7 +148,7 @@ function validateExplicitKey(element, parentType) {
     warning(
       false,
       'Each child in an array or iterator should have a unique "key" prop.' +
-        '%s%s See https://fb.me/react-warning-keys for more information.%s',
+        '%s%s See https://fb.me/reacc-warning-keys for more information.%s',
       currentComponentErrorInfo,
       childOwner,
       getStackAddendum(),

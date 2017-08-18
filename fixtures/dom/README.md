@@ -13,5 +13,5 @@ npm install
 npm start
 ```
 
-The `start` command runs a script that copies over the local build of react into
+The `start` command runs a script that copies over the local build of reacc into
 the public directory.

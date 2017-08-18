@@ -8,11 +8,11 @@ Interest in React seems to have surged ever since David Nolen ([@swannodette](ht
 In this React Community Round-up, we are taking a closer look at React from a functional programming perspective.
 
 ## "React: Another Level of Indirection"
-To start things off, Eric Normand ([@ericnormand](https://twitter.com/ericnormand)) of [LispCast](http://lispcast.com) makes the case for [React from a general functional programming standpoint](http://www.lispcast.com/react-another-level-of-indirection) and explains how React's "Virtual DOM provides the last piece of the Web Frontend Puzzle for ClojureScript".
+To start things off, Eric Normand ([@ericnormand](https://twitter.com/ericnormand)) of [LispCast](http://lispcast.com) makes the case for [React from a general functional programming standpoint](http://www.lispcast.com/reacc-another-level-of-indirection) and explains how React's "Virtual DOM provides the last piece of the Web Frontend Puzzle for ClojureScript".
 
 > The Virtual DOM is an indirection mechanism that solves the difficult problem of DOM programming: how to deal with incremental changes to a stateful tree structure. By abstracting away the statefulness, the Virtual DOM turns the real DOM into an immediate mode GUI, which is perfect for functional programming.
 >
-> [Read the full post...](http://www.lispcast.com/react-another-level-of-indirection)
+> [Read the full post...](http://www.lispcast.com/reacc-another-level-of-indirection)
 
 ## Reagent: Minimalistic React for ClojureScript
 Dan Holmsand ([@holmsand](https://twitter.com/holmsand)) created [Reagent](https://holmsand.github.io/reagent/), a simplistic ClojureScript API to React.
@@ -87,21 +87,21 @@ A basic example from github:
 
 ## Om
 
-In an interview with David Nolen, Tom Coupland ([@tcoupland](https://twitter.com/tcoupland)) of InfoQ provides a nice summary of recent developments around Om ("[Om: Enhancing Facebook's React with Immutability](http://www.infoq.com/news/2014/01/om-react)").
+In an interview with David Nolen, Tom Coupland ([@tcoupland](https://twitter.com/tcoupland)) of InfoQ provides a nice summary of recent developments around Om ("[Om: Enhancing Facebook's React with Immutability](http://www.infoq.com/news/2014/01/om-reacc)").
 
 > David [Nolen]: I think people are starting to see the limitations of just JavaScript and jQuery and even more structured solutions like Backbone, Angular, Ember, etc. React is a fresh approach to the DOM problem that seems obvious in hindsight.
 >
-> [Read the full interview...](http://www.infoq.com/news/2014/01/om-react)
+> [Read the full interview...](http://www.infoq.com/news/2014/01/om-reacc)
 
 ### A slice of React, ClojureScript and Om
 
-Fredrik Dyrkell ([@lexicallyscoped](https://twitter.com/lexicallyscoped)) rewrote part of the [React tutorial in both ClojureScript and Om](http://www.lexicallyscoped.com/2013/12/25/slice-of-reactjs-and-cljs.html), along with short, helpful explanations.
+Fredrik Dyrkell ([@lexicallyscoped](https://twitter.com/lexicallyscoped)) rewrote part of the [React tutorial in both ClojureScript and Om](http://www.lexicallyscoped.com/2013/12/25/slice-of-reaccjs-and-cljs.html), along with short, helpful explanations.
 
 > React has sparked a lot of interest in the Clojure community lately [...]. At the very core, React lets you build up your DOM representation in a functional fashion by composing pure functions and you have a simple building block for everything: React components.
 >
-> [Read the full post...](http://www.lexicallyscoped.com/2013/12/25/slice-of-reactjs-and-cljs.html)
+> [Read the full post...](http://www.lexicallyscoped.com/2013/12/25/slice-of-reaccjs-and-cljs.html)
 
-In a separate post, Dyrkell breaks down [how to build a binary clock component](http://www.lexicallyscoped.com/2014/01/23/ClojureScript-react-om-binary-clock.html) in Om.
+In a separate post, Dyrkell breaks down [how to build a binary clock component](http://www.lexicallyscoped.com/2014/01/23/ClojureScript-reacc-om-binary-clock.html) in Om.
 
 [[Demo](http://www.lexicallyscoped.com/demo/binclock/)] [[Code](https://github.com/fredyr/binclock/blob/master/src/binclock/core.cljs)]
 
@@ -110,7 +110,7 @@ David Nolen shows how to leverage immutable data structures to [add global undo]
 
 ### A Step-by-Step Om Walkthrough
 
-[Josh Lehman](http://www.joshlehman.me) took the time to create an extensive [step-by-step walkthrough](http://www.joshlehman.me/rewriting-the-react-tutorial-in-om/) of the React tutorial in Om. The well-documented source is on [github](https://github.com/jalehman/omtut-starter).
+[Josh Lehman](http://www.joshlehman.me) took the time to create an extensive [step-by-step walkthrough](http://www.joshlehman.me/rewriting-the-reacc-tutorial-in-om/) of the React tutorial in Om. The well-documented source is on [github](https://github.com/jalehman/omtut-starter).
 
 ### Omkara
 

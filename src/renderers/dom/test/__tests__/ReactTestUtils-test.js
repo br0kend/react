@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -20,11 +20,11 @@ let ReactTestUtils;
 
 describe('ReactTestUtils', () => {
   beforeEach(() => {
-    createRenderer = require('react-test-renderer/shallow').createRenderer;
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
-    ReactTestUtils = require('react-dom/test-utils');
+    createRenderer = require('reacc-test-renderer/shallow').createRenderer;
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
+    ReactTestUtils = require('reacc-dom/test-utils');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
   });
 

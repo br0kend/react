@@ -103,7 +103,7 @@ if (__DEV__) {
               ? 'and use an HTTP server (instead of a file: URL) '
               : '') +
             'for a better development experience: ' +
-            'https://fb.me/react-devtools',
+            'https://fb.me/reacc-devtools',
         );
       }
     }
@@ -114,7 +114,7 @@ if (__DEV__) {
       "It looks like you're using a minified copy of the development build " +
         'of React. When deploying React apps to production, make sure to use ' +
         'the production build which skips development warnings and is faster. ' +
-        'See https://fb.me/react-minification for more details.',
+        'See https://fb.me/reacc-minification for more details.',
     );
 
     // If we're in IE8, check to see if we are in compatibility mode and provide
@@ -147,7 +147,7 @@ if (__DEV__) {
         warning(
           false,
           'One or more ES5 shims expected by React are not available: ' +
-            'https://fb.me/react-warning-polyfills',
+            'https://fb.me/reacc-warning-polyfills',
         );
         break;
       }

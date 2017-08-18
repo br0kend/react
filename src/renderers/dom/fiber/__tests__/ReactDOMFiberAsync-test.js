@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('reacc');
 var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
 var ReactFeatureFlags = require('ReactFeatureFlags');
 
@@ -11,7 +11,7 @@ describe('ReactDOMFiberAsync', () => {
 
   beforeEach(() => {
     container = document.createElement('div');
-    ReactDOM = require('react-dom');
+    ReactDOM = require('reacc-dom');
   });
 
   it('renders synchronously by default', () => {
@@ -46,7 +46,7 @@ describe('ReactDOMFiberAsync', () => {
         ReactFeatureFlags = require('ReactFeatureFlags');
         container = document.createElement('div');
         ReactFeatureFlags.enableAsyncSubtreeAPI = true;
-        ReactDOM = require('react-dom');
+        ReactDOM = require('reacc-dom');
       });
 
       it('AsyncComponent at the root makes the entire tree async', () => {

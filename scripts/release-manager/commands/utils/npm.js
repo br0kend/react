@@ -3,10 +3,10 @@
 const querystring = require('querystring');
 
 const PACKAGES = [
-  'react-dom',
-  'react-native-renderer',
-  'react-test-renderer',
-  'react',
+  'reacc-dom',
+  'reacc-native-renderer',
+  'reacc-test-renderer',
+  'reacc',
 ];
 
 function whoami(app) {
@@ -26,7 +26,7 @@ function generateAccessNeededIssue(username, packages) {
     body: `In order to publish React to npm I need access to the following repositories:
 ${packages.map(pkg => `- [${pkg}](https://npm.im/${pkg})`).join('\n')}`,
   };
-  return `https://github.com/facebook/react/issues/new?${querystring.stringify(data)}`;
+  return `https://github.com/facebook/reacc/issues/new?${querystring.stringify(data)}`;
 }
 
 function grantAccess(app, username, packages) {

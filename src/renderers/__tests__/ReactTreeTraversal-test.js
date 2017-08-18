@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 // TODO: can we express this test with only public API?
 var ReactDOMComponentTree = require('ReactDOMComponentTree');
-var ReactTestUtils = require('react-dom/test-utils');
+var ReactTestUtils = require('reacc-dom/test-utils');
 
 /**
  * Ensure that all callbacks are invoked, passing this unique argument.

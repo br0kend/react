@@ -69,14 +69,14 @@ var ON_DOM_READY_QUEUEING = {
    * Initializes the internal `onDOMReady` queue.
    */
   initialize: function() {
-    this.reactMountReady.reset();
+    this.reaccMountReady.reset();
   },
 
   /**
    * After DOM is flushed, invoke all registered `onDOMReady` callbacks.
    */
   close: function() {
-    this.reactMountReady.notifyAll();
+    this.reaccMountReady.notifyAll();
   },
 };
 
@@ -120,7 +120,7 @@ function ReactReconcileTransaction(useCreateElement) {
   // accessible and defaults to false when `ReactDOMComponent` and
   // `ReactDOMTextComponent` checks it in `mountComponent`.`
   this.renderToStaticMarkup = false;
-  this.reactMountReady = CallbackQueue.getPooled();
+  this.reaccMountReady = CallbackQueue.getPooled();
   this.useCreateElement = useCreateElement;
 }
 
@@ -140,7 +140,7 @@ var Mixin = {
    * @return {object} The queue to collect `onDOMReady` callbacks with.
    */
   getReactMountReady: function() {
-    return this.reactMountReady;
+    return this.reaccMountReady;
   },
 
   /**
@@ -155,12 +155,12 @@ var Mixin = {
    * passed to `rollback`, the transaction will be reset to that state.
    */
   checkpoint: function() {
-    // reactMountReady is the our only stateful wrapper
-    return this.reactMountReady.checkpoint();
+    // reaccMountReady is the our only stateful wrapper
+    return this.reaccMountReady.checkpoint();
   },
 
   rollback: function(checkpoint) {
-    this.reactMountReady.rollback(checkpoint);
+    this.reaccMountReady.rollback(checkpoint);
   },
 
   /**
@@ -168,8 +168,8 @@ var Mixin = {
    * instance to be reused.
    */
   destructor: function() {
-    CallbackQueue.release(this.reactMountReady);
-    this.reactMountReady = null;
+    CallbackQueue.release(this.reaccMountReady);
+    this.reaccMountReady = null;
   },
 };
 

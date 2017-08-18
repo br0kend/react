@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -24,8 +24,8 @@ describe('ReactChildren', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   it('should support identity for simple', () => {
@@ -442,7 +442,7 @@ describe('ReactChildren', () => {
 
   it('should allow extension of native prototypes', () => {
     /*eslint-disable no-extend-native */
-    String.prototype.key = 'react';
+    String.prototype.key = 'reacc';
     Number.prototype.key = 'rocks';
     /*eslint-enable no-extend-native */
 
@@ -902,7 +902,7 @@ describe('ReactChildren', () => {
         expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
           'Warning: ' +
             'Each child in an array or iterator should have a unique "key" prop.' +
-            ' See https://fb.me/react-warning-keys for more information.' +
+            ' See https://fb.me/reacc-warning-keys for more information.' +
             '\n    in ComponentReturningArray (at **)',
         );
       });
@@ -929,7 +929,7 @@ describe('ReactChildren', () => {
         expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
           'Warning: ' +
             'Each child in an array or iterator should have a unique "key" prop.' +
-            ' See https://fb.me/react-warning-keys for more information.',
+            ' See https://fb.me/reacc-warning-keys for more information.',
         );
       });
     });

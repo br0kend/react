@@ -6,19 +6,19 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-let ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
+let ReaccDOMFeatureFlags = require('ReactDOMFeatureFlags');
 
 let ExecutionEnvironment;
 let PropTypes;
-let React;
-let ReactDOM;
-let ReactDOMServer;
-let ReactTestUtils;
+let Reacc;
+let ReaccDOM;
+let ReaccDOMServer;
+let ReaccTestUtils;
 
 const stream = require('stream');
 
@@ -28,13 +28,13 @@ const COMMENT_NODE_TYPE = 8;
 // Helper functions for rendering tests
 // ====================================
 
-// promisified version of ReactDOM.render()
-function asyncReactDOMRender(reactElement, domElement, forceHydrate) {
+// promisified version of ReaccDOM.render()
+function asyncReaccDOMRender(reaccElement, domElement, forceHydrate) {
   return new Promise(resolve => {
-    if (forceHydrate && ReactDOMFeatureFlags.useFiber) {
-      ReactDOM.hydrate(reactElement, domElement);
+    if (forceHydrate && ReaccDOMFeatureFlags.useFiber) {
+      ReaccDOM.hydrate(reaccElement, domElement);
     } else {
-      ReactDOM.render(reactElement, domElement);
+      ReaccDOM.render(reaccElement, domElement);
     }
     // We can't use the callback for resolution because that will not catch
     // errors. They're thrown.
@@ -69,32 +69,32 @@ async function expectErrors(fn, count) {
   return result;
 }
 
-// renders the reactElement into domElement, and expects a certain number of errors.
+// renders the reaccElement into domElement, and expects a certain number of errors.
 // returns a Promise that resolves when the render is complete.
-function renderIntoDom(reactElement, domElement, forceHydrate, errorCount = 0) {
+function renderIntoDom(reaccElement, domElement, forceHydrate, errorCount = 0) {
   return expectErrors(async () => {
     ExecutionEnvironment.canUseDOM = true;
-    await asyncReactDOMRender(reactElement, domElement, forceHydrate);
+    await asyncReaccDOMRender(reaccElement, domElement, forceHydrate);
     ExecutionEnvironment.canUseDOM = false;
     return domElement.firstChild;
   }, errorCount);
 }
 
-async function renderIntoString(reactElement, errorCount = 0) {
+async function renderIntoString(reaccElement, errorCount = 0) {
   return await expectErrors(
     () =>
       new Promise(resolve =>
-        resolve(ReactDOMServer.renderToString(reactElement)),
+        resolve(ReaccDOMServer.renderToString(reaccElement)),
       ),
     errorCount,
   );
 }
 
 // Renders text using SSR and then stuffs it into a DOM node; returns the DOM
-// element that corresponds with the reactElement.
+// element that corresponds with the reaccElement.
 // Does not render on client or perform client-side revival.
-async function serverRender(reactElement, errorCount = 0) {
-  const markup = await renderIntoString(reactElement, errorCount);
+async function serverRender(reaccElement, errorCount = 0) {
+  const markup = await renderIntoString(reaccElement, errorCount);
   var domElement = document.createElement('div');
   domElement.innerHTML = markup;
   return domElement.firstChild;
@@ -114,12 +114,12 @@ class DrainWritable extends stream.Writable {
   }
 }
 
-async function renderIntoStream(reactElement, errorCount = 0) {
+async function renderIntoStream(reaccElement, errorCount = 0) {
   return await expectErrors(
     () =>
       new Promise(resolve => {
         let writable = new DrainWritable();
-        ReactDOMServer.renderToNodeStream(reactElement).pipe(writable);
+        ReaccDOMServer.renderToNodeStream(reaccElement).pipe(writable);
         writable.on('finish', () => resolve(writable.buffer));
       }),
     errorCount,
@@ -127,10 +127,10 @@ async function renderIntoStream(reactElement, errorCount = 0) {
 }
 
 // Renders text using node stream SSR and then stuffs it into a DOM node;
-// returns the DOM element that corresponds with the reactElement.
+// returns the DOM element that corresponds with the reaccElement.
 // Does not render on client or perform client-side revival.
-async function streamRender(reactElement, errorCount = 0) {
-  const markup = await renderIntoStream(reactElement, errorCount);
+async function streamRender(reaccElement, errorCount = 0) {
+  const markup = await renderIntoStream(reaccElement, errorCount);
   var domElement = document.createElement('div');
   domElement.innerHTML = markup;
   return domElement.firstChild;
@@ -178,7 +178,7 @@ const clientRenderOnBadMarkup = async (element, errorCount = 0) => {
   // First we render the top of bad mark up.
   var domElement = document.createElement('div');
   domElement.innerHTML =
-    '<div id="badIdWhichWillCauseMismatch" data-reactroot="" data-reactid="1"></div>';
+    '<div id="badIdWhichWillCauseMismatch" data-reaccroot="" data-reactid="1"></div>';
   await renderIntoDom(element, domElement, true, errorCount + 1);
 
   // This gives us the resulting text content.
@@ -187,7 +187,7 @@ const clientRenderOnBadMarkup = async (element, errorCount = 0) => {
   // Next we render the element into a clean DOM node client side.
   const cleanDomElement = document.createElement('div');
   ExecutionEnvironment.canUseDOM = true;
-  await asyncReactDOMRender(element, cleanDomElement, true);
+  await asyncReaccDOMRender(element, cleanDomElement, true);
   ExecutionEnvironment.canUseDOM = false;
   // This gives us the expected text content.
   const cleanTextContent = cleanDomElement.textContent;
@@ -207,7 +207,7 @@ const clientRenderOnBadMarkup = async (element, errorCount = 0) => {
 // -- render on client on top of bad server-generated markup
 //
 // testFn is a test that has one arg, which is a render function. the render
-// function takes in a ReactElement and an optional expected error count and
+// function takes in a ReaccElement and an optional expected error count and
 // returns a promise of a DOM Element.
 //
 // You should only perform tests that examine the DOM of the results of
@@ -215,7 +215,7 @@ const clientRenderOnBadMarkup = async (element, errorCount = 0) => {
 // as that will not work in the server string scenario.
 function itRenders(desc, testFn) {
   it(`renders ${desc} with server string render`, () => testFn(serverRender));
-  if (ReactDOMFeatureFlags.useFiber) {
+  if (ReaccDOMFeatureFlags.useFiber) {
     it(`renders ${desc} with server stream render`, () => testFn(streamRender));
   }
   itClientRenders(desc, testFn);
@@ -227,7 +227,7 @@ function itRenders(desc, testFn) {
 // -- render on client on top of bad server-generated markup
 //
 // testFn is a test that has one arg, which is a render function. the render
-// function takes in a ReactElement and an optional expected error count and
+// function takes in a ReaccElement and an optional expected error count and
 // returns a promise of a DOM Element.
 //
 // Since all of the renders in this function are on the client, you can test interactivity,
@@ -314,8 +314,8 @@ function expectMarkupMismatch(serverElement, clientElement) {
 
 // When there is a test that renders on server and then on client and expects a logged
 // error, you want to see the error show up both on server and client. Unfortunately,
-// React refuses to issue the same error twice to avoid clogging up the console.
-// To get around this, we must reload React modules in between server and client render.
+// Reacc refuses to issue the same error twice to avoid clogging up the console.
+// To get around this, we must reload Reacc modules in between server and client render.
 function resetModules() {
   // First, reset the modules to load the client renderer.
   jest.resetModuleRegistry();
@@ -323,22 +323,22 @@ function resetModules() {
   // TODO: can we express this test with only public API?
   ExecutionEnvironment = require('ExecutionEnvironment');
 
-  require('ReactFeatureFlags').disableNewFiberFeatures = false;
+  require('ReaccFeatureFlags').disableNewFiberFeatures = false;
   PropTypes = require('prop-types');
-  React = require('react');
-  ReactDOM = require('react-dom');
-  ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-  ReactTestUtils = require('react-dom/test-utils');
+  Reacc = require('reacc');
+  ReaccDOM = require('reacc-dom');
+  ReaccDOMFeatureFlags = require('ReactDOMFeatureFlags');
+  ReaccTestUtils = require('reacc-dom/test-utils');
 
   // Now we reset the modules again to load the server renderer.
   // Resetting is important because we want to avoid any shared state
   // influencing the tests.
   jest.resetModuleRegistry();
-  require('ReactFeatureFlags').disableNewFiberFeatures = false;
-  ReactDOMServer = require('react-dom/server');
+  require('ReaccFeatureFlags').disableNewFiberFeatures = false;
+  ReaccDOMServer = require('reacc-dom/server');
 }
 
-describe('ReactDOMServerIntegration', () => {
+describe('ReaccDOMServerIntegration', () => {
   beforeEach(() => {
     resetModules();
 
@@ -362,7 +362,7 @@ describe('ReactDOMServerIntegration', () => {
       expect(e.firstChild.tagName).toBe('BR');
     });
 
-    if (ReactDOMFeatureFlags.useFiber) {
+    if (ReaccDOMFeatureFlags.useFiber) {
       itRenders('a string', async render => {
         let e = await render('Hello');
         expect(e.nodeType).toBe(3);
@@ -714,9 +714,9 @@ describe('ReactDOMServerIntegration', () => {
       });
     });
 
-    describe('props with special meaning in React', function() {
+    describe('props with special meaning in Reacc', function() {
       itRenders('no ref attribute', async render => {
-        class RefComponent extends React.Component {
+        class RefComponent extends Reacc.Component {
           render() {
             return <div ref="foo" />;
           }
@@ -726,7 +726,7 @@ describe('ReactDOMServerIntegration', () => {
       });
 
       itRenders('no children attribute', async render => {
-        const e = await render(React.createElement('div', {}, 'foo'));
+        const e = await render(Reacc.createElement('div', {}, 'foo'));
         expect(e.getAttribute('children')).toBe(null);
       });
 
@@ -976,23 +976,23 @@ describe('ReactDOMServerIntegration', () => {
     }
 
     function expectTextNode(node, text) {
-      if (ReactDOMFeatureFlags.useFiber) {
-        // with Fiber, a React text node is just a DOM text node.
+      if (ReaccDOMFeatureFlags.useFiber) {
+        // with Fiber, a Reacc text node is just a DOM text node.
         expectNode(node, TEXT_NODE_TYPE, text);
       } else {
-        // with Stack, a React text node is a DOM text node surrounded by
-        // react-text comment nodes.
-        expectNode(node, COMMENT_NODE_TYPE, / react-text: [0-9]+ /);
+        // with Stack, a Reacc text node is a DOM text node surrounded by
+        // reacc-text comment nodes.
+        expectNode(node, COMMENT_NODE_TYPE, / reacc-text: [0-9]+ /);
         if (text.length > 0) {
           node = node.nextSibling;
           expectNode(node, TEXT_NODE_TYPE, text);
         }
-        expectNode(node.nextSibling, COMMENT_NODE_TYPE, / \/react-text /);
+        expectNode(node.nextSibling, COMMENT_NODE_TYPE, / \/reacc-text /);
       }
     }
 
     function expectEmptyNode(node) {
-      expectNode(node, COMMENT_NODE_TYPE, / react-empty: [0-9]+ /);
+      expectNode(node, COMMENT_NODE_TYPE, / reacc-empty: [0-9]+ /);
     }
 
     describe('text children', function() {
@@ -1017,7 +1017,7 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('a div with multiple empty text children', async render => {
         const e = await render(<div>{''}{''}{''}</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are just three separate text node children,
           // each of which is blank.
           if (render === serverRender || render === streamRender) {
@@ -1032,7 +1032,7 @@ describe('ReactDOMServerIntegration', () => {
             expectTextNode(e.childNodes[2], '');
           }
         } else {
-          // with Stack, there are six react-text comment nodes.
+          // with Stack, there are six reacc-text comment nodes.
           expect(e.childNodes.length).toBe(6);
           expectTextNode(e.childNodes[0], '');
           expectTextNode(e.childNodes[2], '');
@@ -1042,7 +1042,7 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('a div with multiple whitespace children', async render => {
         const e = await render(<div>{' '}{' '}{' '}</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are normally just three text nodes
           if (
             render === serverRender ||
@@ -1062,7 +1062,7 @@ describe('ReactDOMServerIntegration', () => {
             expectTextNode(e.childNodes[2], ' ');
           }
         } else {
-          // with Stack, each of the text nodes is surrounded by react-text
+          // with Stack, each of the text nodes is surrounded by reacc-text
           // comment nodes, making 9 nodes in total.
           expect(e.childNodes.length).toBe(9);
           expectTextNode(e.childNodes[0], ' ');
@@ -1074,14 +1074,14 @@ describe('ReactDOMServerIntegration', () => {
       itRenders('a div with text sibling to a node', async render => {
         const e = await render(<div>Text<span>More Text</span></div>);
         let spanNode;
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are only two children, the "Text" text node and
           // the span element.
           expect(e.childNodes.length).toBe(2);
           spanNode = e.childNodes[1];
         } else {
           // with Stack, there are four children, a "Text" text node surrounded
-          // by react-text comment nodes, and the span element.
+          // by reacc-text comment nodes, and the span element.
           expect(e.childNodes.length).toBe(4);
           spanNode = e.childNodes[3];
         }
@@ -1107,7 +1107,7 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('a leading blank child with a text sibling', async render => {
         const e = await render(<div>{''}foo</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are just two text nodes.
           if (render === serverRender || render === streamRender) {
             expect(e.childNodes.length).toBe(1);
@@ -1118,9 +1118,9 @@ describe('ReactDOMServerIntegration', () => {
             expectTextNode(e.childNodes[1], 'foo');
           }
         } else {
-          // with Stack, there are five nodes: two react-text comment nodes
+          // with Stack, there are five nodes: two reacc-text comment nodes
           // without any text between them, and the text node foo surrounded
-          // by react-text comment nodes.
+          // by reacc-text comment nodes.
           expect(e.childNodes.length).toBe(5);
           expectTextNode(e.childNodes[0], '');
           expectTextNode(e.childNodes[2], 'foo');
@@ -1129,7 +1129,7 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('a trailing blank child with a text sibling', async render => {
         const e = await render(<div>foo{''}</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are just two text nodes.
           if (render === serverRender || render === streamRender) {
             expect(e.childNodes.length).toBe(1);
@@ -1141,7 +1141,7 @@ describe('ReactDOMServerIntegration', () => {
           }
         } else {
           // with Stack, there are five nodes: the text node foo surrounded
-          // by react-text comment nodes, and two react-text comment nodes
+          // by reacc-text comment nodes, and two react-text comment nodes
           // without any text between them.
           expect(e.childNodes.length).toBe(5);
           expectTextNode(e.childNodes[0], 'foo');
@@ -1151,7 +1151,7 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('an element with two text children', async render => {
         const e = await render(<div>{'foo'}{'bar'}</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are just two text nodes.
           if (
             render === serverRender ||
@@ -1169,7 +1169,7 @@ describe('ReactDOMServerIntegration', () => {
           }
         } else {
           // with Stack, there are six nodes: two text nodes, each surrounded
-          // by react-text comment nodes.
+          // by reacc-text comment nodes.
           expect(e.childNodes.length).toBe(6);
           expectTextNode(e.childNodes[0], 'foo');
           expectTextNode(e.childNodes[3], 'bar');
@@ -1191,7 +1191,7 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('an element with number and text children', async render => {
         const e = await render(<div>{'foo'}{40}</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are just two text nodes.
           if (
             render === serverRender ||
@@ -1209,7 +1209,7 @@ describe('ReactDOMServerIntegration', () => {
           }
         } else {
           // with Stack, there are six nodes: two text nodes, each surrounded
-          // by react-text comment nodes.
+          // by reacc-text comment nodes.
           expect(e.childNodes.length).toBe(6);
           expectTextNode(e.childNodes[0], 'foo');
           expectTextNode(e.childNodes[3], '40');
@@ -1236,11 +1236,11 @@ describe('ReactDOMServerIntegration', () => {
       itRenders('a null component children as empty', async render => {
         const NullComponent = () => null;
         const e = await render(<div><NullComponent /></div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, an empty component results in no markup.
           expect(e.childNodes.length).toBe(0);
         } else {
-          // with Stack, an empty component results in one react-empty comment
+          // with Stack, an empty component results in one reacc-empty comment
           // node.
           expect(e.childNodes.length).toBe(1);
           expectEmptyNode(e.firstChild);
@@ -1249,12 +1249,12 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('null children as blank', async render => {
         const e = await render(<div>{null}foo</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there is just one text node.
           expect(e.childNodes.length).toBe(1);
           expectTextNode(e.childNodes[0], 'foo');
         } else {
-          // with Stack, there's a text node surronded by react-text comment nodes.
+          // with Stack, there's a text node surronded by reacc-text comment nodes.
           expect(e.childNodes.length).toBe(3);
           expectTextNode(e.childNodes[0], 'foo');
         }
@@ -1262,12 +1262,12 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('false children as blank', async render => {
         const e = await render(<div>{false}foo</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there is just one text node.
           expect(e.childNodes.length).toBe(1);
           expectTextNode(e.childNodes[0], 'foo');
         } else {
-          // with Stack, there's a text node surronded by react-text comment nodes.
+          // with Stack, there's a text node surronded by reacc-text comment nodes.
           expect(e.childNodes.length).toBe(3);
           expectTextNode(e.childNodes[0], 'foo');
         }
@@ -1275,12 +1275,12 @@ describe('ReactDOMServerIntegration', () => {
 
       itRenders('null and false children together as blank', async render => {
         const e = await render(<div>{false}{null}foo{null}{false}</div>);
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there is just one text node.
           expect(e.childNodes.length).toBe(1);
           expectTextNode(e.childNodes[0], 'foo');
         } else {
-          // with Stack, there's a text node surronded by react-text comment nodes.
+          // with Stack, there's a text node surronded by reacc-text comment nodes.
           expect(e.childNodes.length).toBe(3);
           expectTextNode(e.childNodes[0], 'foo');
         }
@@ -1335,7 +1335,7 @@ describe('ReactDOMServerIntegration', () => {
       });
     });
     // specially wrapped components
-    // (see the big switch near the beginning ofReactDOMComponent.mountComponent)
+    // (see the big switch near the beginning ofReaccDOMComponent.mountComponent)
     itRenders('an img', async render => {
       const e = await render(<img />);
       expect(e.childNodes.length).toBe(0);
@@ -1393,7 +1393,7 @@ describe('ReactDOMServerIntegration', () => {
       });
 
       itRenders('ES6 class components', async render => {
-        class ClassComponent extends React.Component {
+        class ClassComponent extends Reacc.Component {
           render() {
             return <div>foo</div>;
           }
@@ -1488,7 +1488,7 @@ describe('ReactDOMServerIntegration', () => {
           );
           expect(e.id).toBe('parent');
           let child1, child2, textNode;
-          if (ReactDOMFeatureFlags.useFiber) {
+          if (ReaccDOMFeatureFlags.useFiber) {
             // with Fiber, there are three children: the child1 element, a
             // single space text node, and the child2 element.
             expect(e.childNodes.length).toBe(3);
@@ -1497,7 +1497,7 @@ describe('ReactDOMServerIntegration', () => {
             child2 = e.childNodes[2];
           } else {
             // with Stack, there are five children: the child1 element, a single
-            // space surrounded by react-text comments, and the child2 element.
+            // space surrounded by reacc-text comments, and the child2 element.
             expect(e.childNodes.length).toBe(5);
             child1 = e.childNodes[0];
             textNode = e.childNodes[1];
@@ -1517,7 +1517,7 @@ describe('ReactDOMServerIntegration', () => {
           // prettier-ignore
           const e = await render(<div id="parent">  <div id="child" />   </div>); // eslint-disable-line no-multi-spaces
           let textNode1, child, textNode2;
-          if (ReactDOMFeatureFlags.useFiber) {
+          if (ReaccDOMFeatureFlags.useFiber) {
             // with Fiber, there are three children: a one-space text node, the
             // child element, and a two-space text node.
             expect(e.childNodes.length).toBe(3);
@@ -1526,8 +1526,8 @@ describe('ReactDOMServerIntegration', () => {
             textNode2 = e.childNodes[2];
           } else {
             // with Stack, there are 7 children: a one-space text node surrounded
-            // by react-text comments, the child element, and a two-space text node
-            // surrounded by react-text comments.
+            // by reacc-text comments, the child element, and a two-space text node
+            // surrounded by reacc-text comments.
             expect(e.childNodes.length).toBe(7);
             textNode1 = e.childNodes[0];
             child = e.childNodes[3];
@@ -1541,7 +1541,7 @@ describe('ReactDOMServerIntegration', () => {
         },
       );
 
-      if (ReactDOMFeatureFlags.useFiber) {
+      if (ReaccDOMFeatureFlags.useFiber) {
         itRenders('a composite with multiple children', async render => {
           const Component = props => props.children;
           const e = await render(
@@ -1581,7 +1581,7 @@ describe('ReactDOMServerIntegration', () => {
         const e = await render(
           <div>{'<span>Text1&quot;</span>'}{'<span>Text2&quot;</span>'}</div>,
         );
-        if (ReactDOMFeatureFlags.useFiber) {
+        if (ReaccDOMFeatureFlags.useFiber) {
           // with Fiber, there are just two text nodes.
           if (
             render === serverRender ||
@@ -1598,7 +1598,7 @@ describe('ReactDOMServerIntegration', () => {
           }
         } else {
           // with Stack there are six nodes: two text nodes each surrounded by
-          // two react-text comment nodes.
+          // two reacc-text comment nodes.
           expect(e.childNodes.length).toBe(6);
           expectTextNode(e.childNodes[0], '<span>Text1&quot;</span>');
           expectTextNode(e.childNodes[3], '<span>Text2&quot;</span>');
@@ -1613,29 +1613,29 @@ describe('ReactDOMServerIntegration', () => {
           const UndefinedComponent = () => undefined;
           await render(<UndefinedComponent />, 1);
         },
-        ReactDOMFeatureFlags.useFiber
+        ReaccDOMFeatureFlags.useFiber
           ? 'UndefinedComponent(...): Nothing was returned from render. ' +
               'This usually means a return statement is missing. Or, to ' +
               'render nothing, return null.'
-          : 'A valid React element (or null) must be returned. ' +
+          : 'A valid Reacc element (or null) must be returned. ' +
               'You may have returned undefined, an array or some other invalid object.',
       );
 
       itThrowsWhenRendering(
         'a class returning undefined',
         async render => {
-          class UndefinedComponent extends React.Component {
+          class UndefinedComponent extends Reacc.Component {
             render() {
               return undefined;
             }
           }
           await render(<UndefinedComponent />, 1);
         },
-        ReactDOMFeatureFlags.useFiber
+        ReaccDOMFeatureFlags.useFiber
           ? 'UndefinedComponent(...): Nothing was returned from render. ' +
               'This usually means a return statement is missing. Or, to ' +
               'render nothing, return null.'
-          : 'A valid React element (or null) must be returned. ' +
+          : 'A valid Reacc element (or null) must be returned. ' +
               'You may have returned undefined, an array or some other invalid object.',
       );
 
@@ -1645,29 +1645,29 @@ describe('ReactDOMServerIntegration', () => {
           const ObjectComponent = () => ({x: 123});
           await render(<ObjectComponent />, 1);
         },
-        ReactDOMFeatureFlags.useFiber
-          ? 'Objects are not valid as a React child (found: object with keys ' +
+        ReaccDOMFeatureFlags.useFiber
+          ? 'Objects are not valid as a Reacc child (found: object with keys ' +
               '{x}). If you meant to render a collection of children, use ' +
               'an array instead.'
-          : 'A valid React element (or null) must be returned. ' +
+          : 'A valid Reacc element (or null) must be returned. ' +
               'You may have returned undefined, an array or some other invalid object.',
       );
 
       itThrowsWhenRendering(
         'a class returning an object',
         async render => {
-          class ObjectComponent extends React.Component {
+          class ObjectComponent extends Reacc.Component {
             render() {
               return {x: 123};
             }
           }
           await render(<ObjectComponent />, 1);
         },
-        ReactDOMFeatureFlags.useFiber
-          ? 'Objects are not valid as a React child (found: object with keys ' +
+        ReaccDOMFeatureFlags.useFiber
+          ? 'Objects are not valid as a Reacc child (found: object with keys ' +
               '{x}). If you meant to render a collection of children, use ' +
               'an array instead.'
-          : 'A valid React element (or null) must be returned. ' +
+          : 'A valid Reacc element (or null) must be returned. ' +
               'You may have returned undefined, an array or some other invalid object.',
       );
 
@@ -1676,8 +1676,8 @@ describe('ReactDOMServerIntegration', () => {
         async render => {
           await render({x: 123});
         },
-        ReactDOMFeatureFlags.useFiber
-          ? 'Objects are not valid as a React child (found: object with keys ' +
+        ReaccDOMFeatureFlags.useFiber
+          ? 'Objects are not valid as a Reacc child (found: object with keys ' +
               '{x}). If you meant to render a collection of children, use ' +
               'an array instead.'
           : 'Invalid component element.',
@@ -1978,7 +1978,7 @@ describe('ReactDOMServerIntegration', () => {
         ControlledCheckbox,
         ControlledSelect;
       beforeEach(() => {
-        ControlledInput = class extends React.Component {
+        ControlledInput = class extends Reacc.Component {
           constructor() {
             super();
             this.state = {value: 'Hello'};
@@ -1998,7 +1998,7 @@ describe('ReactDOMServerIntegration', () => {
             );
           }
         };
-        ControlledTextArea = class extends React.Component {
+        ControlledTextArea = class extends Reacc.Component {
           constructor() {
             super();
             this.state = {value: 'Hello'};
@@ -2018,7 +2018,7 @@ describe('ReactDOMServerIntegration', () => {
             );
           }
         };
-        ControlledCheckbox = class extends React.Component {
+        ControlledCheckbox = class extends Reacc.Component {
           constructor() {
             super();
             this.state = {value: true};
@@ -2039,7 +2039,7 @@ describe('ReactDOMServerIntegration', () => {
             );
           }
         };
-        ControlledSelect = class extends React.Component {
+        ControlledSelect = class extends Reacc.Component {
           constructor() {
             super();
             this.state = {value: 'Hello'};
@@ -2074,7 +2074,7 @@ describe('ReactDOMServerIntegration', () => {
 
           // simulate a user typing.
           e.value = 'Goodbye';
-          ReactTestUtils.Simulate.change(e);
+          ReaccTestUtils.Simulate.change(e);
 
           expect(changeCount).toBe(1);
           expect(e.value).toBe('Goodbye');
@@ -2090,7 +2090,7 @@ describe('ReactDOMServerIntegration', () => {
 
           // simulate a user typing.
           e.value = 'Goodbye';
-          ReactTestUtils.Simulate.change(e);
+          ReaccTestUtils.Simulate.change(e);
 
           expect(changeCount).toBe(1);
           expect(e.value).toBe('Goodbye');
@@ -2106,7 +2106,7 @@ describe('ReactDOMServerIntegration', () => {
 
           // simulate a user typing.
           e.checked = false;
-          ReactTestUtils.Simulate.change(e);
+          ReaccTestUtils.Simulate.change(e);
 
           expect(changeCount).toBe(1);
           expect(e.checked).toBe(false);
@@ -2122,7 +2122,7 @@ describe('ReactDOMServerIntegration', () => {
 
           // simulate a user typing.
           e.value = 'Goodbye';
-          ReactTestUtils.Simulate.change(e);
+          ReaccTestUtils.Simulate.change(e);
 
           expect(changeCount).toBe(1);
           expect(e.value).toBe('Goodbye');
@@ -2133,7 +2133,7 @@ describe('ReactDOMServerIntegration', () => {
         // renders the element and changes the value **before** the client
         // code has a chance to render; this simulates what happens when a
         // user starts to interact with a server-rendered form before
-        // ReactDOM.render is called. the client render should NOT blow away
+        // ReaccDOM.render is called. the client render should NOT blow away
         // the changes the user has made.
         const testUserInteractionBeforeClientRender = async (
           element,
@@ -2197,7 +2197,7 @@ describe('ReactDOMServerIntegration', () => {
           expect(changeCount).toBe(0);
         });
 
-        // skipping this test because React 15 does the wrong thing. it blows
+        // skipping this test because Reacc 15 does the wrong thing. it blows
         // away the user's typing in the textarea.
         xit(
           'should not blow away user-entered text on successful reconnect to an uncontrolled textarea',
@@ -2207,7 +2207,7 @@ describe('ReactDOMServerIntegration', () => {
             ),
         );
 
-        // skipping this test because React 15 does the wrong thing. it blows
+        // skipping this test because Reacc 15 does the wrong thing. it blows
         // away the user's typing in the textarea.
         xit(
           'should not blow away user-entered text on successful reconnect to a controlled textarea',
@@ -2242,7 +2242,7 @@ describe('ReactDOMServerIntegration', () => {
   describe('context', function() {
     let PurpleContext, RedContext;
     beforeEach(() => {
-      class Parent extends React.Component {
+      class Parent extends Reacc.Component {
         getChildContext() {
           return {text: this.props.text};
         }
@@ -2257,7 +2257,7 @@ describe('ReactDOMServerIntegration', () => {
     });
 
     itRenders('class child with context', async render => {
-      class ClassChildWithContext extends React.Component {
+      class ClassChildWithContext extends Reacc.Component {
         render() {
           return <div>{this.context.text}</div>;
         }
@@ -2283,7 +2283,7 @@ describe('ReactDOMServerIntegration', () => {
     });
 
     itRenders('class child without context', async render => {
-      class ClassChildWithoutContext extends React.Component {
+      class ClassChildWithoutContext extends Reacc.Component {
         render() {
           // this should render blank; context isn't passed to this component.
           return <div>{this.context.text}</div>;
@@ -2309,7 +2309,7 @@ describe('ReactDOMServerIntegration', () => {
     });
 
     itRenders('class child with wrong context', async render => {
-      class ClassChildWithWrongContext extends React.Component {
+      class ClassChildWithWrongContext extends Reacc.Component {
         render() {
           // this should render blank; context.text isn't passed to this component.
           return <div id="classWrongChild">{this.context.text}</div>;
@@ -2363,7 +2363,7 @@ describe('ReactDOMServerIntegration', () => {
     });
 
     itRenders('a child context merged with a parent context', async render => {
-      class Parent extends React.Component {
+      class Parent extends Reacc.Component {
         getChildContext() {
           return {text1: 'purple'};
         }
@@ -2373,7 +2373,7 @@ describe('ReactDOMServerIntegration', () => {
       }
       Parent.childContextTypes = {text1: PropTypes.string};
 
-      class Child extends React.Component {
+      class Child extends Reacc.Component {
         getChildContext() {
           return {text2: 'red'};
         }
@@ -2404,7 +2404,7 @@ describe('ReactDOMServerIntegration', () => {
     itRenders(
       'with a call to componentWillMount before getChildContext',
       async render => {
-        class WillMountContext extends React.Component {
+        class WillMountContext extends Reacc.Component {
           getChildContext() {
             return {text: this.state.text};
           }
@@ -2430,7 +2430,7 @@ describe('ReactDOMServerIntegration', () => {
     itThrowsWhenRendering(
       'if getChildContext exists without childContextTypes',
       render => {
-        class MyComponent extends React.Component {
+        class MyComponent extends Reacc.Component {
           render() {
             return <div />;
           }
@@ -2447,7 +2447,7 @@ describe('ReactDOMServerIntegration', () => {
     itThrowsWhenRendering(
       'if getChildContext returns a value not in childContextTypes',
       render => {
-        class MyComponent extends React.Component {
+        class MyComponent extends Reacc.Component {
           render() {
             return <div />;
           }
@@ -2465,7 +2465,7 @@ describe('ReactDOMServerIntegration', () => {
   describe('refs', function() {
     it('should not run ref code on server', async () => {
       let refCount = 0;
-      class RefsComponent extends React.Component {
+      class RefsComponent extends Reacc.Component {
         render() {
           return <div ref={e => refCount++} />;
         }
@@ -2476,7 +2476,7 @@ describe('ReactDOMServerIntegration', () => {
 
     it('should run ref code on client', async () => {
       let refCount = 0;
-      class RefsComponent extends React.Component {
+      class RefsComponent extends Reacc.Component {
         render() {
           return <div ref={e => refCount++} />;
         }
@@ -2487,7 +2487,7 @@ describe('ReactDOMServerIntegration', () => {
 
     it('should send the correct element to ref functions on client', async () => {
       let refElement = null;
-      class RefsComponent extends React.Component {
+      class RefsComponent extends Reacc.Component {
         render() {
           return <div ref={e => (refElement = e)} />;
         }
@@ -2498,18 +2498,18 @@ describe('ReactDOMServerIntegration', () => {
     });
 
     it('should have string refs on client when rendered over server markup', async () => {
-      class RefsComponent extends React.Component {
+      class RefsComponent extends Reacc.Component {
         render() {
           return <div ref="myDiv" />;
         }
       }
 
-      const markup = ReactDOMServer.renderToString(<RefsComponent />);
+      const markup = ReaccDOMServer.renderToString(<RefsComponent />);
       const root = document.createElement('div');
       root.innerHTML = markup;
       let component = null;
       resetModules();
-      await asyncReactDOMRender(
+      await asyncReaccDOMRender(
         <RefsComponent ref={e => (component = e)} />,
         root,
         true,
@@ -2521,7 +2521,7 @@ describe('ReactDOMServerIntegration', () => {
   describe('reconnecting to server markup', function() {
     var EmptyComponent;
     beforeEach(() => {
-      EmptyComponent = class extends React.Component {
+      EmptyComponent = class extends Reacc.Component {
         render() {
           return null;
         }
@@ -2533,7 +2533,7 @@ describe('ReactDOMServerIntegration', () => {
         let ES6ClassComponent, PureComponent, bareElement;
         beforeEach(() => {
           // try each type of component on client and server.
-          ES6ClassComponent = class extends React.Component {
+          ES6ClassComponent = class extends Reacc.Component {
             render() {
               return <div id={this.props.id} />;
             }
@@ -2700,7 +2700,7 @@ describe('ReactDOMServerIntegration', () => {
         ));
 
       it('can distinguish an empty component from an empty text component', () =>
-        (ReactDOMFeatureFlags.useFiber
+        (ReaccDOMFeatureFlags.useFiber
           ? expectMarkupMatch
           : expectMarkupMismatch)(
           <div><EmptyComponent /></div>,

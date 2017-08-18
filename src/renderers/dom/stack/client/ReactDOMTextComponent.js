@@ -80,8 +80,8 @@ Object.assign(ReactDOMTextComponent.prototype, {
     }
 
     var domID = hostContainerInfo._idCounter++;
-    var openingValue = ' react-text: ' + domID + ' ';
-    var closingValue = ' /react-text ';
+    var openingValue = ' reacc-text: ' + domID + ' ';
+    var closingValue = ' /reacc-text ';
     this._domID = domID;
     this._hostParent = hostParent;
     if (transaction.useCreateElement) {
@@ -164,7 +164,7 @@ Object.assign(ReactDOMTextComponent.prototype, {
         );
         if (
           node.nodeType === COMMENT_NODE &&
-          node.nodeValue === ' /react-text '
+          node.nodeValue === ' /reacc-text '
         ) {
           this._closingComment = node;
           break;

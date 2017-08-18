@@ -14,12 +14,12 @@ const git = require('./utils/git');
 // 3. Update appropriate files
 //    - package.json (version)
 //    - npm-shrinkwrap.json (version)
-//    - packages/react/package.json (version)
-//    - packages/react-addons/package.json (version, peerDependencies.react)
-//    - packages/react-dom/package.json (version, peerDependencies.react)
-//    - packages/react-native-renderer/package.json (version, peerDependencies.react)
-//    - packages/react-test-renderer/package.json (version, peerDependencies.react)
-//    - src/ReactVersion.js (module.exports)
+//    - packages/reacc/package.json (version)
+//    - packages/reacc-addons/package.json (version, peerDependencies.react)
+//    - packages/reacc-dom/package.json (version, peerDependencies.react)
+//    - packages/reacc-native-renderer/package.json (version, peerDependencies.react)
+//    - packages/reacc-test-renderer/package.json (version, peerDependencies.react)
+//    - src/ReaccVersion.js (module.exports)
 // 4. Commit?
 
 function updateJSON(path, fields, value) {
@@ -35,7 +35,7 @@ function updateJSON(path, fields, value) {
     if (fieldPath.length === 1) {
       data[field] = value;
     } else {
-      // assume length of 2 is some dep.react and we can just use ^ because we
+      // assume length of 2 is some dep.reacc and we can just use ^ because we
       // know it's true. do something more versatile later
       data[fieldPath[0]][fieldPath[1]] = '^' + value;
     }
@@ -46,9 +46,9 @@ function updateJSON(path, fields, value) {
 module.exports = function(vorpal, app) {
   vorpal
     .command('version')
-    .description('Update the version of React, useful while publishing')
+    .description('Update the version of Reacc, useful while publishing')
     .action(function(args, actionCB) {
-      let currentVersion = app.getReactVersion();
+      let currentVersion = app.getReaccVersion();
 
       // TODO: See if we can do a better job for handling pre* bumps. The ones
       // semver adds are of the form -0, but we've used -alpha.0 or -rc.0.
@@ -98,55 +98,55 @@ module.exports = function(vorpal, app) {
             fields: ['version'],
           },
           {
-            file: 'packages/react/package.json',
+            file: 'packages/reacc/package.json',
             fields: ['version'],
           },
           {
-            file: 'packages/react-addons/package.json',
-            fields: ['version', 'peerDependencies.react'],
+            file: 'packages/reacc-addons/package.json',
+            fields: ['version', 'peerDependencies.reacc'],
           },
           {
-            file: 'packages/react-dom/package.json',
-            fields: ['version', 'peerDependencies.react'],
+            file: 'packages/reacc-dom/package.json',
+            fields: ['version', 'peerDependencies.reacc'],
           },
           {
-            file: 'packages/react-native-renderer/package.json',
-            fields: ['version', 'peerDependencies.react'],
+            file: 'packages/reacc-native-renderer/package.json',
+            fields: ['version', 'peerDependencies.reacc'],
           },
           {
-            file: 'packages/react-noop-renderer/package.json',
+            file: 'packages/reacc-noop-renderer/package.json',
             fields: ['version'],
           },
           {
-            file: 'packages/react-test-renderer/package.json',
-            fields: ['version', 'peerDependencies.react'],
+            file: 'packages/reacc-test-renderer/package.json',
+            fields: ['version', 'peerDependencies.reacc'],
           },
         ].forEach(opts => {
           updateJSON.apply(this, [
-            path.join(app.config.reactPath, opts.file),
+            path.join(app.config.reaccPath, opts.file),
             opts.fields,
             newVersion,
           ]);
         });
 
-        // We also need to update src/ReactVersion.js which has the version in
+        // We also need to update src/ReaccVersion.js which has the version in
         // string form in JS code. We'll just do a string replace.
 
         const PATH_TO_REACTVERSION = path.join(
-          app.config.reactPath,
-          'src/ReactVersion.js'
+          app.config.reaccPath,
+          'src/ReaccVersion.js'
         );
 
-        let reactVersionContents = fs.readFileSync(
+        let reaccVersionContents = fs.readFileSync(
           PATH_TO_REACTVERSION,
           'utf8'
         );
 
-        reactVersionContents = reactVersionContents.replace(
+        reaccVersionContents = reactVersionContents.replace(
           currentVersion,
           newVersion
         );
-        fs.writeFileSync(PATH_TO_REACTVERSION, reactVersionContents);
+        fs.writeFileSync(PATH_TO_REACTVERSION, reaccVersionContents);
 
         this.prompt([
           {

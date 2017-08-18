@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -345,10 +345,10 @@ var CHILD_INST2 = {
   _currentElement: {props: {}},
 };
 
-GRANDPARENT_HOST_NODE._reactInstance = GRANDPARENT_INST;
-PARENT_HOST_NODE._reactInstance = PARENT_INST;
-CHILD_HOST_NODE._reactInstance = CHILD_INST;
-CHILD_HOST_NODE2._reactInstance = CHILD_INST2;
+GRANDPARENT_HOST_NODE._reaccInstance = GRANDPARENT_INST;
+PARENT_HOST_NODE._reaccInstance = PARENT_INST;
+CHILD_HOST_NODE._reaccInstance = CHILD_INST;
+CHILD_HOST_NODE2._reaccInstance = CHILD_INST2;
 
 var three = {
   grandParent: GRANDPARENT_HOST_NODE,
@@ -363,7 +363,7 @@ var siblings = {
 };
 
 function getInstanceFromNode(node) {
-  return node._reactInstance;
+  return node._reaccInstance;
 }
 
 function getNodeFromInstance(inst) {
@@ -382,8 +382,8 @@ describe('ResponderEventPlugin', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    const ReactDOM = require('react-dom');
-    const ReactDOMUnstableNativeDependencies = require('react-dom/unstable-native-dependencies');
+    const ReactDOM = require('reacc-dom');
+    const ReactDOMUnstableNativeDependencies = require('reacc-dom/unstable-native-dependencies');
     EventPluginHub =
       ReactDOM.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
         .EventPluginHub;

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -34,11 +34,11 @@ describe('ReactDOMInput', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
     // TODO: can we express this test with only public API?
     inputValueTracking = require('inputValueTracking');
     spyOn(console, 'error');
@@ -837,7 +837,7 @@ describe('ReactDOMInput', () => {
         '(specify either the checked prop, or the defaultChecked prop, but not ' +
         'both). Decide between using a controlled or uncontrolled input ' +
         'element and remove one of these props. More info: ' +
-        'https://fb.me/react-controlled-components',
+        'https://fb.me/reacc-controlled-components',
     );
 
     ReactTestUtils.renderIntoDocument(
@@ -861,7 +861,7 @@ describe('ReactDOMInput', () => {
         '(specify either the value prop, or the defaultValue prop, but not ' +
         'both). Decide between using a controlled or uncontrolled input ' +
         'element and remove one of these props. More info: ' +
-        'https://fb.me/react-controlled-components',
+        'https://fb.me/reacc-controlled-components',
     );
 
     ReactTestUtils.renderIntoDocument(
@@ -882,7 +882,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type text to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -899,7 +899,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type text to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -919,7 +919,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type text to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -934,7 +934,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing an uncontrolled input of type text to be controlled. ' +
         'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -949,7 +949,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing an uncontrolled input of type text to be controlled. ' +
         'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -966,7 +966,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type checkbox to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -983,7 +983,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type checkbox to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1000,7 +1000,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type checkbox to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1015,7 +1015,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing an uncontrolled input of type checkbox to be controlled. ' +
         'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1030,7 +1030,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing an uncontrolled input of type checkbox to be controlled. ' +
         'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1045,7 +1045,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type radio to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1060,7 +1060,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type radio to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1075,7 +1075,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type radio to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1090,7 +1090,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing an uncontrolled input of type radio to be controlled. ' +
         'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1105,7 +1105,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing an uncontrolled input of type radio to be controlled. ' +
         'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1161,7 +1161,7 @@ describe('ReactDOMInput', () => {
       'Warning: A component is changing a controlled input of type radio to be uncontrolled. ' +
         'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
         'Decide between using a controlled or uncontrolled input ' +
-        'element for the lifetime of the component. More info: https://fb.me/react-controlled-components\n' +
+        'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components\n' +
         '    in input (at **)',
     );
   });
@@ -1189,7 +1189,7 @@ describe('ReactDOMInput', () => {
       <input value="0" type="range" min="0" max="100" step="1" />,
     );
     expect(log).toEqual([
-      ...(ReactDOMFeatureFlags.useFiber ? [] : ['set data-reactroot']),
+      ...(ReactDOMFeatureFlags.useFiber ? [] : ['set data-reaccroot']),
       'set type',
       'set step',
       'set min',
@@ -1255,7 +1255,7 @@ describe('ReactDOMInput', () => {
     expect(log).toEqual([
       ...(ReactDOMFeatureFlags.useFiber
         ? []
-        : ['node.setAttribute("data-reactroot", "")']),
+        : ['node.setAttribute("data-reaccroot", "")']),
       'node.setAttribute("type", "date")',
       'node.setAttribute("value", "1980-01-01")',
       'node.value = ""',

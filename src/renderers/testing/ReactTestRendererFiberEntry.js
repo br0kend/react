@@ -277,7 +277,7 @@ function toJSON(inst: Instance | TextInstance): ReactTestRendererNode {
         children: renderedChildren,
       };
       Object.defineProperty(json, '$$typeof', {
-        value: Symbol.for('react.test.json'),
+        value: Symbol.for('reacc.test.json'),
       });
       return json;
     default:

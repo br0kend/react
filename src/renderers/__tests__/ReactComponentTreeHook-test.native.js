@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -35,8 +35,8 @@ describeStack('ReactComponentTreeHook', () => {
     jest.resetModules();
 
     PropTypes = require('prop-types');
-    React = require('react');
-    ReactNative = require('react-native');
+    React = require('reacc');
+    ReactNative = require('reacc-native');
     ReactInstanceMap = require('ReactInstanceMap');
     ReactComponentTreeHook = require('ReactComponentTreeHook');
     ReactComponentTreeTestUtils = require('ReactComponentTreeTestUtils');

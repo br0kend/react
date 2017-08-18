@@ -58,7 +58,7 @@ if (__DEV__) {
 
   // This is so gross but it's at least non-critical and can be removed if
   // it causes problems. This is meant to give a nicer error message for
-  // ReactDOM15.unstable_renderSubtreeIntoContainer(reactDOM16Component,
+  // ReactDOM15.unstable_renderSubtreeIntoContainer(reaccDOM16Component,
   // ...)) which otherwise throws a "_processChildContext is not a function"
   // exception.
   Object.defineProperty(fakeInternalInstance, '_processChildContext', {
@@ -306,7 +306,7 @@ module.exports = function(
     // The instance needs access to the fiber so that it can schedule updates
     ReactInstanceMap.set(instance, workInProgress);
     if (__DEV__) {
-      instance._reactInternalInstance = fakeInternalInstance;
+      instance._reaccInternalInstance = fakeInternalInstance;
     }
   }
 

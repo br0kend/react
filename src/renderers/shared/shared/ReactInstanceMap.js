@@ -26,19 +26,19 @@ var ReactInstanceMap = {
    * supported we can rename it.
    */
   remove: function(key) {
-    key._reactInternalFiber = undefined;
+    key._reaccInternalFiber = undefined;
   },
 
   get: function(key) {
-    return key._reactInternalFiber;
+    return key._reaccInternalFiber;
   },
 
   has: function(key) {
-    return key._reactInternalFiber !== undefined;
+    return key._reaccInternalFiber !== undefined;
   },
 
   set: function(key, value) {
-    key._reactInternalFiber = value;
+    key._reaccInternalFiber = value;
   },
 };
 

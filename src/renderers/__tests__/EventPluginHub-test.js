@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -19,8 +19,8 @@ describe('EventPluginHub', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   it('should prevent non-function listeners, at dispatch', () => {

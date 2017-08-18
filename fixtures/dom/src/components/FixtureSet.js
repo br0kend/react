@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'reacc';
 import PropTypes from 'prop-types';
 
 const propTypes = {

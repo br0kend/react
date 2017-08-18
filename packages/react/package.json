@@ -1,12 +1,12 @@
 {
-  "name": "react",
+  "name": "reacc",
   "description": "React is a JavaScript library for building user interfaces.",
   "version": "16.0.0-beta.5",
   "keywords": [
-    "react"
+    "reacc"
   ],
-  "homepage": "https://facebook.github.io/react/",
-  "bugs": "https://github.com/facebook/react/issues",
+  "homepage": "https://facebook.github.io/reacc/",
+  "bugs": "https://github.com/facebook/reacc/issues",
   "license": "BSD-3-Clause",
   "files": [
     "LICENSE",
@@ -17,7 +17,7 @@
     "umd/"
   ],
   "main": "index.js",
-  "repository": "facebook/react",
+  "repository": "facebook/reacc",
   "engines": {
     "node": ">=0.10.0"
   },

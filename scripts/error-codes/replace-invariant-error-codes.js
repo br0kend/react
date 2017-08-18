@@ -28,7 +28,7 @@ module.exports = function(babel) {
       path.scope.getProgramParent().push({
         id: localState.prodInvariantIdentifier,
         init: t.callExpression(t.identifier('require'), [
-          t.stringLiteral('reactProdInvariant'),
+          t.stringLiteral('reaccProdInvariant'),
         ]),
       });
     }
@@ -50,7 +50,7 @@ module.exports = function(babel) {
           if (node[SEEN_SYMBOL]) {
             return;
           }
-          // Insert `var PROD_INVARIANT = require('reactProdInvariant');`
+          // Insert `var PROD_INVARIANT = require('reaccProdInvariant');`
           // before all `require('invariant')`s.
           // NOTE it doesn't support ES6 imports yet.
           if (
@@ -79,15 +79,15 @@ module.exports = function(babel) {
             // - `XYZ` is an error code: a unique identifier (a number string)
             //   that references a verbose error message.
             //   The mapping is stored in `scripts/error-codes/codes.json`.
-            // - `PROD_INVARIANT` is the `reactProdInvariant` function that always throws with an error URL like
-            //   http://facebook.github.io/react/docs/error-decoder.html?invariant=XYZ&args[]=foo&args[]=bar
+            // - `PROD_INVARIANT` is the `reaccProdInvariant` function that always throws with an error URL like
+            //   http://facebook.github.io/reacc/docs/error-decoder.html?invariant=XYZ&args[]=foo&args[]=bar
             //
             // Specifically this does 3 things:
             // 1. Checks the condition first, preventing an extra function call.
             // 2. Adds an environment check so that verbose error messages aren't
             //    shipped to production.
-            // 3. Rewrites the call to `invariant` in production to `reactProdInvariant`
-            //   - `reactProdInvariant` is always renamed to avoid shadowing
+            // 3. Rewrites the call to `invariant` in production to `reaccProdInvariant`
+            //   - `reaccProdInvariant` is always renamed to avoid shadowing
             // The generated code is longer than the original code but will dead
             // code removal in a minifier will strip that out.
             var condition = node.arguments[0];

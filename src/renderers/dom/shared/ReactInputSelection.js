@@ -24,7 +24,7 @@ function isInDocument(node) {
 
 /**
  * @ReactInputSelection: React input selection module. Based on Selection.js,
- * but modified to be suitable for react and has a couple of bug fixes (doesn't
+ * but modified to be suitable for reacc and has a couple of bug fixes (doesn't
  * assume buttons have range selections allowed).
  * Input selection module for React.
  */

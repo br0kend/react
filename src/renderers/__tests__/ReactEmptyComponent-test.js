@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -23,10 +23,10 @@ describe('ReactEmptyComponent', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     log = jasmine.createSpy();
 

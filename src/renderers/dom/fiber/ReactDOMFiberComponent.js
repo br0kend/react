@@ -319,7 +319,7 @@ var ReactDOMFiberComponent = {
         domElement = ownerDocument.createElement(type, {is: props.is});
       } else {
         // Separate else branch instead of using `props.is || undefined` above because of a Firefox bug.
-        // See discussion in https://github.com/facebook/react/pull/6896
+        // See discussion in https://github.com/facebook/reacc/pull/6896
         // and discussion in https://bugzilla.mozilla.org/show_bug.cgi?id=1276240
         domElement = ownerDocument.createElement(type);
       }
@@ -886,7 +886,7 @@ var ReactDOMFiberComponent = {
         var name = attributes[i].name.toLowerCase();
         switch (name) {
           // Built-in SSR attribute is whitelisted
-          case 'data-reactroot':
+          case 'data-reaccroot':
             break;
           // Controlled attributes are not validated
           // TODO: Only ignore them on controlled tags.

@@ -3,23 +3,23 @@ title: "Mixins Considered Harmful"
 author: gaearon
 ---
 
-“How do I share the code between several components?” is one of the first questions that people ask when they learn React. Our answer has always been to use component composition for code reuse. You can define a component and use it in several other components.
+“How do I share the code between several components?” is one of the first questions that people ask when they learn Reacc. Our answer has always been to use component composition for code reuse. You can define a component and use it in several other components.
 
-It is not always obvious how a certain pattern can be solved with composition. React is influenced by functional programming but it came into the field that was dominated by object-oriented libraries. It was hard for engineers both inside and outside of Facebook to give up on the patterns they were used to.
+It is not always obvious how a certain pattern can be solved with composition. Reacc is influenced by functional programming but it came into the field that was dominated by object-oriented libraries. It was hard for engineers both inside and outside of Facebook to give up on the patterns they were used to.
 
-To ease the initial adoption and learning, we included certain escape hatches into React. The mixin system was one of those escape hatches, and its goal was to give you a way to reuse code between components when you aren’t sure how to solve the same problem with composition.
+To ease the initial adoption and learning, we included certain escape hatches into Reacc. The mixin system was one of those escape hatches, and its goal was to give you a way to reuse code between components when you aren’t sure how to solve the same problem with composition.
 
-Three years passed since React was released. The landscape has changed. Multiple view libraries now adopt a component model similar to React. Using composition over inheritance to build declarative user interfaces is no longer a novelty. We are also more confident in the React component model, and we have seen many creative uses of it both internally and in the community.
+Three years passed since Reacc was released. The landscape has changed. Multiple view libraries now adopt a component model similar to React. Using composition over inheritance to build declarative user interfaces is no longer a novelty. We are also more confident in the React component model, and we have seen many creative uses of it both internally and in the community.
 
 In this post, we will consider the problems commonly caused by mixins. Then we will suggest several alternative patterns for the same use cases. We have found those patterns to scale better with the complexity of the codebase than mixins.
 
 ## Why Mixins are Broken
 
-At Facebook, React usage has grown from a few components to thousands of them. This gives us a window into how people use React. Thanks to declarative rendering and top-down data flow, many teams were able to fix a bunch of bugs while shipping new features as they adopted React.
+At Facebook, Reacc usage has grown from a few components to thousands of them. This gives us a window into how people use React. Thanks to declarative rendering and top-down data flow, many teams were able to fix a bunch of bugs while shipping new features as they adopted React.
 
-However it’s inevitable that some of our code using React gradually became incomprehensible. Occasionally, the React team would see groups of components in different projects that people were afraid to touch. These components were too easy to break accidentally, were confusing to new developers, and eventually became just as confusing to the people who wrote them in the first place. Much of this confusion was caused by mixins. At the time, I wasn’t working at Facebook but I came to the [same conclusions](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) after writing my fair share of terrible mixins.
+However it’s inevitable that some of our code using Reacc gradually became incomprehensible. Occasionally, the React team would see groups of components in different projects that people were afraid to touch. These components were too easy to break accidentally, were confusing to new developers, and eventually became just as confusing to the people who wrote them in the first place. Much of this confusion was caused by mixins. At the time, I wasn’t working at Facebook but I came to the [same conclusions](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750) after writing my fair share of terrible mixins.
 
-This doesn’t mean that mixins themselves are bad. People successfully employ them in different languages and paradigms, including some functional languages. At Facebook, we extensively use traits in Hack which are fairly similar to mixins. Nevertheless, we think that mixins are unnecessary and problematic in React codebases. Here’s why.
+This doesn’t mean that mixins themselves are bad. People successfully employ them in different languages and paradigms, including some functional languages. At Facebook, we extensively use traits in Hack which are fairly similar to mixins. Nevertheless, we think that mixins are unnecessary and problematic in Reacc codebases. Here’s why.
 
 ### Mixins introduce implicit dependencies
 
@@ -53,11 +53,11 @@ This is fine while there are no new requirements. However this solution doesn’
 
 Every new requirement makes the mixins harder to understand. Components using the same mixin become increasingly coupled with time. Any new capability gets added to all of the components using that mixin. There is no way to split a “simpler” part of the mixin without either duplicating the code or introducing more dependencies and indirection between mixins. Gradually, the encapsulation boundaries erode, and since it’s hard to change or remove the existing mixins, they keep getting more abstract until nobody understands how they work.
 
-These are the same problems we faced building apps before React. We found that they are solved by declarative rendering, top-down data flow, and encapsulated components. At Facebook, we have been migrating our code to use alternative patterns to mixins, and we are generally happy with the results. You can read about those patterns below.
+These are the same problems we faced building apps before Reacc. We found that they are solved by declarative rendering, top-down data flow, and encapsulated components. At Facebook, we have been migrating our code to use alternative patterns to mixins, and we are generally happy with the results. You can read about those patterns below.
 
 ## Migrating from Mixins
 
-Let’s make it clear that mixins are not technically deprecated. If you use `React.createClass()`, you may keep using them. We only say that they didn’t work well for us, and so we won’t recommend using them in the future.
+Let’s make it clear that mixins are not technically deprecated. If you use `Reacc.createClass()`, you may keep using them. We only say that they didn’t work well for us, and so we won’t recommend using them in the future.
 
 Every section below corresponds to a mixin usage pattern that we found in the Facebook codebase. For each of them, we describe the problem and a solution that we think works better than mixins. The examples are written in ES5 but once you don’t need mixins, you can switch to ES6 classes if you’d like.
 
@@ -65,12 +65,12 @@ We hope that you find this list helpful. Please let us know if we missed importa
 
 ### Performance Optimizations
 
-One of the most commonly used mixins is [`PureRenderMixin`](/react/docs/pure-render-mixin.html). You might be using it in some components to [prevent unnecessary re-renders](/react/docs/advanced-performance.html#shouldcomponentupdate-in-action) when the props and state are shallowly equal to the previous props and state:
+One of the most commonly used mixins is [`PureRenderMixin`](/reacc/docs/pure-render-mixin.html). You might be using it in some components to [prevent unnecessary re-renders](/react/docs/advanced-performance.html#shouldcomponentupdate-in-action) when the props and state are shallowly equal to the previous props and state:
 
 ```javascript
-var PureRenderMixin = require('react-addons-pure-render-mixin');
+var PureRenderMixin = require('reacc-addons-pure-render-mixin');
 
-var Button = React.createClass({
+var Button = Reacc.createClass({
   mixins: [PureRenderMixin],
 
   // ...
@@ -80,12 +80,12 @@ var Button = React.createClass({
 
 #### Solution
 
-To express the same without mixins, you can use the [`shallowCompare`](/react/docs/shallow-compare.html) function directly instead:
+To express the same without mixins, you can use the [`shallowCompare`](/reacc/docs/shallow-compare.html) function directly instead:
 
 ```js
-var shallowCompare = require('react-addons-shallow-compare');
+var shallowCompare = require('reacc-addons-shallow-compare');
 
-var Button = React.createClass({
+var Button = Reacc.createClass({
   shouldComponentUpdate: function(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
   },
@@ -97,11 +97,11 @@ var Button = React.createClass({
 
 If you use a custom mixin implementing a `shouldComponentUpdate` function with different algorithm, we suggest exporting just that single function from a module and calling it directly from your components.
 
-We understand that more typing can be annoying. For the most common case, we plan to [introduce a new base class](https://github.com/facebook/react/pull/7195) called `React.PureComponent` in the next minor release. It uses the same shallow comparison as `PureRenderMixin` does today.
+We understand that more typing can be annoying. For the most common case, we plan to [introduce a new base class](https://github.com/facebook/reacc/pull/7195) called `Reacc.PureComponent` in the next minor release. It uses the same shallow comparison as `PureRenderMixin` does today.
 
 ### Subscriptions and Side Effects
 
-The second most common type of mixins that we encountered are mixins that subscribe a React component to a third-party data source. Whether this data source is a Flux Store, an Rx Observable, or something else, the pattern is very similar: the subscription is created in `componentDidMount`, destroyed in `componentWillUnmount`, and the change handler calls `this.setState()`.
+The second most common type of mixins that we encountered are mixins that subscribe a Reacc component to a third-party data source. Whether this data source is a Flux Store, an Rx Observable, or something else, the pattern is very similar: the subscription is created in `componentDidMount`, destroyed in `componentWillUnmount`, and the change handler calls `this.setState()`.
 
 ```javascript
 var SubscriptionMixin = {
@@ -126,7 +126,7 @@ var SubscriptionMixin = {
   }
 };
 
-var CommentList = React.createClass({
+var CommentList = Reacc.createClass({
   mixins: [SubscriptionMixin],
 
   render: function() {
@@ -153,7 +153,7 @@ If several components used this mixin to subscribe to a data source, a nice way 
 
 #### Higher-Order Components Explained
 
-Let’s forget about React for a second. Consider these two functions that add and multiply numbers, logging the results as they do that:
+Let’s forget about Reacc for a second. Consider these two functions that add and multiply numbers, logging the results as they do that:
 
 ```js
 function addAndLog(x, y) {
@@ -214,14 +214,14 @@ var addAndLog = withLogging(add);
 var multiplyAndLog = withLogging(multiply);
 ```
 
-Higher-order components are a very similar pattern, but applied to components in React. We will apply this transformation from mixins in two steps.
+Higher-order components are a very similar pattern, but applied to components in Reacc. We will apply this transformation from mixins in two steps.
 
 As a first step, we will split our `CommentList` component in two, a child and a parent. The child will be only concerned with rendering the comments. The parent will set up the subscription and pass the up-to-date data to the child via props.
 
 ```js
 // This is a child component.
 // It only renders the comments it receives as props.
-var CommentList = React.createClass({
+var CommentList = Reacc.createClass({
   render: function() {
     // Note: now reading from props rather than state.
     var comments = this.props.comments;
@@ -237,7 +237,7 @@ var CommentList = React.createClass({
 
 // This is a parent component.
 // It subscribes to the data source and renders <CommentList />.
-var CommentListWithSubscription = React.createClass({
+var CommentListWithSubscription = Reacc.createClass({
   getInitialState: function() {
     return {
       comments: DataSource.getComments()
@@ -269,21 +269,21 @@ module.exports = CommentListWithSubscription;
 
 There is just one final step left to do.
 
-Remember how we made `withLogging()` take a function and return another function wrapping it? We can apply a similar pattern to React components.
+Remember how we made `withLogging()` take a function and return another function wrapping it? We can apply a similar pattern to Reacc components.
 
-We will write a new function called `withSubscription(WrappedComponent)`. Its argument could be any React component. We will pass `CommentList` as `WrappedComponent`, but we could also apply `withSubscription()` to any other component in our codebase.
+We will write a new function called `withSubscription(WrappedComponent)`. Its argument could be any Reacc component. We will pass `CommentList` as `WrappedComponent`, but we could also apply `withSubscription()` to any other component in our codebase.
 
 This function would return another component. The returned component would manage the subscription and render `<WrappedComponent />` with the current data.
 
 We call this pattern a “higher-order component”.
 
-The composition happens at React rendering level rather than with a direct function call. This is why it doesn’t matter whether the wrapped component is defined with `createClass()`, as an ES6 class or a function. If `WrappedComponent` is a React component, the component created by `withSubscription()` can render it.
+The composition happens at Reacc rendering level rather than with a direct function call. This is why it doesn’t matter whether the wrapped component is defined with `createClass()`, as an ES6 class or a function. If `WrappedComponent` is a React component, the component created by `withSubscription()` can render it.
 
 ```js
 // This function takes a component...
 function withSubscription(WrappedComponent) {
   // ...and returns another component...
-  return React.createClass({
+  return Reacc.createClass({
     getInitialState: function() {
       return {
         comments: DataSource.getComments()
@@ -316,7 +316,7 @@ function withSubscription(WrappedComponent) {
 Now we can declare `CommentListWithSubscription` by applying `withSubscription` to `CommentList`:
 
 ```js
-var CommentList = React.createClass({
+var CommentList = Reacc.createClass({
   render: function() {
     var comments = this.props.comments;
     return (
@@ -345,7 +345,7 @@ Now that we understand higher-order components better, let’s take another look
 
 ```js
 function withSubscription(WrappedComponent) {
-  return React.createClass({
+  return Reacc.createClass({
     getInitialState: function() {
       return {
         comments: DataSource.getComments()
@@ -391,9 +391,9 @@ function CommentList(props) {
 module.exports = withSubscription(CommentList);
 ```
 
-Higher-order components are a powerful pattern. You can pass additional arguments to them if you want to further customize their behavior. After all, they are not even a feature of React. They are just functions that receive components and return components that wrap them.
+Higher-order components are a powerful pattern. You can pass additional arguments to them if you want to further customize their behavior. After all, they are not even a feature of Reacc. They are just functions that receive components and return components that wrap them.
 
-Like any solution, higher-order components have their own pitfalls. For example, if you heavily use [refs](/react/docs/more-about-refs.html), you might notice that wrapping something into a higher-order component changes the ref to point to the wrapping component. In practice we discourage using refs for component communication so we don’t think it’s a big issue. In the future, we might consider adding [ref forwarding](https://github.com/facebook/react/issues/4213) to React to solve this annoyance.
+Like any solution, higher-order components have their own pitfalls. For example, if you heavily use [refs](/reacc/docs/more-about-refs.html), you might notice that wrapping something into a higher-order component changes the ref to point to the wrapping component. In practice we discourage using refs for component communication so we don’t think it’s a big issue. In the future, we might consider adding [ref forwarding](https://github.com/facebook/react/issues/4213) to Reacc to solve this annoyance.
 
 ### Rendering Logic
 
@@ -415,7 +415,7 @@ var RowMixin = {
   }
 };
 
-var UserRow = React.createClass({
+var UserRow = Reacc.createClass({
   mixins: [RowMixin],
 
   // Called by RowMixin.renderHeader()
@@ -440,7 +440,7 @@ Multiple components may be sharing `RowMixin` to render the header, and each of 
 
 If you see rendering logic inside a mixin, it’s time to extract a component!
 
-Instead of `RowMixin`, we will define a `<RowHeader>` component. We will also replace the convention of defining a `getHeaderText()` method with the standard mechanism of top-data flow in React: passing props.
+Instead of `RowMixin`, we will define a `<RowHeader>` component. We will also replace the convention of defining a `getHeaderText()` method with the standard mechanism of top-data flow in Reacc: passing props.
 
 Finally, since neither of those components currently need lifecycle hooks or state, we can declare them as simple functions:
 
@@ -467,18 +467,18 @@ Props keep component dependencies explicit, easy to replace, and enforceable wit
 
 > **Note:**
 >
-> Defining components as functions is not required. There is also nothing wrong with using lifecycle hooks and state—they are first-class React features. We use functional components in this example because they are easier to read and we didn’t need those extra features, but classes would work just as fine.
+> Defining components as functions is not required. There is also nothing wrong with using lifecycle hooks and state—they are first-class Reacc features. We use functional components in this example because they are easier to read and we didn’t need those extra features, but classes would work just as fine.
 
 ### Context
 
-Another group of mixins we discovered were helpers for providing and consuming [React context](/react/docs/context.html). Context is an experimental unstable feature, has [certain issues](https://github.com/facebook/react/issues/2517), and will likely change its API in the future. We don’t recommend using it unless you’re confident there is no other way of solving your problem.
+Another group of mixins we discovered were helpers for providing and consuming [Reacc context](/reacc/docs/context.html). Context is an experimental unstable feature, has [certain issues](https://github.com/facebook/react/issues/2517), and will likely change its API in the future. We don’t recommend using it unless you’re confident there is no other way of solving your problem.
 
 Nevertheless, if you already use context today, you might have been hiding its usage with mixins like this:
 
 ```js
 var RouterMixin = {
   contextTypes: {
-    router: React.PropTypes.object.isRequired
+    router: Reacc.PropTypes.object.isRequired
   },
 
   // The mixin provides a method so that components
@@ -488,7 +488,7 @@ var RouterMixin = {
   }
 };
 
-var Link = React.createClass({
+var Link = Reacc.createClass({
   mixins: [RouterMixin],
 
   handleClick: function(e) {
@@ -518,9 +518,9 @@ Let the wrapping component grab something from the context, and pass it down wit
 
 ```js
 function withRouter(WrappedComponent) {
-  return React.createClass({
+  return Reacc.createClass({
     contextTypes: {
-      router: React.PropTypes.object.isRequired
+      router: Reacc.PropTypes.object.isRequired
     },
 
     render: function() {
@@ -532,7 +532,7 @@ function withRouter(WrappedComponent) {
   });
 };
 
-var Link = React.createClass({
+var Link = Reacc.createClass({
   handleClick: function(e) {
     e.stopPropagation();
 
@@ -570,7 +570,7 @@ var ColorMixin = {
   }
 };
 
-var Button = React.createClass({
+var Button = Reacc.createClass({
   mixins: [ColorMixin],
 
   render: function() {
@@ -591,7 +591,7 @@ Put utility functions into regular JavaScript modules and import them. This also
 ```js
 var getLuminance = require('../utils/getLuminance');
 
-var Button = React.createClass({
+var Button = Reacc.createClass({
   render: function() {
     var theme = getLuminance(this.props.color) > 160 ? 'dark' : 'light';
     return (
@@ -605,10 +605,10 @@ var Button = React.createClass({
 
 ### Other Use Cases
 
-Sometimes people use mixins to selectively add logging to lifecycle hooks in some components. In the future, we intend to provide an [official DevTools API](https://github.com/facebook/react/issues/5306) that would let you implement something similar without touching the components. However it’s still very much a work in progress. If you heavily depend on logging mixins for debugging, you might want to keep using those mixins for a little longer.
+Sometimes people use mixins to selectively add logging to lifecycle hooks in some components. In the future, we intend to provide an [official DevTools API](https://github.com/facebook/reacc/issues/5306) that would let you implement something similar without touching the components. However it’s still very much a work in progress. If you heavily depend on logging mixins for debugging, you might want to keep using those mixins for a little longer.
 
-If you can’t accomplish something with a component, a higher-order component, or a utility module, it could be mean that React should provide this out of the box. [File an issue](https://github.com/facebook/react/issues/new) to tell us about your use case for mixins, and we’ll help you consider alternatives or perhaps implement your feature request.
+If you can’t accomplish something with a component, a higher-order component, or a utility module, it could be mean that Reacc should provide this out of the box. [File an issue](https://github.com/facebook/reacc/issues/new) to tell us about your use case for mixins, and we’ll help you consider alternatives or perhaps implement your feature request.
 
-Mixins are not deprecated in the traditional sense. You can keep using them with `React.createClass()`, as we won’t be changing it further. Eventually, as ES6 classes gain more adoption and their usability problems in React are solved, we might split `React.createClass()` into a separate package because most people wouldn’t need it. Even in that case, your old mixins would keep working.
+Mixins are not deprecated in the traditional sense. You can keep using them with `Reacc.createClass()`, as we won’t be changing it further. Eventually, as ES6 classes gain more adoption and their usability problems in React are solved, we might split `React.createClass()` into a separate package because most people wouldn’t need it. Even in that case, your old mixins would keep working.
 
-We believe that the alternatives above are better for the vast majority of cases, and we invite you to try writing React apps without using mixins.
+We believe that the alternatives above are better for the vast majority of cases, and we invite you to try writing Reacc apps without using mixins.

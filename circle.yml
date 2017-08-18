@@ -6,7 +6,7 @@ machine:
   ruby:
     version: 2.2.3
   environment:
-    TRAVIS_REPO_SLUG: facebook/react
+    TRAVIS_REPO_SLUG: facebook/reacc
     YARN_VERSION: 0.17.8
     PATH: "${PATH}:${HOME}/.yarn/bin"
 
@@ -28,7 +28,7 @@ dependencies:
     # - npm ls --depth=0
   cache_directories:
     - docs/vendor/bundle
-    - ~/react-gh-pages # docs checkout
+    - ~/reacc-gh-pages # docs checkout
     - ~/.yarn
     - ~/.yarn-cache
 

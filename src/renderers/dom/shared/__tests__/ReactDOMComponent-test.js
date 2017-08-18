@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -25,11 +25,11 @@ describe('ReactDOMComponent', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-    ReactDOMServer = require('react-dom/server');
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactDOMServer = require('reacc-dom/server');
+    ReactTestUtils = require('reacc-dom/test-utils');
     // TODO: can we express this test with only public API?
     inputValueTracking = require('inputValueTracking');
   });
@@ -150,7 +150,7 @@ describe('ReactDOMComponent', () => {
       expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
         'Warning: Invalid prop `foo` on <div> tag. Either remove this prop ' +
           'from the element, or pass a string or number value to keep ' +
-          'it in the DOM. For details, see https://fb.me/react-unknown-prop' +
+          'it in the DOM. For details, see https://fb.me/reacc-unknown-prop' +
           '\n    in div (at **)',
       );
     });
@@ -163,7 +163,7 @@ describe('ReactDOMComponent', () => {
       expectDev(normalizeCodeLocInfo(console.error.calls.argsFor(0)[0])).toBe(
         'Warning: Invalid props `foo`, `baz` on <div> tag. Either remove these ' +
           'props from the element, or pass a string or number value to keep ' +
-          'them in the DOM. For details, see https://fb.me/react-unknown-prop' +
+          'them in the DOM. For details, see https://fb.me/reacc-unknown-prop' +
           '\n    in div (at **)',
       );
     });
@@ -1020,7 +1020,7 @@ describe('ReactDOMComponent', () => {
         mountComponent({dangerouslySetInnerHTML: '<span>Hi Jim!</span>'});
       }).toThrowError(
         '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' +
-          'Please visit https://fb.me/react-invariant-dangerously-set-inner-html for more information.',
+          'Please visit https://fb.me/reacc-invariant-dangerously-set-inner-html for more information.',
       );
     });
 
@@ -1029,7 +1029,7 @@ describe('ReactDOMComponent', () => {
         mountComponent({dangerouslySetInnerHTML: {foo: 'bar'}});
       }).toThrowError(
         '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' +
-          'Please visit https://fb.me/react-invariant-dangerously-set-inner-html for more information.',
+          'Please visit https://fb.me/reacc-invariant-dangerously-set-inner-html for more information.',
       );
     });
 
@@ -2010,7 +2010,7 @@ describe('ReactDOMComponent', () => {
     it('does not assign an implicit boolean custom attributes', function() {
       spyOn(console, 'error');
 
-      // eslint-disable-next-line react/jsx-boolean-value
+      // eslint-disable-next-line reacc/jsx-boolean-value
       var el = ReactTestUtils.renderIntoDocument(<div whatever />);
 
       expect(el.hasAttribute('whatever')).toBe(false);

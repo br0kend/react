@@ -13,7 +13,7 @@
 'use strict';
 
 const checkPropTypes = require('prop-types/checkPropTypes');
-const React = require('react');
+const React = require('reacc');
 
 const emptyObject = require('fbjs/lib/emptyObject');
 const invariant = require('fbjs/lib/invariant');

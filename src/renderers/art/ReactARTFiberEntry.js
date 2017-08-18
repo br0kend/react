@@ -19,7 +19,7 @@ const Mode = require('art/modes/current');
 const Transform = require('art/core/transform');
 const invariant = require('fbjs/lib/invariant');
 const emptyObject = require('fbjs/lib/emptyObject');
-const React = require('react');
+const React = require('reacc');
 const ReactFiberReconciler = require('ReactFiberReconciler');
 const ReactDOMFrameScheduling = require('ReactDOMFrameScheduling');
 

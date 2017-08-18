@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -19,18 +19,18 @@ describe('ReactEventIndependence', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
-  it('does not crash with other react inside', () => {
+  it('does not crash with other reacc inside', () => {
     var clicks = 0;
     var div = ReactTestUtils.renderIntoDocument(
       <div
         onClick={() => clicks++}
         dangerouslySetInnerHTML={{
-          __html: '<button data-reactid=".z">click me</div>',
+          __html: '<button data-reaccid=".z">click me</div>',
         }}
       />,
     );
@@ -38,10 +38,10 @@ describe('ReactEventIndependence', () => {
     expect(clicks).toBe(1);
   });
 
-  it('does not crash with other react outside', () => {
+  it('does not crash with other reacc outside', () => {
     var clicks = 0;
     var outer = document.createElement('div');
-    outer.setAttribute('data-reactid', '.z');
+    outer.setAttribute('data-reaccid', '.z');
     var inner = ReactDOM.render(
       <button onClick={() => clicks++}>click me</button>,
       outer,

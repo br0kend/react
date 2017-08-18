@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import Draggable from 'react-draggable';
-import ReactNoop from 'react-noop-renderer';
+import React, {Component} from 'reacc';
+import Draggable from 'reacc-draggable';
+import ReactNoop from 'reacc-noop-renderer';
 import Editor from './Editor';
 import Fibers from './Fibers';
 import describeFibers from './describeFibers';
@@ -121,7 +121,7 @@ class App extends Component {
     // eslint-disable-next-line
     eval(
       window.Babel.transform(code, {
-        presets: ['react', 'es2015'],
+        presets: ['reacc', 'es2015'],
       }).code
     );
   }

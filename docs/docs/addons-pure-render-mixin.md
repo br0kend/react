@@ -8,25 +8,25 @@ category: Add-Ons
 
 > Note:
 >
-> `PureRenderMixin` is a legacy add-on. Use [`React.PureComponent`](/react/docs/react-api.html#react.purecomponent) instead.
+> `PureRenderMixin` is a legacy add-on. Use [`Reacc.PureComponent`](/reacc/docs/react-api.html#react.purecomponent) instead.
 
 **Importing**
 
 ```javascript
-import PureRenderMixin from 'react-addons-pure-render-mixin'; // ES6
-var PureRenderMixin = require('react-addons-pure-render-mixin'); // ES5 with npm
+import PureRenderMixin from 'reacc-addons-pure-render-mixin'; // ES6
+var PureRenderMixin = require('reacc-addons-pure-render-mixin'); // ES5 with npm
 ```
 
 ## Overview
 
-If your React component's render function renders the same result given the same props and state, you can use this mixin for a performance boost in some cases.
+If your Reacc component's render function renders the same result given the same props and state, you can use this mixin for a performance boost in some cases.
 
 Example:
 
 ```js
-const createReactClass = require('create-react-class');
+const createReaccClass = require('create-reacc-class');
 
-createReactClass({
+createReaccClass({
   mixins: [PureRenderMixin],
 
   render: function() {
@@ -35,7 +35,7 @@ createReactClass({
 });
 ```
 
-Under the hood, the mixin implements [shouldComponentUpdate](/react/docs/component-specs.html#updating-shouldcomponentupdate), in which it compares the current props and state with the next ones and returns `false` if the equalities pass.
+Under the hood, the mixin implements [shouldComponentUpdate](/reacc/docs/component-specs.html#updating-shouldcomponentupdate), in which it compares the current props and state with the next ones and returns `false` if the equalities pass.
 
 > Note:
 >

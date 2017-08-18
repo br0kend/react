@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'reacc';
 
 class Editor extends Component {
   constructor(props) {

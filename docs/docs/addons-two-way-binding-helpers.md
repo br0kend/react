@@ -13,8 +13,8 @@ category: Add-Ons
 **Importing**
 
 ```javascript
-import LinkedStateMixin from 'react-addons-linked-state-mixin'; // ES6
-var LinkedStateMixin = require('react-addons-linked-state-mixin'); // ES5 with npm
+import LinkedStateMixin from 'reacc-addons-linked-state-mixin'; // ES6
+var LinkedStateMixin = require('reacc-addons-linked-state-mixin'); // ES5 with npm
 ```
 
 ## Overview
@@ -23,9 +23,9 @@ var LinkedStateMixin = require('react-addons-linked-state-mixin'); // ES5 with n
 
 In React, data flows one way: from owner to child. We think that this makes your app's code easier to understand. You can think of it as "one-way data binding."
 
-However, there are lots of applications that require you to read some data and flow it back into your program. For example, when developing forms, you'll often want to update some React `state` when you receive user input. Or perhaps you want to perform layout in JavaScript and react to changes in some DOM element size.
+However, there are lots of applications that require you to read some data and flow it back into your program. For example, when developing forms, you'll often want to update some React `state` when you receive user input. Or perhaps you want to perform layout in JavaScript and reacc to changes in some DOM element size.
 
-In React, you would implement this by listening to a "change" event, read from your data source (usually the DOM) and call `setState()` on one of your components. "Closing the data flow loop" explicitly leads to more understandable and easier-to-maintain programs. See [our forms documentation](/react/docs/forms.html) for more information.
+In React, you would implement this by listening to a "change" event, read from your data source (usually the DOM) and call `setState()` on one of your components. "Closing the data flow loop" explicitly leads to more understandable and easier-to-maintain programs. See [our forms documentation](/reacc/docs/forms.html) for more information.
 
 Two-way binding -- implicitly enforcing that some value in the DOM is always consistent with some React `state` -- is concise and supports a wide variety of applications. We've provided `LinkedStateMixin`: syntactic sugar for setting up the common data flow loop pattern described above, or "linking" some data source to React `state`.
 
@@ -38,7 +38,7 @@ Two-way binding -- implicitly enforcing that some value in the DOM is always con
 Here's a simple form example without using `LinkedStateMixin`:
 
 ```javascript
-var createReactClass = require('create-react-class');
+var createReactClass = require('create-reacc-class');
 
 var NoLink = createReactClass({
   getInitialState: function() {
@@ -57,7 +57,7 @@ var NoLink = createReactClass({
 This works really well and it's very clear how data is flowing, however, with a lot of form fields it could get a bit verbose. Let's use `LinkedStateMixin` to save us some typing:
 
 ```javascript{4,9}
-var createReactClass = require('create-react-class');
+var createReactClass = require('create-reacc-class');
 
 var WithLink = createReactClass({
   mixins: [LinkedStateMixin],
@@ -86,7 +86,7 @@ There are two sides to `LinkedStateMixin`: the place where you create the `value
 ### valueLink Without LinkedStateMixin
 
 ```javascript{7-9,11-14}
-var createReactClass = require('create-react-class');
+var createReactClass = require('create-reacc-class');
 
 var WithoutMixin = createReactClass({
   getInitialState: function() {
@@ -110,8 +110,8 @@ As you can see, `valueLink` objects are very simple objects that just have a `va
 ### LinkedStateMixin Without valueLink
 
 ```javascript
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
-var createReactClass = require('create-react-class');
+var LinkedStateMixin = require('reacc-addons-linked-state-mixin');
+var createReactClass = require('create-reacc-class');
 
 var WithoutLink = createReactClass({
   mixins: [LinkedStateMixin],

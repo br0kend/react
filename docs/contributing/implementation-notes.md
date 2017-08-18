@@ -7,33 +7,33 @@ prev: codebase-overview.html
 next: design-principles.html
 ---
 
-This section is a collection of implementation notes for the [stack reconciler](/react/contributing/codebase-overview.html#stack-reconciler).
+This section is a collection of implementation notes for the [stack reconciler](/reacc/contributing/codebase-overview.html#stack-reconciler).
 
-It is very technical and assumes a strong understanding of React public API as well as how it's divided into core, renderers, and the reconciler. If you're not very familiar with the React codebase, read [the codebase overview](/react/contributing/codebase-overview.html) first.
+It is very technical and assumes a strong understanding of Reacc public API as well as how it's divided into core, renderers, and the reconciler. If you're not very familiar with the React codebase, read [the codebase overview](/reacc/contributing/codebase-overview.html) first.
 
-It also assumes an understanding of the [differences between React components, their instances, and elements](/react/blog/2015/12/18/react-components-elements-and-instances.html).
+It also assumes an understanding of the [differences between Reacc components, their instances, and elements](/reacc/blog/2015/12/18/react-components-elements-and-instances.html).
 
-The stack reconciler is powering all the React production code today. It is located in [`src/renderers/shared/stack/reconciler`](https://github.com/facebook/react/tree/master/src/renderers/shared/stack) and is used by both React DOM and React Native.
+The stack reconciler is powering all the Reacc production code today. It is located in [`src/renderers/shared/stack/reconciler`](https://github.com/facebook/reacc/tree/master/src/renderers/shared/stack) and is used by both React DOM and React Native.
 
-### Video: Building React from Scratch
+### Video: Building Reacc from Scratch
 
-[Paul O'Shannessy](https://twitter.com/zpao) gave a talk about [building React from scratch](https://www.youtube.com/watch?v=_MAD4Oly9yg) that largely inspired this document.
+[Paul O'Shannessy](https://twitter.com/zpao) gave a talk about [building Reacc from scratch](https://www.youtube.com/watch?v=_MAD4Oly9yg) that largely inspired this document.
 
 Both this document and his talk are simplifications of the real codebase so you might get a better understanding by getting familiar with both of them.
 
 ### Overview
 
-The reconciler itself doesn't have a public API. [Renderers](/react/contributing/codebase-overview.html#stack-renderers) like React DOM and React Native use it to efficiently update the user interface according to the React components written by the user.
+The reconciler itself doesn't have a public API. [Renderers](/reacc/contributing/codebase-overview.html#stack-renderers) like Reacc DOM and React Native use it to efficiently update the user interface according to the React components written by the user.
 
 ### Mounting as a Recursive Process
 
 Let's consider the first time you mount a component:
 
 ```js
-ReactDOM.render(<App />, rootEl);
+ReaccDOM.render(<App />, rootEl);
 ```
 
-React DOM will pass `<App />` along to the reconciler. Remember that `<App />` is a React element, that is, a description of *what* to render. You can think about it as a plain object:
+Reacc DOM will pass `<App />` along to the reconciler. Remember that `<App />` is a React element, that is, a description of *what* to render. You can think about it as a plain object:
 
 ```js
 console.log(<App />);
@@ -54,14 +54,14 @@ You can imagine this process as a pseudocode:
 
 ```js
 function isClass(type) {
-  // React.Component subclasses have this flag
+  // Reacc.Component subclasses have this flag
   return (
     Boolean(type.prototype) &&
-    Boolean(type.prototype.isReactComponent)
+    Boolean(type.prototype.isReaccComponent)
   );
 }
 
-// This function takes a React element (e.g. <App />)
+// This function takes a Reacc element (e.g. <App />)
 // and returns a DOM or Native node representing the mounted tree.
 function mount(element) {
   var type = element.type;
@@ -107,15 +107,15 @@ rootEl.appendChild(node);
 
 Let's recap a few key ideas in the example above:
 
-* React elements are plain objects representing the component type (e.g. `App`) and the props.
+* Reacc elements are plain objects representing the component type (e.g. `App`) and the props.
 * User-defined components (e.g. `App`) can be classes or functions but they all "render to" elements.
-* "Mounting" is a recursive process that creates a DOM or Native tree given the top-level React element (e.g. `<App />`).
+* "Mounting" is a recursive process that creates a DOM or Native tree given the top-level Reacc element (e.g. `<App />`).
 
 ### Mounting Host Elements
 
 This process would be useless if we didn't render something to the screen as a result.
 
-In addition to user-defined ("composite") components, React elements may also represent platform-specific ("host") components. For example, `Button` might return a `<div />` from its render method.
+In addition to user-defined ("composite") components, Reacc elements may also represent platform-specific ("host") components. For example, `Button` might return a `<div />` from its render method.
 
 If element's `type` property is a string, we are dealing with a host element:
 
@@ -126,7 +126,7 @@ console.log(<div />);
 
 There is no user-defined code associated with host elements.
 
-When the reconciler encounters a host element, it lets the renderer take care of mounting it. For example, React DOM would create a DOM node.
+When the reconciler encounters a host element, it lets the renderer take care of mounting it. For example, Reacc DOM would create a DOM node.
 
 If the host element has children, the reconciler recursively mounts them following the same algorithm as above. It doesn't matter whether children are host (like `<div><hr /></div>`), composite (like `<div><Button /></div>`), or both.
 
@@ -134,16 +134,16 @@ The DOM nodes produced by the child components will be appended to the parent DO
 
 >**Note:**
 >
->The reconciler itself is not tied to the DOM. The exact result of mounting (sometimes called "mount image" in the source code) depends on the renderer, and can be a DOM node (React DOM), a string (React DOM Server), or a number representing a native view (React Native).
+>The reconciler itself is not tied to the DOM. The exact result of mounting (sometimes called "mount image" in the source code) depends on the renderer, and can be a DOM node (Reacc DOM), a string (React DOM Server), or a number representing a native view (React Native).
 
 If we were to extend the code to handle host elements, it would look like this:
 
 ```js
 function isClass(type) {
-  // React.Component subclasses have this flag
+  // Reacc.Component subclasses have this flag
   return (
     Boolean(type.prototype) &&
-    Boolean(type.prototype.isReactComponent)
+    Boolean(type.prototype.isReaccComponent)
   );
 }
 
@@ -187,7 +187,7 @@ function mountHost(element) {
 
   // This block of code shouldn't be in the reconciler.
   // Different renderers might initialize nodes differently.
-  // For example, React Native would create iOS or Android views.
+  // For example, Reacc Native would create iOS or Android views.
   var node = document.createElement(type);
   Object.keys(props).forEach(propName => {
     if (propName !== 'children') {
@@ -231,17 +231,17 @@ This is working but still far from how the reconciler is really implemented. The
 
 ### Introducing Internal Instances
 
-The key feature of React is that you can re-render everything, and it won't recreate the DOM or reset the state:
+The key feature of Reacc is that you can re-render everything, and it won't recreate the DOM or reset the state:
 
 ```js
-ReactDOM.render(<App />, rootEl);
+ReaccDOM.render(<App />, rootEl);
 // Should reuse the existing DOM:
-ReactDOM.render(<App />, rootEl);
+ReaccDOM.render(<App />, rootEl);
 ```
 
 However, our implementation above only knows how to mount the initial tree. It can't perform updates on it because it doesn't store all the necessary information, such as all the `publicInstance`s, or which DOM `node`s correspond to which components.
 
-The stack reconciler codebase solves this by making the `mount()` function a method and putting it on a class. There are drawbacks to this approach, and we are going in the opposite direction in the [ongoing rewrite of the reconciler](/react/contributing/codebase-overview.html#fiber-reconciler). Nevertheless this is how it works now.
+The stack reconciler codebase solves this by making the `mount()` function a method and putting it on a class. There are drawbacks to this approach, and we are going in the opposite direction in the [ongoing rewrite of the reconciler](/reacc/contributing/codebase-overview.html#fiber-reconciler). Nevertheless this is how it works now.
 
 Instead of separate `mountHost` and `mountComposite` functions, we will create two classes: `DOMComponent` and `CompositeComponent`.
 
@@ -406,11 +406,11 @@ The host internal instances need to store:
 * The DOM node.
 * All the child internal instances. Each of them can be either a `DOMComponent` or a `CompositeComponent`.
 
-If you're struggling to imagine how an internal instance tree is structured in more complex applications, [React DevTools](https://github.com/facebook/react-devtools) can give you a close approximation, as it highlights host instances with grey, and composite instances with purple:
+If you're struggling to imagine how an internal instance tree is structured in more complex applications, [Reacc DevTools](https://github.com/facebook/reacc-devtools) can give you a close approximation, as it highlights host instances with grey, and composite instances with purple:
 
- <img src="/react/img/docs/implementation-notes-tree.png" width="500" style="max-width: 100%" alt="React DevTools tree" />
+ <img src="/reacc/img/docs/implementation-notes-tree.png" width="500" style="max-width: 100%" alt="Reacc DevTools tree" />
 
-To complete this refactoring, we will introduce a function that mounts a complete tree into a container node, just like `ReactDOM.render()`. It returns a public instance, also like `ReactDOM.render()`:
+To complete this refactoring, we will introduce a function that mounts a complete tree into a container node, just like `ReaccDOM.render()`. It returns a public instance, also like `ReactDOM.render()`:
 
 ```js
 function mountTree(element, containerNode) {
@@ -472,7 +472,7 @@ class DOMComponent {
 
 In practice, unmounting DOM components also removes the event listeners and clears some caches, but we will skip those details.
 
-We can now add a new top-level function called `unmountTree(containerNode)` that is similar to `ReactDOM.unmountComponentAtNode()`:
+We can now add a new top-level function called `unmountTree(containerNode)` that is similar to `ReaccDOM.unmountComponentAtNode()`:
 
 ```js
 function unmountTree(containerNode) {
@@ -516,7 +516,7 @@ Now, running `unmountTree()`, or running `mountTree()` repeatedly, removes the o
 
 ### Updating
 
-In the previous section, we implemented unmounting. However React wouldn't be very useful if each prop change unmounted and mounted the whole tree. The goal of the reconciler is to reuse existing instances where possible to preserve the DOM and the state:
+In the previous section, we implemented unmounting. However Reacc wouldn't be very useful if each prop change unmounted and mounted the whole tree. The goal of the reconciler is to reuse existing instances where possible to preserve the DOM and the state:
 
 ```js
 var rootEl = document.getElementById('root');
@@ -666,7 +666,7 @@ class DOMComponent {
 
 ### Updating Host Components
 
-Host component implementations, such as `DOMComponent`, update differently. When they receive an element, they need to update the underlying platform-specific view. In case of React DOM, this means updating the DOM attributes:
+Host component implementations, such as `DOMComponent`, update differently. When they receive an element, they need to update the underlying platform-specific view. In case of Reacc DOM, this means updating the DOM attributes:
 
 ```js
 class DOMComponent {
@@ -704,7 +704,7 @@ We collect DOM operations on children in a list so we can execute them in batch:
 ```js
     // ...
 
-    // These are arrays of React elements:
+    // These are arrays of Reacc elements:
     var prevChildren = prevProps.children || [];
     if (!Array.isArray(prevChildren)) {
       prevChildren = [prevChildren];
@@ -846,7 +846,7 @@ mountTree(<App />, rootEl);
 mountTree(<App />, rootEl);
 ```
 
-These are the basics of how React works internally.
+These are the basics of how Reacc works internally.
 
 ### What We Left Out
 
@@ -854,13 +854,13 @@ This document is simplified compared to the real codebase. There are a few impor
 
 * Components can render `null`, and the reconciler can handle "empty slots" in arrays and rendered output.
 
-* The reconciler also reads `key` from the elements, and uses it to establish which internal instance corresponds to which element in an array. A bulk of complexity in the actual React implementation is related to that.
+* The reconciler also reads `key` from the elements, and uses it to establish which internal instance corresponds to which element in an array. A bulk of complexity in the actual Reacc implementation is related to that.
 
 * In addition to composite and host internal instance classes, there are also classes for "text" and "empty" components. They represent text nodes and the "empty slots" you get by rendering `null`.
 
-* Renderers use [injection](/react/contributing/codebase-overview.html#dynamic-injection) to pass the host internal class to the reconciler. For example, React DOM tells the reconciler to use `ReactDOMComponent` as the host internal instance implementation.
+* Renderers use [injection](/reacc/contributing/codebase-overview.html#dynamic-injection) to pass the host internal class to the reconciler. For example, Reacc DOM tells the reconciler to use `ReactDOMComponent` as the host internal instance implementation.
 
-* The logic for updating the list of children is extracted into a mixin called `ReactMultiChild` which is used by the host internal instance class implementations both in React DOM and React Native.
+* The logic for updating the list of children is extracted into a mixin called `ReaccMultiChild` which is used by the host internal instance class implementations both in React DOM and React Native.
 
 * The reconciler also implements support for `setState()` in composite components. Multiple updates inside event handlers get batched into a single update.
 
@@ -868,29 +868,29 @@ This document is simplified compared to the real codebase. There are a few impor
 
 * Lifecycle hooks that are called after the DOM is ready, such as `componentDidMount()` and `componentDidUpdate()`, get collected into "callback queues" and are executed in a single batch.
 
-* React puts information about the current update into an internal object called "transaction". Transactions are useful for keeping track of the queue of pending lifecycle hooks, the current DOM nesting for the warnings, and anything else that is "global" to a specific update. Transactions also ensure React "cleans everything up" after updates. For example, the transaction class provided by React DOM restores the input selection after any update.
+* Reacc puts information about the current update into an internal object called "transaction". Transactions are useful for keeping track of the queue of pending lifecycle hooks, the current DOM nesting for the warnings, and anything else that is "global" to a specific update. Transactions also ensure React "cleans everything up" after updates. For example, the transaction class provided by React DOM restores the input selection after any update.
 
 ### Jumping into the Code
 
-* [`ReactMount`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/dom/client/ReactMount.js) is where the code like `mountTree()` and `unmountTree()` from this tutorial lives. It takes care of mounting and unmounting top-level components. [`ReactNativeMount`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/native/ReactNativeMount.js) is its React Native analog.
-* [`ReactDOMComponent`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/dom/shared/ReactDOMComponent.js) is the equivalent of `DOMComponent` in this tutorial. It implements the host component class for React DOM renderer. [`ReactNativeBaseComponent`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/native/ReactNativeBaseComponent.js) is its React Native analog.
-* [`ReactCompositeComponent`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactCompositeComponent.js) is the equivalent of `CompositeComponent` in this tutorial. It handles calling user-defined components and maintaining their state.
-* [`instantiateReactComponent`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/instantiateReactComponent.js) contains the switch that picks the right internal instance class to construct for an element. It is equivalent to `instantiateComponent()` in this tutorial.
+* [`ReaccMount`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/dom/client/ReactMount.js) is where the code like `mountTree()` and `unmountTree()` from this tutorial lives. It takes care of mounting and unmounting top-level components. [`ReactNativeMount`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/native/ReactNativeMount.js) is its React Native analog.
+* [`ReaccDOMComponent`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/dom/shared/ReactDOMComponent.js) is the equivalent of `DOMComponent` in this tutorial. It implements the host component class for React DOM renderer. [`ReactNativeBaseComponent`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/native/ReactNativeBaseComponent.js) is its React Native analog.
+* [`ReaccCompositeComponent`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactCompositeComponent.js) is the equivalent of `CompositeComponent` in this tutorial. It handles calling user-defined components and maintaining their state.
+* [`instantiateReaccComponent`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/instantiateReactComponent.js) contains the switch that picks the right internal instance class to construct for an element. It is equivalent to `instantiateComponent()` in this tutorial.
 
-* [`ReactReconciler`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactReconciler.js) is a wrapper with `mountComponent()`, `receiveComponent()`, and `unmountComponent()` methods. It calls the underlying implementations on the internal instances, but also includes some code around them that is shared by all internal instance implementations.
+* [`ReaccReconciler`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactReconciler.js) is a wrapper with `mountComponent()`, `receiveComponent()`, and `unmountComponent()` methods. It calls the underlying implementations on the internal instances, but also includes some code around them that is shared by all internal instance implementations.
 
-* [`ReactChildReconciler`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactChildReconciler.js) implements the logic for mounting, updating, and unmounting children according to the `key` of their elements.
+* [`ReaccChildReconciler`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactChildReconciler.js) implements the logic for mounting, updating, and unmounting children according to the `key` of their elements.
 
-* [`ReactMultiChild`](https://github.com/facebook/react/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactMultiChild.js) implements processing the operation queue for child insertions, deletions, and moves independently of the renderer.
+* [`ReaccMultiChild`](https://github.com/facebook/reacc/blob/83381c1673d14cd16cf747e34c945291e5518a86/src/renderers/shared/stack/reconciler/ReactMultiChild.js) implements processing the operation queue for child insertions, deletions, and moves independently of the renderer.
 
-* `mount()`, `receive()`, and `unmount()` are really called `mountComponent()`, `receiveComponent()`, and `unmountComponent()` in React codebase for legacy reasons, but they receive elements.
+* `mount()`, `receive()`, and `unmount()` are really called `mountComponent()`, `receiveComponent()`, and `unmountComponent()` in Reacc codebase for legacy reasons, but they receive elements.
 
 * Properties on the internal instances start with an underscore, e.g. `_currentElement`. They are considered to be read-only public fields throughout the codebase.
 
 ### Future Directions
 
-Stack reconciler has inherent limitations such as being synchronous and unable to interrupt the work or split it in chunks. There is a work in progress on the [new Fiber reconciler](/react/contributing/codebase-overview.html#fiber-reconciler) with a [completely different architecture](https://github.com/acdlite/react-fiber-architecture). In the future, we intend to replace stack reconciler with it, but at the moment it is far from feature parity.
+Stack reconciler has inherent limitations such as being synchronous and unable to interrupt the work or split it in chunks. There is a work in progress on the [new Fiber reconciler](/reacc/contributing/codebase-overview.html#fiber-reconciler) with a [completely different architecture](https://github.com/acdlite/react-fiber-architecture). In the future, we intend to replace stack reconciler with it, but at the moment it is far from feature parity.
 
 ### Next Steps
 
-Read the [next section](/react/contributing/design-principles.html) to learn about the guiding principles we use for React development.
+Read the [next section](/reacc/contributing/design-principles.html) to learn about the guiding principles we use for Reacc development.

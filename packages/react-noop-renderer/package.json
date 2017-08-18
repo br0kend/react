@@ -1,10 +1,10 @@
 {
-  "name": "react-noop-renderer",
+  "name": "reacc-noop-renderer",
   "version": "16.0.0-beta.5",
   "private": true,
   "description": "React package for testing the Fiber reconciler.",
   "main": "index.js",
-  "repository": "facebook/react",
+  "repository": "facebook/reacc",
   "license": "BSD-3-Clause",
   "dependencies": {
     "fbjs": "^0.8.9",

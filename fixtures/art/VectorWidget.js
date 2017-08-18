@@ -8,8 +8,8 @@
  */
 'use strict';
 
-var React = require('react');
-var ReactART = require('react-art');
+var React = require('reacc');
+var ReactART = require('reacc-art');
 var Group = ReactART.Group;
 var Shape = ReactART.Shape;
 var Surface = ReactART.Surface;

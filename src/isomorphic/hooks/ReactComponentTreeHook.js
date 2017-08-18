@@ -105,7 +105,7 @@ if (canUseCollections) {
   var rootByKey = {};
 
   // Use non-numeric keys to prevent V8 performance issues:
-  // https://github.com/facebook/react/pull/7232
+  // https://github.com/facebook/reacc/pull/7232
   var getKeyFromID = function(id: DebugID): string {
     return '.' + id;
   };

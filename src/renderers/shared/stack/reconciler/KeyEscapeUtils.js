@@ -15,7 +15,7 @@
 var emptyFunction = require('fbjs/lib/emptyFunction');
 
 /**
- * Escape and wrap key so it is safe to use as a reactid
+ * Escape and wrap key so it is safe to use as a reaccid
  *
  * @param {string} key to be escaped.
  * @return {string} the escaped key.

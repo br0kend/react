@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const resolvePath = require('./utils').resolvePath;
 
 const DEFAULT_FB_SOURCE_PATH = '~/fbsource/';
-const RELATIVE_RN_PATH = 'xplat/js/react-native-github/Libraries/Renderer/';
+const RELATIVE_RN_PATH = 'xplat/js/reacc-native-github/Libraries/Renderer/';
 
 function syncReactNative(buildPath, fbSourcePath) {
   fbSourcePath = typeof fbSourcePath === 'string'

@@ -9,7 +9,7 @@
 
 'use strict';
 
-// TODO: Move flattenStyle into react
+// TODO: Move flattenStyle into reacc
 
 var flattenStyle = function() {};
 

@@ -20,8 +20,8 @@ describe 'ReactCoffeeScriptClass', ->
   renderedName = null;
 
   beforeEach ->
-    React = require 'react'
-    ReactDOM = require 'react-dom'
+    React = require 'reacc'
+    ReactDOM = require 'reacc-dom'
     PropTypes = require 'prop-types'
     container = document.createElement 'div'
     attachedListener = null

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -39,10 +39,10 @@ describeStack('ReactPerf', () => {
       console.table.isFake = true;
     }
 
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
     ReactPerf = require('ReactPerf');
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
     emptyFunction = require('fbjs/lib/emptyFunction');
 
     App = class extends React.Component {
@@ -489,7 +489,7 @@ describeStack('ReactPerf', () => {
   });
 
   it('should work when measurement starts during reconciliation', () => {
-    // https://github.com/facebook/react/issues/6949#issuecomment-230371009
+    // https://github.com/facebook/reacc/issues/6949#issuecomment-230371009
     class Measurer extends React.Component {
       componentWillMount() {
         ReactPerf.start();

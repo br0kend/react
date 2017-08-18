@@ -6,15 +6,15 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+var React = require('reacc');
+var ReactDOM = require('reacc-dom');
 var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-var ReactTestUtils = require('react-dom/test-utils');
+var ReactTestUtils = require('reacc-dom/test-utils');
 var PropTypes = require('prop-types');
 
 describe('ReactDOMFiber', () => {
@@ -1139,8 +1139,8 @@ describe('disableNewFiberFeatures', () => {
 
   it('throws if the React package cannot be loaded', () => {
     jest.resetModules();
-    jest.mock('react', () => undefined);
-    expect(() => require('react-dom')).toThrow(
+    jest.mock('reacc', () => undefined);
+    expect(() => require('reacc-dom')).toThrow(
       'ReactDOM was loaded before React.',
     );
     jest.resetModules();

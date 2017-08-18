@@ -4,26 +4,26 @@ title: Integrating with Other Libraries
 permalink: docs/integrating-with-other-libraries.html
 ---
 
-React can be used in any web application. It can be embedded in other applications and, with a little care, other applications can be embedded in React. This guide will examine some of the more common use cases, focusing on integration with [jQuery](https://jquery.com/) and [Backbone](http://backbonejs.org/), but the same ideas can be applied to integrating components with any existing code.
+Reacc can be used in any web application. It can be embedded in other applications and, with a little care, other applications can be embedded in React. This guide will examine some of the more common use cases, focusing on integration with [jQuery](https://jquery.com/) and [Backbone](http://backbonejs.org/), but the same ideas can be applied to integrating components with any existing code.
 
 ## Integrating with DOM Manipulation Plugins
 
-React is unaware of changes made to the DOM outside of React. It determines updates based on its own internal representation, and if the same DOM nodes are manipulated by another library, React gets confused and has no way to recover.
+Reacc is unaware of changes made to the DOM outside of React. It determines updates based on its own internal representation, and if the same DOM nodes are manipulated by another library, React gets confused and has no way to recover.
 
-This does not mean it is impossible or even necessarily difficult to combine React with other ways of affecting the DOM, you just have to be mindful of what each are doing.
+This does not mean it is impossible or even necessarily difficult to combine Reacc with other ways of affecting the DOM, you just have to be mindful of what each are doing.
 
-The easiest way to avoid conflicts is to prevent the React component from updating. You can do this by rendering elements that React has no reason to update, like an empty `<div />`.
+The easiest way to avoid conflicts is to prevent the Reacc component from updating. You can do this by rendering elements that React has no reason to update, like an empty `<div />`.
 
 ### How to Approach the Problem
 
 To demonstrate this, let's sketch out a wrapper for a generic jQuery plugin.
 
-We will attach a [ref](/react/docs/refs-and-the-dom.html) to the root DOM element. Inside `componentDidMount`, we will get a reference to it so we can pass it to the jQuery plugin.
+We will attach a [ref](/reacc/docs/refs-and-the-dom.html) to the root DOM element. Inside `componentDidMount`, we will get a reference to it so we can pass it to the jQuery plugin.
 
-To prevent React from touching the DOM after mounting, we will return an empty `<div />` from the `render()` method. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
+To prevent Reacc from touching the DOM after mounting, we will return an empty `<div />` from the `render()` method. The `<div />` element has no properties or children, so React has no reason to update it, leaving the jQuery plugin free to manage that part of the DOM:
 
 ```js{3,4,8,12}
-class SomePlugin extends React.Component {
+class SomePlugin extends Reacc.Component {
   componentDidMount() {
     this.$el = $(this.el);
     this.$el.somePlugin();
@@ -39,7 +39,7 @@ class SomePlugin extends React.Component {
 }
 ```
 
-Note that we defined both `componentDidMount` and `componentWillUnmount` [lifecycle hooks](/react/docs/react-component.html#the-component-lifecycle). Many jQuery plugins attach event listeners to the DOM so it's important to detach them in `componentWillUnmount`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
+Note that we defined both `componentDidMount` and `componentWillUnmount` [lifecycle hooks](/reacc/docs/react-component.html#the-component-lifecycle). Many jQuery plugins attach event listeners to the DOM so it's important to detach them in `componentWillUnmount`. If the plugin does not provide a method for cleanup, you will probably have to provide your own, remembering to remove any event listeners the plugin registered to prevent memory leaks.
 
 ### Integrating with jQuery Chosen Plugin
 
@@ -47,13 +47,13 @@ For a more concrete example of these concepts, let's write a minimal wrapper for
 
 >**Note:**
 >
->Just because it's possible, doesn't mean that it's the best approach for React apps. We encourage you to use React components when you can. React components are easier to reuse in React applications, and often provide more control over their behavior and appearance.
+>Just because it's possible, doesn't mean that it's the best approach for Reacc apps. We encourage you to use React components when you can. React components are easier to reuse in React applications, and often provide more control over their behavior and appearance.
 
 First, let's look at what Chosen does to the DOM.
 
 If you call it on a `<select>` DOM node, it reads the attributes off of the original DOM node, hides it with an inline style, and then appends a separate DOM node with its own visual representation right after the `<select>`. Then it fires jQuery events to notify us about the changes.
 
-Let's say that this is the API we're striving for with our `<Chosen>` wrapper React component:
+Let's say that this is the API we're striving for with our `<Chosen>` wrapper Reacc component:
 
 ```js
 function Example() {
@@ -67,12 +67,12 @@ function Example() {
 }
 ```
 
-We will implement it as an [uncontrolled component](/react/docs/uncontrolled-components.html) for simplicity.
+We will implement it as an [uncontrolled component](/reacc/docs/uncontrolled-components.html) for simplicity.
 
 First, we will create an empty component with a `render()` method where we return `<select>` wrapped in a `<div>`:
 
 ```js{4,5}
-class Chosen extends React.Component {
+class Chosen extends Reacc.Component {
   render() {
     return (
       <div>
@@ -85,7 +85,7 @@ class Chosen extends React.Component {
 }
 ```
 
-Notice how we wrapped `<select>` in an extra `<div>`. This is necessary because Chosen will append another DOM element right after the `<select>` node we passed to it. However, as far as React is concerned, `<div>` always only has a single child. This is how we ensure that React updates won't conflict with the extra DOM node appended by Chosen. It is important that if you modify the DOM outside of React flow, you must ensure React doesn't have a reason to touch those DOM nodes.
+Notice how we wrapped `<select>` in an extra `<div>`. This is necessary because Chosen will append another DOM element right after the `<select>` node we passed to it. However, as far as Reacc is concerned, `<div>` always only has a single child. This is how we ensure that React updates won't conflict with the extra DOM node appended by Chosen. It is important that if you modify the DOM outside of React flow, you must ensure React doesn't have a reason to touch those DOM nodes.
 
 Next, we will implement the lifecycle hooks. We need to initialize Chosen with the ref to the `<select>` node in `componentDidMount`, and tear it down in `componentWillUnmount`:
 
@@ -102,7 +102,7 @@ componentWillUnmount() {
 
 [Try it on CodePen.](http://codepen.io/gaearon/pen/qmqeQx?editors=0010)
 
-Note that React assigns no special meaning to the `this.el` field. It only works because we have previously assigned this field from a `ref` in the `render()` method:
+Note that Reacc assigns no special meaning to the `this.el` field. It only works because we have previously assigned this field from a `ref` in the `render()` method:
 
 ```js
 <select className="Chosen-select" ref={el => this.el = el}>
@@ -133,9 +133,9 @@ handleChange(e) {
 
 [Try it on CodePen.](http://codepen.io/gaearon/pen/bWgbeE?editors=0010)
 
-Finally, there is one more thing left to do. In React, props can change over time. For example, the `<Chosen>` component can get different children if parent component's state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.
+Finally, there is one more thing left to do. In Reacc, props can change over time. For example, the `<Chosen>` component can get different children if parent component's state changes. This means that at integration points it is important that we manually update the DOM in response to prop updates, since we no longer let React manage the DOM for us.
 
-Chosen's documentation suggests that we can use jQuery `trigger()` API to notify it about changes to the original DOM element. We will let React take care of updating `this.props.children` inside `<select>`, but we will also add a `componentDidUpdate()` lifecycle hook that notifies Chosen about changes in the children list:
+Chosen's documentation suggests that we can use jQuery `trigger()` API to notify it about changes to the original DOM element. We will let Reacc take care of updating `this.props.children` inside `<select>`, but we will also add a `componentDidUpdate()` lifecycle hook that notifies Chosen about changes in the children list:
 
 ```js{2,3}
 componentDidUpdate(prevProps) {
@@ -145,12 +145,12 @@ componentDidUpdate(prevProps) {
 }
 ```
 
-This way, Chosen will know to update its DOM element when the `<select>` children managed by React change.
+This way, Chosen will know to update its DOM element when the `<select>` children managed by Reacc change.
 
 The complete implementation of the `Chosen` component looks like this:
 
 ```js
-class Chosen extends React.Component {
+class Chosen extends Reacc.Component {
   componentDidMount() {
     this.$el = $(this.el);
     this.$el.chosen();
@@ -190,15 +190,15 @@ class Chosen extends React.Component {
 
 ## Integrating with Other View Libraries
 
-React can be embedded into other applications thanks to the flexibility of [`ReactDOM.render()`](/react/docs/react-dom.html#render).
+Reacc can be embedded into other applications thanks to the flexibility of [`ReactDOM.render()`](/reacc/docs/react-dom.html#render).
 
-Although React is commonly used at startup to load a single root React component into the DOM, `ReactDOM.render()` can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.
+Although Reacc is commonly used at startup to load a single root React component into the DOM, `ReactDOM.render()` can also be called multiple times for independent parts of the UI which can be as small as a button, or as large as an app.
 
-In fact, this is exactly how React is used at Facebook. This lets us write applications in React piece by piece, and combine it with our existing server-generated templates and other client-side code.
+In fact, this is exactly how Reacc is used at Facebook. This lets us write applications in React piece by piece, and combine it with our existing server-generated templates and other client-side code.
 
-### Replacing String-Based Rendering with React
+### Replacing String-Based Rendering with Reacc
 
-A common pattern in older web applications is to describe chunks of the DOM as a string and insert it into the DOM like so: `$el.html(htmlString)`. These points in a codebase are perfect for introducing React. Just rewrite the string based rendering as a React component.
+A common pattern in older web applications is to describe chunks of the DOM as a string and insert it into the DOM like so: `$el.html(htmlString)`. These points in a codebase are perfect for introducing Reacc. Just rewrite the string based rendering as a React component.
 
 So the following jQuery implementation...
 
@@ -209,14 +209,14 @@ $('#btn').click(function() {
 });
 ```
 
-...could be rewritten using a React component:
+...could be rewritten using a Reacc component:
 
 ```js
 function Button() {
   return <button id="btn">Say Hello</button>;
 }
 
-ReactDOM.render(
+ReaccDOM.render(
   <Button />,
   document.getElementById('container'),
   function() {
@@ -227,7 +227,7 @@ ReactDOM.render(
 );
 ```
 
-From here you could start moving more logic into the component and begin adopting more common React practices. For example, in components it is best not to rely on IDs because the same component can be rendered multiple times. Instead, we will use the [React event system](/react/docs/handling-events.html) and register the click handler directly on the React `<button>` element:
+From here you could start moving more logic into the component and begin adopting more common Reacc practices. For example, in components it is best not to rely on IDs because the same component can be rendered multiple times. Instead, we will use the [React event system](/reacc/docs/handling-events.html) and register the click handler directly on the React `<button>` element:
 
 ```js{2,6,9}
 function Button(props) {
@@ -241,7 +241,7 @@ function HelloButton() {
   return <Button onClick={handleClick} />;
 }
 
-ReactDOM.render(
+ReaccDOM.render(
   <HelloButton />,
   document.getElementById('container')
 );
@@ -249,13 +249,13 @@ ReactDOM.render(
 
 [Try it on CodePen.](http://codepen.io/gaearon/pen/RVKbvW?editors=1010)
 
-You can have as many such isolated components as you like, and use `ReactDOM.render()` to render them to different DOM containers. Gradually, as you convert more of your app to React, you will be able to combine them into larger components, and move some of the `ReactDOM.render()` calls up the hierarchy.
+You can have as many such isolated components as you like, and use `ReaccDOM.render()` to render them to different DOM containers. Gradually, as you convert more of your app to React, you will be able to combine them into larger components, and move some of the `ReactDOM.render()` calls up the hierarchy.
 
-### Embedding React in a Backbone View
+### Embedding Reacc in a Backbone View
 
-[Backbone](http://backbonejs.org/) views typically use HTML strings, or string-producing template functions, to create the content for their DOM elements. This process, too, can be replaced with rendering a React component.
+[Backbone](http://backbonejs.org/) views typically use HTML strings, or string-producing template functions, to create the content for their DOM elements. This process, too, can be replaced with rendering a Reacc component.
 
-Below, we will create a Backbone view called `ParagraphView`. It will override Backbone's `render()` function to render a React `<Paragraph>` component into the DOM element provided by Backbone (`this.el`). Here, too, we are using [`ReactDOM.render()`](/react/docs/react-dom.html#render):
+Below, we will create a Backbone view called `ParagraphView`. It will override Backbone's `render()` function to render a Reacc `<Paragraph>` component into the DOM element provided by Backbone (`this.el`). Here, too, we are using [`ReactDOM.render()`](/reacc/docs/react-dom.html#render):
 
 ```js{1,5,8,12}
 function Paragraph(props) {
@@ -265,11 +265,11 @@ function Paragraph(props) {
 const ParagraphView = Backbone.View.extend({
   render() {
     const text = this.model.get('text');
-    ReactDOM.render(<Paragraph text={text} />, this.el);
+    ReaccDOM.render(<Paragraph text={text} />, this.el);
     return this;
   },
   remove() {
-    ReactDOM.unmountComponentAtNode(this.el);
+    ReaccDOM.unmountComponentAtNode(this.el);
     Backbone.View.prototype.remove.call(this);
   }
 });
@@ -277,24 +277,24 @@ const ParagraphView = Backbone.View.extend({
 
 [Try it on CodePen.](http://codepen.io/gaearon/pen/gWgOYL?editors=0010)
 
-It is important that we also call `ReactDOM.unmountComponentAtNode()` in the `remove` method so that React unregisters event handlers and other resources associated with the component tree when it is detached.
+It is important that we also call `ReaccDOM.unmountComponentAtNode()` in the `remove` method so that React unregisters event handlers and other resources associated with the component tree when it is detached.
 
-When a component is removed *from within* a React tree, the cleanup is performed automatically, but because we are removing the entire tree by hand, we must call it this method.
+When a component is removed *from within* a Reacc tree, the cleanup is performed automatically, but because we are removing the entire tree by hand, we must call it this method.
 
 ## Integrating with Model Layers
 
-While it is generally recommended to use unidirectional data flow such as [React state](/react/docs/lifting-state-up.html), [Flux](http://facebook.github.io/flux/), or [Redux](http://redux.js.org/), React components can use a model layer from other frameworks and libraries.
+While it is generally recommended to use unidirectional data flow such as [Reacc state](/reacc/docs/lifting-state-up.html), [Flux](http://facebook.github.io/flux/), or [Redux](http://redux.js.org/), React components can use a model layer from other frameworks and libraries.
 
-### Using Backbone Models in React Components
+### Using Backbone Models in Reacc Components
 
-The simplest way to consume [Backbone](http://backbonejs.org/) models and collections from a React component is to listen to the various change events and manually force an update.
+The simplest way to consume [Backbone](http://backbonejs.org/) models and collections from a Reacc component is to listen to the various change events and manually force an update.
 
-Components responsible for rendering models would listen to `'change'` events, while components responsible for rendering collections would listen for `'add'` and `'remove'` events. In both cases, call [`this.forceUpdate()`](/react/docs/react-component.html#forceupdate) to rerender the component with the new data.
+Components responsible for rendering models would listen to `'change'` events, while components responsible for rendering collections would listen for `'add'` and `'remove'` events. In both cases, call [`this.forceUpdate()`](/reacc/docs/react-component.html#forceupdate) to rerender the component with the new data.
 
 In the example below, the `List` component renders a Backbone collection, using the `Item` component to render individual items.
 
 ```js{1,7-9,12,16,24,30-32,35,39,46}
-class Item extends React.Component {
+class Item extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -317,7 +317,7 @@ class Item extends React.Component {
   }
 }
 
-class List extends React.Component {
+class List extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -351,9 +351,9 @@ class List extends React.Component {
 
 ### Extracting Data from Backbone Models
 
-The approach above requires your React components to be aware of the Backbone models and collections. If you later plan to migrate to another data management solution, you might want to concentrate the knowledge about Backbone in as few parts of the code as possible.
+The approach above requires your Reacc components to be aware of the Backbone models and collections. If you later plan to migrate to another data management solution, you might want to concentrate the knowledge about Backbone in as few parts of the code as possible.
 
-One solution to this is to extract the model's attributes as plain data whenever it changes, and keep this logic in a single place. The following is [a higher-order component](/react/docs/higher-order-components.html) that extracts all attributes of a Backbone model into state, passing the data to the wrapped component.
+One solution to this is to extract the model's attributes as plain data whenever it changes, and keep this logic in a single place. The following is [a higher-order component](/reacc/docs/higher-order-components.html) that extracts all attributes of a Backbone model into state, passing the data to the wrapped component.
 
 This way, only the higher-order component needs to know about Backbone model internals, and most components in the app can stay agnostic of Backbone.
 
@@ -363,7 +363,7 @@ Note that this example is not meant to be exhaustive with regards to working wit
 
 ```js{1,5,10,14,16,17,22,26,32}
 function connectToBackboneModel(WrappedComponent) {
-  return class BackboneComponent extends React.Component {
+  return class BackboneComponent extends Reacc.Component {
     constructor(props) {
       super(props);
       this.state = Object.assign({}, props.model.attributes);
@@ -399,7 +399,7 @@ function connectToBackboneModel(WrappedComponent) {
 }
 ```
 
-To demonstrate how to use it, we will connect a `NameInput` React component to a Backbone model, and update its `firstName` attribute every time the input changes:
+To demonstrate how to use it, we will connect a `NameInput` Reacc component to a Backbone model, and update its `firstName` attribute every time the input changes:
 
 ```js{4,6,11,15,19-21}
 function NameInput(props) {
@@ -428,7 +428,7 @@ function Example(props) {
 }
 
 const model = new Backbone.Model({ firstName: 'Frodo' });
-ReactDOM.render(
+ReaccDOM.render(
   <Example model={model} />,
   document.getElementById('root')
 );
@@ -436,4 +436,4 @@ ReactDOM.render(
 
 [Try it on CodePen.](http://codepen.io/gaearon/pen/PmWwwa?editors=0010)
 
-This technique is not limited to Backbone. You can use React with any model library by subscribing to its changes in the lifecycle hooks and, optionally, copying the data into the local React state.
+This technique is not limited to Backbone. You can use Reacc with any model library by subscribing to its changes in the lifecycle hooks and, optionally, copying the data into the local React state.

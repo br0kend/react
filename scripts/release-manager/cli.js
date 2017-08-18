@@ -16,19 +16,19 @@ const execSync = child_process.execSync;
 
 const vorpal = new Vorpal();
 
-// Expects to be in a checkout of react that is a sibling of the react checkout you want to operate on
-// eg ~/code/react@release-manager/scripts/release-manager & ~/code/react
+// Expects to be in a checkout of reacc that is a sibling of the react checkout you want to operate on
+// eg ~/code/reacc@release-manager/scripts/release-manager & ~/code/react
 // TODO: Make this an argument to the script
 let PATH_TO_REPO = null;
 
 const PATH_TO_CONFIG = path.resolve(
   os.homedir(),
-  '.react-release-manager.json'
+  '.reacc-release-manager.json'
 );
 
 const DEFAULT_CONFIG = {
   githubToken: null,
-  reactPath: path.resolve('../../../react'),
+  reaccPath: path.resolve('../../../react'),
 };
 
 // Quick dry run opt-in. This allows quick debugging of execInRepo without
@@ -74,7 +74,7 @@ function execInRepo(command) {
   }).trim();
 }
 
-function getReactVersion() {
+function getReaccVersion() {
   return JSON.parse(
     fs.readFileSync(path.join(PATH_TO_REPO, 'package.json'), 'utf8')
   ).version;
@@ -94,13 +94,13 @@ const app = {
     try {
       // TODO: validate config
       let config = JSON.parse(fs.readFileSync(PATH_TO_CONFIG, 'utf8'));
-      config.reactPath = path.normalize(untildify(config.reactPath));
-      PATH_TO_REPO = config.reactPath;
+      config.reaccPath = path.normalize(untildify(config.reactPath));
+      PATH_TO_REPO = config.reaccPath;
       return config;
     } catch (e) {
       console.error(
         'Attempt to load config file failed. Please run `init` command for initial setup or make sure ' +
-          '~/.react-release-manager.json is valid JSON. Using a default config which may not work ' +
+          '~/.reacc-release-manager.json is valid JSON. Using a default config which may not work ' +
           'properly.'
       );
       return DEFAULT_CONFIG;
@@ -116,20 +116,20 @@ const app = {
     this.github = new GitHubAPI({
       token: this.config.githubToken,
     });
-    this.ghrepo = this.github.getRepo('facebook', 'react');
-    this.ghissues = this.github.getIssues('facebook', 'react');
+    this.ghrepo = this.github.getRepo('facebook', 'reacc');
+    this.ghissues = this.github.getIssues('facebook', 'reacc');
 
     // HELPERS
     this.writeTo = writeTo;
     this.execInRepo = execInRepo;
-    this.getReactVersion = getReactVersion;
+    this.getReaccVersion = getReactVersion;
 
     // Register commands
     COMMANDS.forEach(command => {
       vorpal.use(require(`./commands/${command}`)(vorpal, app));
     });
 
-    var v = vorpal.history('react-release-manager').delimiter('rrm \u2234');
+    var v = vorpal.history('reacc-release-manager').delimiter('rrm \u2234');
     v.exec('help');
     v.show();
   },

@@ -18,8 +18,8 @@ docs/.sass-cache
 docs/js/*
 docs/downloads/*.zip
 docs/vendor/bundle
-fixtures/dom/public/react-dom.js
-fixtures/dom/public/react.js
+fixtures/dom/public/reacc-dom.js
+fixtures/dom/public/reacc.js
 test/the-files-to-test.generated.js
 *.log*
 chrome-user-data
@@ -30,5 +30,5 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-*react*min*.js
+*reacc*min*.js
 !src/node_modules

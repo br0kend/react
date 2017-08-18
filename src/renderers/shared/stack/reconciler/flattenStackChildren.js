@@ -28,9 +28,9 @@ if (
 ) {
   // Temporary hack.
   // Inline requires don't work well with Jest:
-  // https://github.com/facebook/react/issues/7240
+  // https://github.com/facebook/reacc/issues/7240
   // Remove the inline requires when we don't need them anymore:
-  // https://github.com/facebook/react/pull/7178
+  // https://github.com/facebook/reacc/pull/7178
   ReactComponentTreeHook = require('ReactGlobalSharedState')
     .ReactComponentTreeHook;
 }

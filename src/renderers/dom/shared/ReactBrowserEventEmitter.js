@@ -75,18 +75,18 @@ var {topLevelTypes} = require('BrowserEventConstants');
  */
 
 var alreadyListeningTo = {};
-var reactTopListenersCounter = 0;
+var reaccTopListenersCounter = 0;
 
 /**
  * To ensure no conflicts with other potential React instances on the page
  */
-var topListenersIDKey = '_reactListenersID' + ('' + Math.random()).slice(2);
+var topListenersIDKey = '_reaccListenersID' + ('' + Math.random()).slice(2);
 
 function getListeningForDocument(mountAt) {
   // In IE8, `mountAt` is a host object and doesn't have `hasOwnProperty`
   // directly.
   if (!Object.prototype.hasOwnProperty.call(mountAt, topListenersIDKey)) {
-    mountAt[topListenersIDKey] = reactTopListenersCounter++;
+    mountAt[topListenersIDKey] = reaccTopListenersCounter++;
     alreadyListeningTo[mountAt[topListenersIDKey]] = {};
   }
   return alreadyListeningTo[mountAt[topListenersIDKey]];

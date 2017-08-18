@@ -5,20 +5,20 @@
     <script>
       System.config({
         paths: {
-          react: '../../../build/dist/react.production.min.js',
-          'react-dom': '../../../build/dist/react-dom.production.min.js'
+          reacc: '../../../build/dist/react.production.min.js',
+          'reacc-dom': '../../../build/dist/react-dom.production.min.js'
         }
       });
 
       Promise.all([
-        System.import("react"),
-        System.import("react-dom")
+        System.import("reacc"),
+        System.import("reacc-dom")
       ]).then(function (deps) {
-        var React = deps[0];
-        var ReactDOM = deps[1];
+        var Reacc = deps[0];
+        var ReaccDOM = deps[1];
 
-        ReactDOM.render(
-          React.createElement('h1', null, 'Hello World!'),
+        ReaccDOM.render(
+          Reacc.createElement('h1', null, 'Hello World!'),
           document.getElementById('container')
         );
       });

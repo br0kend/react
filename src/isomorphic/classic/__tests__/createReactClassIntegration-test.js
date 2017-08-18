@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -17,13 +17,13 @@ var ReactDOM;
 var ReactTestUtils;
 var createReactClass;
 
-describe('create-react-class-integration', () => {
+describe('create-reacc-class-integration', () => {
   beforeEach(() => {
     PropTypes = require('prop-types');
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
-    createReactClass = require('create-react-class/factory')(
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
+    createReactClass = require('create-reacc-class/factory')(
       React.Component,
       React.isValidElement,
       new React.Component().updater,
@@ -341,7 +341,7 @@ describe('create-react-class-integration', () => {
     expect(console.error.calls.count()).toBe(1);
     expect(console.error.calls.argsFor(0)[0]).toBe(
       'Warning: Something is calling a React component directly. Use a ' +
-        'factory or JSX instead. See: https://fb.me/react-legacyfactory',
+        'factory or JSX instead. See: https://fb.me/reacc-legacyfactory',
     );
   });
 

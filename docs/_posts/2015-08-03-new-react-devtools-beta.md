@@ -6,7 +6,7 @@ author: jaredly
 We've made an entirely new version of the devtools, and we want you to try it
 out!
 
-![The full devtools gif](/react/img/blog/devtools-full.gif)
+![The full devtools gif](/reacc/img/blog/devtools-full.gif)
 
 ## Why entirely new?
 
@@ -33,7 +33,7 @@ Yeah!
 
 ### The Tree View
 
-![The new tree view of the devtools](/react/img/blog/devtools-tree-view.png)
+![The new tree view of the devtools](/reacc/img/blog/devtools-tree-view.png)
 
 - Much richer view of your props, including the contents of objects and arrays
 - Custom components are emphasized, native components are de-emphasized
@@ -52,19 +52,19 @@ Yeah!
 Select the search bar (or press "/"), and start searching for a component by
 name.
 
-![](/react/img/blog/devtools-search.gif)
+![](/reacc/img/blog/devtools-search.gif)
 
 ### The Side Pane
 
 - Now shows the `context` for a component
 - Right-click to store a prop/state value as a global variable
 
-![](/react/img/blog/devtools-side-pane.gif)
+![](/reacc/img/blog/devtools-side-pane.gif)
 
 ## How do I install it?
 
 First, disable the Chrome web store version, or it will break things. Then
-[download the .crx](https://github.com/facebook/react-devtools/releases) and
+[download the .crx](https://github.com/facebook/reacc-devtools/releases) and
 drag it into your `chrome://extensions` page. If it's not working to drag it
 from the downloads bar, try opening your downloads folder and drag it from
 there.
@@ -75,17 +75,17 @@ the official web store version, and everyone will be automatically upgraded.
 ### Also Firefox!
 
 We also have an initial version of the devtools for Firefox, which you can
-download from the same [release page](https://github.com/facebook/react-devtools/releases).
+download from the same [release page](https://github.com/facebook/reacc-devtools/releases).
 
 ## Feedback welcome
 
 Let us know what issues you run into
-[on GitHub](https://github.com/facebook/react-devtools/issues), and check out
-[the README](https://github.com/facebook/react-devtools/tree/devtools-next)
+[on GitHub](https://github.com/facebook/reacc-devtools/issues), and check out
+[the README](https://github.com/facebook/reacc-devtools/tree/devtools-next)
 for more info.
 
 ## Update
 *August 12, 2015*
 
 A second beta is out, with a number of bugfixes. It is also listed on the
-[releases page](https://github.com/facebook/react-devtools/releases).
+[releases page](https://github.com/facebook/reacc-devtools/releases).

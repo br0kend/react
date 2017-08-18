@@ -101,7 +101,7 @@ function assertValidProps(component, props) {
       typeof props.dangerouslySetInnerHTML === 'object' &&
         HTML in props.dangerouslySetInnerHTML,
       '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' +
-        'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' +
+        'Please visit https://fb.me/reacc-invariant-dangerously-set-inner-html ' +
         'for more information.',
     );
   }
@@ -552,7 +552,7 @@ ReactDOMComponent.Mixin = {
           el = ownerDocument.createElement(type, {is: props.is});
         } else {
           // Separate else branch instead of using `props.is || undefined` above because of a Firefox bug.
-          // See discussion in https://github.com/facebook/react/pull/6896
+          // See discussion in https://github.com/facebook/reacc/pull/6896
           // and discussion in https://bugzilla.mozilla.org/show_bug.cgi?id=1276240
           el = ownerDocument.createElement(type);
         }
@@ -801,7 +801,7 @@ ReactDOMComponent.Mixin = {
         // Avoid setting textContent when the text is empty. In IE11 setting
         // textContent on a text area will cause the placeholder to not
         // show within the textarea until it has been focused and blurred again.
-        // https://github.com/facebook/react/issues/6731#issuecomment-254874553
+        // https://github.com/facebook/reacc/issues/6731#issuecomment-254874553
         if (contentToUse !== '') {
           if (__DEV__) {
             setAndValidateContentChildDev.call(this, contentToUse);

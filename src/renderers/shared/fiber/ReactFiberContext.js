@@ -58,8 +58,8 @@ function cacheContext(
   maskedContext: Object,
 ) {
   const instance = workInProgress.stateNode;
-  instance.__reactInternalMemoizedUnmaskedChildContext = unmaskedContext;
-  instance.__reactInternalMemoizedMaskedChildContext = maskedContext;
+  instance.__reaccInternalMemoizedUnmaskedChildContext = unmaskedContext;
+  instance.__reaccInternalMemoizedMaskedChildContext = maskedContext;
 }
 exports.cacheContext = cacheContext;
 
@@ -79,9 +79,9 @@ exports.getMaskedContext = function(
   const instance = workInProgress.stateNode;
   if (
     instance &&
-    instance.__reactInternalMemoizedUnmaskedChildContext === unmaskedContext
+    instance.__reaccInternalMemoizedUnmaskedChildContext === unmaskedContext
   ) {
-    return instance.__reactInternalMemoizedMaskedChildContext;
+    return instance.__reaccInternalMemoizedMaskedChildContext;
   }
 
   const context = {};
@@ -230,7 +230,7 @@ exports.pushContextProvider = function(workInProgress: Fiber): boolean {
   // If the instance does not exist yet, we will push null at first,
   // and replace it on the stack later when invalidating the context.
   const memoizedMergedChildContext =
-    (instance && instance.__reactInternalMemoizedMergedChildContext) ||
+    (instance && instance.__reaccInternalMemoizedMergedChildContext) ||
     emptyObject;
 
   // Remember the parent context so we can merge with it later.
@@ -266,7 +266,7 @@ exports.invalidateContextProvider = function(
       previousContext,
       true,
     );
-    instance.__reactInternalMemoizedMergedChildContext = mergedContext;
+    instance.__reaccInternalMemoizedMergedChildContext = mergedContext;
 
     // Replace the old (or empty) context with the new one.
     // It is important to unwind the context in the reverse order.
@@ -299,7 +299,7 @@ exports.findCurrentUnmaskedContext = function(fiber: Fiber): Object {
   let node: Fiber = fiber;
   while (node.tag !== HostRoot) {
     if (isContextProvider(node)) {
-      return node.stateNode.__reactInternalMemoizedMergedChildContext;
+      return node.stateNode.__reaccInternalMemoizedMergedChildContext;
     }
     const parent = node.return;
     invariant(

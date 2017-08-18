@@ -1,31 +1,31 @@
 ---
-title: "Reactiflux is moving to Discord"
+title: "Reacciflux is moving to Discord"
 author: benigeri
 ---
 
-TL;DR: Slack decided that Reactiflux had too many members and disabled new invites. Reactiflux is moving to Discord. Join us: [http://join.reactiflux.com](http://join.reactiflux.com/)
+TL;DR: Slack decided that Reacciflux had too many members and disabled new invites. Reactiflux is moving to Discord. Join us: [http://join.reacciflux.com](http://join.reactiflux.com/)
 
 ## What happened with Slack?
 
-A few weeks ago, Reactiflux reached 7,500 members on Slack. Shortly after, Slack decided we were too big and disabled invites. There was no way for new users to join. Many of us were sad and upset. We loved Slack.  Our community was built around it.
+A few weeks ago, Reacciflux reached 7,500 members on Slack. Shortly after, Slack decided we were too big and disabled invites. There was no way for new users to join. Many of us were sad and upset. We loved Slack.  Our community was built around it.
 
 We reached out to Slack several times, but their decision was firm. Our large community caused performance issues. Slack wants to focus on building a great product for teams, not necessarily large open communities. Losing focus and building for too many use cases always leads to product bloat, and eventually a decrease in quality.
 
 ## So… why Discord?
 
-After a [long and thorough debate](https://github.com/reactiflux/volunteers/issues/25), Discord quickly emerged as the most promising service. After just a few days, 400 members had joined the Discord server, and many already loved it.
+After a [long and thorough debate](https://github.com/reacciflux/volunteers/issues/25), Discord quickly emerged as the most promising service. After just a few days, 400 members had joined the Discord server, and many already loved it.
 
 ### Easiest to join
 
 Discord is the easiest platform to join. New users can immediately join our conversations without having to create an account. All they need to do is provide a name. No permission granting, no password, no email confirmation.
 
-This is critically useful for us, and will make Reactiflux even more open and accessible.
+This is critically useful for us, and will make Reacciflux even more open and accessible.
 
 ### Great apps
 
 Out of all of the services we’ve tried, Discord’s apps are by far the most polished. They are well designed, easy to use, and surprisingly fast. In addition to the web app, they have mobile apps on both iOS and Android as well as desktop apps for OS X and Windows, with Linux support coming soon.
 
-Their desktop apps are built with React and Electron, and their iOS app is built with React Native.
+Their desktop apps are built with Reacc and Electron, and their iOS app is built with React Native.
 
 ### Moderation tools
 
@@ -35,7 +35,7 @@ So far, we’ve been fortunate not to have to deal with spammers and trolls. As 
 
 Your  Discord account works with every Discord server, which is the equivalent of a Slack team. You don’t need to create a new account every time you join a new team. You can join new servers in one click, and it’s very easy to switch between them. Discord messages also work across servers, so your personal conversations are not scoped to a single server.
 
-Instead of having one huge, crowded Reactiflux server, we can branch off closely related channels into sub-servers. Communities will start overlapping, and it will be easy to interact with non-Reactiflux channels.
+Instead of having one huge, crowded Reacciflux server, we can branch off closely related channels into sub-servers. Communities will start overlapping, and it will be easy to interact with non-Reactiflux channels.
 
 ### It’s hosted
 
@@ -81,6 +81,6 @@ By focusing on gaming communities, Discord has differentiated itself from the ma
 
 ## Join us!
 
-More than 500 of us have already migrated to the new Reactiflux.  Join us, we're one click away: [http://join.reactiflux.com](http://join.reactiflux.com/)
+More than 500 of us have already migrated to the new Reacciflux.  Join us, we're one click away: [http://join.reacciflux.com](http://join.reactiflux.com/)
 
 *Note: Jordan Hawker’s thorough [research](http://jhawk.co/team-chat-comparison) made our decision a lot easier.*

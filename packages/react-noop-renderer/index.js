@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./cjs/react-noop-renderer.development.js');
+module.exports = require('./cjs/reacc-noop-renderer.development.js');

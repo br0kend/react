@@ -36,7 +36,7 @@ function testMinificationUsedDCE() {
           'React is running in production mode, but dead code ' +
             'elimination has not been applied. Read how to correctly ' +
             'configure React for production: ' +
-            'https://fburl.com/react-perf-use-the-production-build'
+            'https://fburl.com/reacc-perf-use-the-production-build'
         );
       });
     }
@@ -45,7 +45,7 @@ function testMinificationUsedDCE() {
 
 if (process.env.NODE_ENV === 'production') {
   testMinificationUsedDCE();
-  module.exports = require('./cjs/react.production.min.js');
+  module.exports = require('./cjs/reacc.production.min.js');
 } else {
-  module.exports = require('./cjs/react.development.js');
+  module.exports = require('./cjs/reacc.development.js');
 }

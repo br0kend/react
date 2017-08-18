@@ -52,7 +52,7 @@ var babelOptions = {
     // Don't put this in .babelrc so that we don't embed filenames
     // into ReactART builds that include JSX.
     // TODO: I have not verified that this actually works.
-    require.resolve('babel-plugin-transform-react-jsx-source'),
+    require.resolve('babel-plugin-transform-reacc-jsx-source'),
   ],
   retainLines: true,
 };

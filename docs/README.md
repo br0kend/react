@@ -1,10 +1,10 @@
-# React Documentation & Website
+# Reacc Documentation & Website
 
-## [Read the React Documentation](https://facebook.github.io/react/)
+## [Read the Reacc Documentation](https://facebook.github.io/reacc/)
 
 This folder is not the right place to *read* the documentation.
 
-Instead, head over [to the React website](https://facebook.github.io/react/) to read it.
+Instead, head over [to the Reacc website](https://facebook.github.io/reacc/) to read it.
 
 This folder only contains the source code for the website.
 
@@ -30,23 +30,23 @@ The version of the Pygment syntax highlighter used by Jekyll requires Python 2.7
 Once you have RubyGems and installed Bundler (via `gem install bundler`), use it to install the dependencies:
 
 ```sh
-$ cd react/docs
+$ cd reacc/docs
 $ bundle install # Might need sudo.
 $ npm install
 ```
 
 ### Instructions
 
-The site requires React, so first make sure you've built the project (via [`grunt`](http://gruntjs.com/getting-started)).
+The site requires Reacc, so first make sure you've built the project (via [`grunt`](http://gruntjs.com/getting-started)).
 
 Use Jekyll to serve the website locally (by default, at `http://localhost:4000`):
 
 ```sh
-$ cd react/docs
+$ cd reacc/docs
 $ bundle exec rake
 $ bundle exec rake fetch_remotes
 $ bundle exec jekyll serve -w
-$ open http://localhost:4000/react/index.html
+$ open http://localhost:4000/reacc/index.html
 ```
 
 We use [SASS](http://sass-lang.com/) (with [Bourbon](http://bourbon.io/)) for our CSS, and we use JSX to transform some of our JS.
@@ -54,7 +54,7 @@ If you only want to modify the HTML or Markdown, you do not have to do anything 
 If you want to modify the CSS or JS, use [Rake](http://rake.rubyforge.org/) to compile them:
 
 ```sh
-$ cd react/docs
+$ cd reacc/docs
 $ bundle exec rake watch # Automatically compiles as needed.
 # bundle exec rake         Manually compile CSS and JS.
 # bundle exec rake js      Manually compile JS, only.
@@ -62,9 +62,9 @@ $ bundle exec rake watch # Automatically compiles as needed.
 
 ## Afterthoughts
 
-### Updating `facebook.github.io/react`
+### Updating `facebook.github.io/reacc`
 
-The easiest way to do this is to have a separate clone of this repository, checked out to the `gh-pages` branch. We have a build step that expects this to be in a directory named `react-gh-pages` at the same depth as `react`. Then it's just a matter of running `grunt docs`, which will compile the site and copy it out to this repository. From there, you can check it in.
+The easiest way to do this is to have a separate clone of this repository, checked out to the `gh-pages` branch. We have a build step that expects this to be in a directory named `reacc-gh-pages` at the same depth as `react`. Then it's just a matter of running `grunt docs`, which will compile the site and copy it out to this repository. From there, you can check it in.
 
 **Note:** This should only be done for new releases. You should create a tag corresponding to the release tag in the main repository.
 
@@ -76,4 +76,4 @@ $ bundle exec rake release
 
 ### Removing the Jekyll / Ruby Dependency
 
-In an ideal world, we would not be adding a Ruby dependency on part of our project. We would like to move towards a point where we are using React to render the website.
+In an ideal world, we would not be adding a Ruby dependency on part of our project. We would like to move towards a point where we are using Reacc to render the website.

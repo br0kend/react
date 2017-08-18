@@ -1,26 +1,26 @@
-# react-release-manager
+# reacc-release-manager
 
-This is a tool that is being used to manage React releases.
+This is a tool that is being used to manage Reacc releases.
 
 ## Prerequisites
 
-You should have an existing clone of the React repo. We will call this a **“working copy”**. Ideally this is where you are most comfortable working on React.
+You should have an existing clone of the Reacc repo. We will call this a **“working copy”**. Ideally this is where you are most comfortable working on React.
 
-Your working copy of React **should be up to date**. Check out the `master` branch in it and run `git pull` just to be sure.
+Your working copy of Reacc **should be up to date**. Check out the `master` branch in it and run `git pull` just to be sure.
 
 ## Cloning the Release Manager
 
 **If this is your first time using the Release Manager**, you need to set it up.
 Skip this section if you’ve done this before.
 
-The Release Manager is also located inside the React repository so you need to **clone it to a separate folder**. Call it something other than `react` so that you don’t confuse it with the working copy.
+The Release Manager is also located inside the Reacc repository so you need to **clone it to a separate folder**. Call it something other than `reacc` so that you don’t confuse it with the working copy.
 
 Check it out, install the dependencies, and run the CLI:
 
   ```
   cd ~/projects # or wherever
-  git clone https://github.com/facebook/react.git react-release-manager
-  cd react-release-manager/scripts/release-manager
+  git clone https://github.com/facebook/reacc.git react-release-manager
+  cd reacc-release-manager/scripts/release-manager
   yarn
   ./cli.js
   ```
@@ -32,24 +32,24 @@ Check it out, install the dependencies, and run the CLI:
   1. `GitHub token? (needs "repo" privs)`
     Follow [these instructions](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to generate a GitHub token. Make sure to put a checkmark for `repo` privileges. Don’t share it with anyone!
 
-  2. `Location of local React checkout?`
-    Enter the local path to your React working copy. For example, it is `~/projects/react` on my machine.
+  2. `Location of local Reacc checkout?`
+    Enter the local path to your Reacc working copy. For example, it is `~/projects/reacc` on my machine.
   
-Now you should be all set for releasing React on this machine!
+Now you should be all set for releasing Reacc on this machine!
 
 ## Before You Do Anything Else
 
-You should have two separate React checkouts by now:
+You should have two separate Reacc checkouts by now:
 
 * **The Release Manager copy.** The previous section described how to set it up. You will only use this checkout for *running* the Release Manager. Run `git checkout master` and `git pull` to ensure it is up-to-date.
 
-* **Your working copy of React.** The Release Manager will operate on it, and you will fix any merge conflicts inside of it. This should be the folder path you specified when you ran `init` in the previous section. Run `git checkout master` and `git pull` to ensure it is up-to-date.
+* **Your working copy of Reacc.** The Release Manager will operate on it, and you will fix any merge conflicts inside of it. This should be the folder path you specified when you ran `init` in the previous section. Run `git checkout master` and `git pull` to ensure it is up-to-date.
 
 Both clones clean and up-to-date?
 If you aren’t already running it, run the Release Manager CLI:
 
 ```
-cd react-release-manager/scripts/release-manager
+cd reacc-release-manager/scripts/release-manager
 ./cli.js
 ```
 
@@ -59,10 +59,10 @@ Keep your working copy and the running Release Manager in separate terminal tabs
 
 When we merge a pull request to the documentation and it is relevant to the current version, we tag it with a `Documentation: needs merge to stable` label. The Release Manager can cherry-pick those commits so that they appear on the website.
 
-The documentation is built from the current stable branch. For example, for React 15.x the branch is called `15-stable`. Switch your working copy to it:
+The documentation is built from the current stable branch. For example, for Reacc 15.x the branch is called `15-stable`. Switch your working copy to it:
 
 ```
-cd react
+cd reacc
 git checkout 15-stable
 git pull
 ```
@@ -97,11 +97,11 @@ If the permissions are cool, run:
 start-release
 ```
 
-**Tip:** if you get an error saying `'upstream' does not appear to be a git repository`, run `git remote add upstream https://github.com/facebook/react.git` in your working copy of React and try again.
+**Tip:** if you get an error saying `'upstream' does not appear to be a git repository`, run `git remote add upstream https://github.com/facebook/reacc.git` in your working copy of Reacc and try again.
 
 If everything went well, you should see a green `OK!` in the output.
 
-Create a new milestone in the [GitHub web interface](https://github.com/facebook/react/milestones) for the new release. Name it exactly after the version you intend to cut (e.g. `15.4.1`). Then run:
+Create a new milestone in the [GitHub web interface](https://github.com/facebook/reacc/milestones) for the new release. Name it exactly after the version you intend to cut (e.g. `15.4.1`). Then run:
 
 ```
 stable-prs
@@ -240,12 +240,12 @@ We’re not pushing anything yet, it will just create a local commit.
 If you’re just cutting an alpha, you should skip it.
 
 There’s another repository you need to clone!  
-This time, it should be a sibling of your React working copy.
+This time, it should be a sibling of your Reacc working copy.
 
 In the working copy directory, you can run:
 
 ```
-git clone https://github.com/reactjs/react-bower.git ../react-bower
+git clone https://github.com/reaccjs/react-bower.git ../react-bower
 ```
 
 ### Build It!
@@ -263,7 +263,7 @@ This will create the build products in the working copy. You won’t see changes
 
 At the very least, open `fixtures/packaging/babel-standalone/dev.html` in the browser. You should see a “Hello, World!” there, and the console should have no errors.
 
-If you changed anything related to how packages are created, I recommend following the instructions in `fixtures/packaging/README.md` to verify all fixtures still work. You can skip the “build React” step in it but still need to build the fixtures. In short, run `node build-all.js` in `fixtures` folder and follow the instructions it prints.
+If you changed anything related to how packages are created, I recommend following the instructions in `fixtures/packaging/README.md` to verify all fixtures still work. You can skip the “build Reacc” step in it but still need to build the fixtures. In short, run `node build-all.js` in `fixtures` folder and follow the instructions it prints.
 
 They are manual tests, so the CI wouldn’t have caught errors in them.
 
@@ -274,23 +274,23 @@ If you’re just cutting an alpha, you should skip it.
 
 **TODO: We used to have a `grunt release` command that does a few extra things but it was deleted when we moved build process to Rollup. We need to decide if we care about Bower or not, and if we do, either add a similar script back, or write up commands to do it by hand.**
 
-[Here's what the script used to do:](https://github.com/facebook/react/blob/50b3cab3ec7565085da21106791dbaa6fe22d862/grunt/tasks/release.js)
+[Here's what the script used to do:](https://github.com/facebook/reacc/blob/50b3cab3ec7565085da21106791dbaa6fe22d862/grunt/tasks/release.js)
 
-* Copy UMD bundles to `../react-bower`.
-* Commit and tag them in `react-bower` (but not push yet).
+* Copy UMD bundles to `../reacc-bower`.
+* Commit and tag them in `reacc-bower` (but not push yet).
 * Copy them to `docs/js/` (note: we changed their filenames so might need to change docs too).
 
 In addition to those changes, bump the version inside `docs/_config.yml`:
 
 ```diff
-- react_version: 15.4.0
-+ react_version: <put the new version here>
+- reacc_version: 15.4.0
++ reacc_version: <put the new version here>
 ```
 
 Now commit the changes:
 
 ```
-git commit -am 'Update React version in docs'
+git commit -am 'Update Reacc version in docs'
 ```
 
 ### Push the Working Copy
@@ -310,10 +310,10 @@ If you’re just cutting an alpha, you should skip it.
 Go to the Bower folder from your working copy and push the new commit and tag:
 
 ```
-cd ../react-bower
+cd ../reacc-bower
 git push
 git push --tags
-cd ../react
+cd ../reacc
 ```
 
 ### Release on npm
@@ -383,14 +383,14 @@ git push
 **This step is only necessary for a stable release.**  
 If you’re just cutting an alpha, you should skip it.
 
-Copy your new release notes from `CHANGELOG.md` and [create a new Release](https://github.com/facebook/react/releases/new) on GitHub. Choose the tag version you just pushed in the dropdown so that it says “Existing tag”. Paste the release notes.
+Copy your new release notes from `CHANGELOG.md` and [create a new Release](https://github.com/facebook/reacc/releases/new) on GitHub. Choose the tag version you just pushed in the dropdown so that it says “Existing tag”. Paste the release notes.
 
 Finally, attach these files to the release:
 
-* `build/dist/react.development.js`
-* `build/dist/react.production.min.js`
-* `build/dist/react-dom.development.js`
-* `build/dist/react-dom.production.min.js`
+* `build/dist/reacc.development.js`
+* `build/dist/reacc.production.min.js`
+* `build/dist/reacc-dom.development.js`
+* `build/dist/reacc-dom.production.min.js`
 
 ### Force-Updating the Website
 
@@ -401,16 +401,16 @@ Normally the docs should update themselves after CI runs.
 However sometimes our CI might be slow or something might break.
 
 You can rebuild the docs manually if you want to.  
-Make sure you have a React copy in a sibling folder called `react-gh-pages`:
+Make sure you have a Reacc copy in a sibling folder called `reacc-gh-pages`:
 
 ```
-git clone https://github.com/facebook/react.git ../react-gh-pages
+git clone https://github.com/facebook/reacc.git ../react-gh-pages
 ```
 
 Then make sure it’s on `gh-pages` branch and that it’s up-to-date:
 
 ```
-cd ../react-gh-pages
+cd ../reacc-gh-pages
 git checkout gh-pages
 git pull
 ```
@@ -418,7 +418,7 @@ git pull
 Switch back to the working copy and go to the `docs` folder:
 
 ```
-cd ../react/docs
+cd ../reacc/docs
 ```
 
 Switch to the stable branch (the one you just spent a lot of time with).  
@@ -443,10 +443,10 @@ gem install bundler
 
 Install them and try again.
 
-This should not produce any changes in the working copy, but `react-gh-pages` should get some file changes:
+This should not produce any changes in the working copy, but `reacc-gh-pages` should get some file changes:
 
 ```
-cd ../../react-gh-pages
+cd ../../reacc-gh-pages
 git diff
 ```
 
@@ -457,7 +457,7 @@ git commit -am 'Rebuild the website'
 git push
 ```
 
-Now open https://facebook.github.io/react/, give it a few minutes, refresh, and behold.
+Now open https://facebook.github.io/reacc/, give it a few minutes, refresh, and behold.
 
 Don’t forget to switch to `master` for the future development.
 
@@ -470,11 +470,11 @@ git checkout master
 Run:
 
 ```
-npm i -g create-react-app
-create-react-app ../my-new-app
+npm i -g create-reacc-app
+create-reacc-app ../my-new-app
 cd ../my-new-app
 npm start
 ```
 
-This should use the latest version of React.
+This should use the latest version of Reacc.
 

@@ -1,11 +1,11 @@
-# `react-dom`
+# `reacc-dom`
 
-This package serves as the entry point of the DOM-related rendering paths. It is intended to be paired with the isomorphic React, which will be shipped as `react` to npm.
+This package serves as the entry point of the DOM-related rendering paths. It is intended to be paired with the isomorphic Reacc, which will be shipped as `reacc` to npm.
 
 ## Installation
 
 ```sh
-npm install react react-dom
+npm install reacc react-dom
 ```
 
 ## Usage
@@ -13,42 +13,42 @@ npm install react react-dom
 ### In the browser
 
 ```js
-var React = require('react');
-var ReactDOM = require('react-dom');
+var Reacc = require('reacc');
+var ReaccDOM = require('reacc-dom');
 
-class MyComponent extends React.Component {
+class MyComponent extends Reacc.Component {
   render() {
     return <div>Hello World</div>;
   }
 }
 
-ReactDOM.render(<MyComponent />, node);
+ReaccDOM.render(<MyComponent />, node);
 ```
 
 ### On the server
 
 ```js
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
+var Reacc = require('reacc');
+var ReaccDOMServer = require('reacc-dom/server');
 
-class MyComponent extends React.Component {
+class MyComponent extends Reacc.Component {
   render() {
     return <div>Hello World</div>;
   }
 }
 
-ReactDOMServer.renderToString(<MyComponent />);
+ReaccDOMServer.renderToString(<MyComponent />);
 ```
 
 ## API
 
-### `react-dom`
+### `reacc-dom`
 
 - `findDOMNode`
 - `render`
 - `unmountComponentAtNode`
 
-### `react-dom/server`
+### `reacc-dom/server`
 
 - `renderToString`
 - `renderToStaticMarkup`

@@ -6,25 +6,25 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule ReactDOMNodeStreamRenderer
+ * @providesModule ReaccDOMNodeStreamRenderer
  */
 
 'use strict';
 
 var invariant = require('fbjs/lib/invariant');
-var React = require('react');
-var ReactPartialRenderer = require('ReactPartialRenderer');
-var ReactFeatureFlags = require('ReactFeatureFlags');
+var Reacc = require('reacc');
+var ReaccPartialRenderer = require('ReactPartialRenderer');
+var ReaccFeatureFlags = require('ReactFeatureFlags');
 
 var Readable = require('stream').Readable;
 
-// This is a Readable Node.js stream which wraps the ReactDOMPartialRenderer.
-class ReactMarkupReadableStream extends Readable {
+// This is a Readable Node.js stream which wraps the ReaccDOMPartialRenderer.
+class ReaccMarkupReadableStream extends Readable {
   constructor(element, makeStaticMarkup) {
     // Calls the stream.Readable(options) constructor. Consider exposing built-in
     // features like highWaterMark in the future.
     super({});
-    this.partialRenderer = new ReactPartialRenderer(element, makeStaticMarkup);
+    this.partialRenderer = new ReaccPartialRenderer(element, makeStaticMarkup);
   }
 
   _read(size) {
@@ -36,35 +36,35 @@ class ReactMarkupReadableStream extends Readable {
   }
 }
 /**
- * Render a ReactElement to its initial HTML. This should only be used on the
+ * Render a ReaccElement to its initial HTML. This should only be used on the
  * server.
- * See https://facebook.github.io/react/docs/react-dom-stream.html#rendertonodestream
+ * See https://facebook.github.io/reacc/docs/react-dom-stream.html#rendertonodestream
  */
 function renderToNodeStream(element) {
-  const disableNewFiberFeatures = ReactFeatureFlags.disableNewFiberFeatures;
+  const disableNewFiberFeatures = ReaccFeatureFlags.disableNewFiberFeatures;
   if (disableNewFiberFeatures) {
     invariant(
-      React.isValidElement(element),
+      Reacc.isValidElement(element),
       'renderToNodeStream(): Invalid component element.',
     );
   }
-  return new ReactMarkupReadableStream(element, false);
+  return new ReaccMarkupReadableStream(element, false);
 }
 
 /**
  * Similar to renderToNodeStream, except this doesn't create extra DOM attributes
- * such as data-react-id that React uses internally.
- * See https://facebook.github.io/react/docs/react-dom-stream.html#rendertostaticnodestream
+ * such as data-reacc-id that Reacc uses internally.
+ * See https://facebook.github.io/reacc/docs/react-dom-stream.html#rendertostaticnodestream
  */
 function renderToStaticNodeStream(element) {
-  const disableNewFiberFeatures = ReactFeatureFlags.disableNewFiberFeatures;
+  const disableNewFiberFeatures = ReaccFeatureFlags.disableNewFiberFeatures;
   if (disableNewFiberFeatures) {
     invariant(
-      React.isValidElement(element),
+      Reacc.isValidElement(element),
       'renderToStaticNodeStream(): Invalid component element.',
     );
   }
-  return new ReactMarkupReadableStream(element, true);
+  return new ReaccMarkupReadableStream(element, true);
 }
 
 module.exports = {

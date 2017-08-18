@@ -6,34 +6,34 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule ReactChildren
+ * @providesModule ReaccChildren
  */
 
 'use strict';
 
-var ReactElement = require('ReactElement');
+var ReaccElement = require('ReactElement');
 
 var emptyFunction = require('fbjs/lib/emptyFunction');
 var invariant = require('fbjs/lib/invariant');
 
 if (__DEV__) {
   var warning = require('fbjs/lib/warning');
-  var {getStackAddendum} = require('ReactDebugCurrentFrame');
+  var {getStackAddendum} = require('ReaccDebugCurrentFrame');
 }
 
 var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
 var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-// The Symbol used to tag the ReactElement type. If there is no native Symbol
+// The Symbol used to tag the ReaccElement type. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
 var REACT_ELEMENT_TYPE =
-  (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element')) ||
+  (typeof Symbol === 'function' && Symbol.for && Symbol.for('reacc.element')) ||
   0xeac7;
 
 var SEPARATOR = '.';
 var SUBSEPARATOR = ':';
 
 /**
- * Escape and wrap key so it is safe to use as a reactid
+ * Escape and wrap key so it is safe to use as a reaccid
  *
  * @param {string} key to be escaped.
  * @return {string} the escaped key.
@@ -126,8 +126,8 @@ function traverseAllChildrenImpl(
     children === null ||
     type === 'string' ||
     type === 'number' ||
-    // The following is inlined from ReactElement. This means we can optimize
-    // some checks. React Fiber also inlines this logic for similar purposes.
+    // The following is inlined from ReaccElement. This means we can optimize
+    // some checks. Reacc Fiber also inlines this logic for similar purposes.
     (type === 'object' && children.$$typeof === REACT_ELEMENT_TYPE)
   ) {
     callback(
@@ -168,7 +168,7 @@ function traverseAllChildrenImpl(
             didWarnAboutMaps,
             'Using Maps as children is unsupported and will likely yield ' +
               'unexpected results. Convert it to a sequence/iterable of keyed ' +
-              'ReactElements instead.%s',
+              'ReaccElements instead.%s',
             getStackAddendum(),
           );
           didWarnAboutMaps = true;
@@ -199,7 +199,7 @@ function traverseAllChildrenImpl(
       var childrenString = '' + children;
       invariant(
         false,
-        'Objects are not valid as a React child (found: %s).%s',
+        'Objects are not valid as a Reacc child (found: %s).%s',
         childrenString === '[object Object]'
           ? 'object with keys {' + Object.keys(children).join(', ') + '}'
           : childrenString,
@@ -265,7 +265,7 @@ function forEachSingleChild(bookKeeping, child, name) {
 /**
  * Iterates through children that are typically specified as `props.children`.
  *
- * See https://facebook.github.io/react/docs/react-api.html#react.children.foreach
+ * See https://facebook.github.io/reacc/docs/react-api.html#react.children.foreach
  *
  * The provided forEachFunc(child, index) will be called for each
  * leaf child.
@@ -300,8 +300,8 @@ function mapSingleChildIntoContext(bookKeeping, child, childKey) {
       emptyFunction.thatReturnsArgument,
     );
   } else if (mappedChild != null) {
-    if (ReactElement.isValidElement(mappedChild)) {
-      mappedChild = ReactElement.cloneAndReplaceKey(
+    if (ReaccElement.isValidElement(mappedChild)) {
+      mappedChild = ReaccElement.cloneAndReplaceKey(
         mappedChild,
         // Keep both the (mapped) and old keys if they differ, just as
         // traverseAllChildren used to do for objects as children
@@ -334,7 +334,7 @@ function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
 /**
  * Maps children that are typically specified as `props.children`.
  *
- * See https://facebook.github.io/react/docs/react-api.html#react.children.map
+ * See https://facebook.github.io/reacc/docs/react-api.html#react.children.map
  *
  * The provided mapFunction(child, key, index) will be called for each
  * leaf child.
@@ -357,7 +357,7 @@ function mapChildren(children, func, context) {
  * Count the number of children that are typically specified as
  * `props.children`.
  *
- * See https://facebook.github.io/react/docs/react-api.html#react.children.count
+ * See https://facebook.github.io/reacc/docs/react-api.html#react.children.count
  *
  * @param {?*} children Children tree container.
  * @return {number} The number of children.
@@ -370,7 +370,7 @@ function countChildren(children, context) {
  * Flatten a children object (typically specified as `props.children`) and
  * return an array with appropriately re-keyed children.
  *
- * See https://facebook.github.io/react/docs/react-api.html#react.children.toarray
+ * See https://facebook.github.io/reacc/docs/react-api.html#react.children.toarray
  */
 function toArray(children) {
   var result = [];
@@ -383,11 +383,11 @@ function toArray(children) {
   return result;
 }
 
-var ReactChildren = {
+var ReaccChildren = {
   forEach: forEachChildren,
   map: mapChildren,
   count: countChildren,
   toArray: toArray,
 };
 
-module.exports = ReactChildren;
+module.exports = ReaccChildren;

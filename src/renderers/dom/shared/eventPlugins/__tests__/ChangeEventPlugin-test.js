@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ReactTestUtils = require('react-dom/test-utils');
+var React = require('reacc');
+var ReactDOM = require('reacc-dom');
+var ReactTestUtils = require('reacc-dom/test-utils');
 // TODO: can we express this test with only public API?
 var ChangeEventPlugin = require('ChangeEventPlugin');
 var inputValueTracking = require('inputValueTracking');

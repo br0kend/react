@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -20,10 +20,10 @@ describe('ReactDOMSelect', () => {
   var noop = function() {};
 
   beforeEach(() => {
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   it('should allow setting `defaultValue`', () => {
@@ -540,7 +540,7 @@ describe('ReactDOMSelect', () => {
         '(specify either the value prop, or the defaultValue prop, but not ' +
         'both). Decide between using a controlled or uncontrolled select ' +
         'element and remove one of these props. More info: ' +
-        'https://fb.me/react-controlled-components',
+        'https://fb.me/reacc-controlled-components',
     );
 
     ReactTestUtils.renderIntoDocument(

@@ -433,7 +433,7 @@ if (__DEV__) {
   ReactDebugTool.addHook(ReactInvalidSetStateWarningHook);
   ReactDebugTool.addHook(ReactComponentTreeHook);
   var url = (ExecutionEnvironment.canUseDOM && window.location.href) || '';
-  if (/[?&]react_perf\b/.test(url)) {
+  if (/[?&]reacc_perf\b/.test(url)) {
     ReactDebugTool.beginProfiling();
   }
 }

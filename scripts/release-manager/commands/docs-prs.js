@@ -17,7 +17,7 @@ const DOCS_LABEL = 'Documentation: needs merge to stable';
 // git push
 // update labels on each PR
 //   ALT: dump link to
-//        https://github.com/facebook/react/issues?q=label%3A%22Documentation%3A+needs+merge+to+stable%22+is%3Aclosed
+//        https://github.com/facebook/reacc/issues?q=label%3A%22Documentation%3A+needs+merge+to+stable%22+is%3Aclosed
 //        and say manual step to remove label
 
 module.exports = function(vorpal, app) {

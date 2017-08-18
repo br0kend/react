@@ -11,7 +11,7 @@
 
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 var ReactDOMComponentTree = require('ReactDOMComponentTree');
 var ReactDOMSelect = require('ReactDOMSelect');
 

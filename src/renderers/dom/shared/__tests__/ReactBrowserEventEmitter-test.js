@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -63,11 +63,11 @@ describe('ReactBrowserEventEmitter', () => {
     // TODO: can we express this test with only public API?
     EventPluginHub = require('EventPluginHub');
     EventPluginRegistry = require('EventPluginRegistry');
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
     ReactDOMComponentTree = require('ReactDOMComponentTree');
     ReactBrowserEventEmitter = require('ReactBrowserEventEmitter');
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
     TapEventPlugin = require('TapEventPlugin');
 
     var container = document.createElement('div');

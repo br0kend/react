@@ -13,7 +13,7 @@ Run them when you make changes to how we package React and ReactDOM.
 First, build React and the fixtures:
 
 ```
-cd react
+cd reacc
 npm run build
 
 cd fixtures/packaging

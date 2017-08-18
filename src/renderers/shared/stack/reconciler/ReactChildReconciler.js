@@ -31,9 +31,9 @@ if (
 ) {
   // Temporary hack.
   // Inline requires don't work well with Jest:
-  // https://github.com/facebook/react/issues/7240
+  // https://github.com/facebook/reacc/issues/7240
   // Remove the inline requires when we don't need them anymore:
-  // https://github.com/facebook/react/pull/7178
+  // https://github.com/facebook/reacc/pull/7178
   ReactComponentTreeHook = require('ReactGlobalSharedState')
     .ReactComponentTreeHook;
 }
@@ -157,7 +157,7 @@ var ReactChildReconciler = {
         var nextChildInstance = instantiateReactComponent(nextElement, true);
         nextChildren[name] = nextChildInstance;
         // Creating mount image now ensures refs are resolved in right order
-        // (see https://github.com/facebook/react/pull/7101 for explanation).
+        // (see https://github.com/facebook/reacc/pull/7101 for explanation).
         var nextChildMountImage = ReactReconciler.mountComponent(
           nextChildInstance,
           transaction,

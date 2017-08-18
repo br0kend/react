@@ -30,7 +30,7 @@ const benchmarkFilter = argv.benchmark;
 const headless = argv.headless;
 const skipBuild = argv['skip-build'];
 
-async function runBenchmarks(reactPath) {
+async function runBenchmarks(reaccPath) {
   const benchmarkNames = getBenchmarkNames();
   const results = {};
   const server = serveBenchmark();
@@ -46,7 +46,7 @@ async function runBenchmarks(reactPath) {
       console.log(
         chalk.gray(`- Building benchmark "${chalk.white(benchmarkName)}"...`)
       );
-      await buildBenchmark(reactPath, benchmarkName);
+      await buildBenchmark(reaccPath, benchmarkName);
       console.log(
         chalk.gray(`- Running benchmark "${chalk.white(benchmarkName)}"...`)
       );
@@ -81,14 +81,14 @@ async function benchmarkRemoteMaster() {
 }
 
 // get the performance benchmark results
-// of the local react repo
-async function benchmarkLocal(reactPath) {
+// of the local reacc repo
+async function benchmarkLocal(reaccPath) {
   console.log(chalk.gray(`- Building React bundles...`));
   return {
     // we build the bundles from the React repo
-    bundles: await buildAllBundles(reactPath, skipBuild),
+    bundles: await buildAllBundles(reaccPath, skipBuild),
     // we use these bundles to run the benchmarks
-    benchmarks: await runBenchmarks(reactPath),
+    benchmarks: await runBenchmarks(reaccPath),
   };
 }
 

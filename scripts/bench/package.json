@@ -1,5 +1,5 @@
 {
-  "name": "react-benchmark",
+  "name": "reacc-benchmark",
   "version": "0.0.1",
   "main": "runner.js",
   "scripts": {

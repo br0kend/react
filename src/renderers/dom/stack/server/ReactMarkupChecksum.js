@@ -17,7 +17,7 @@ var TAG_END = /\/?>/;
 var COMMENT_START = /^<\!\-\-/;
 
 var ReactMarkupChecksum = {
-  CHECKSUM_ATTR_NAME: 'data-react-checksum',
+  CHECKSUM_ATTR_NAME: 'data-reacc-checksum',
 
   /**
    * @param {string} markup Markup string

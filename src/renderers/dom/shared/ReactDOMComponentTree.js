@@ -23,9 +23,9 @@ var Flags = ReactDOMComponentFlags;
 
 var randomKey = Math.random().toString(36).slice(2);
 
-var internalInstanceKey = '__reactInternalInstance$' + randomKey;
+var internalInstanceKey = '__reaccInternalInstance$' + randomKey;
 
-var internalEventHandlersKey = '__reactEventHandlers$' + randomKey;
+var internalEventHandlersKey = '__reaccEventHandlers$' + randomKey;
 
 /**
  * Check if a given node should be cached.
@@ -35,9 +35,9 @@ function shouldPrecacheNode(node, nodeID) {
     (node.nodeType === ELEMENT_NODE &&
       node.getAttribute(ATTR_NAME) === '' + nodeID) ||
     (node.nodeType === COMMENT_NODE &&
-      node.nodeValue === ' react-text: ' + nodeID + ' ') ||
+      node.nodeValue === ' reacc-text: ' + nodeID + ' ') ||
     (node.nodeType === COMMENT_NODE &&
-      node.nodeValue === ' react-empty: ' + nodeID + ' ')
+      node.nodeValue === ' reacc-empty: ' + nodeID + ' ')
   );
 }
 

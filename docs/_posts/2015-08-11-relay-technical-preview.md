@@ -21,7 +21,7 @@ Relay is in use at Facebook in production apps, and we're using it more and more
 
 We're open-sourcing a technical preview of Relay - the core framework that we use internally, with some modifications for use outside Facebook. As this is the first release, it's good to keep in mind that there may be some incomplete or missing features. We'll continue to develop Relay and are working closely with the GraphQL community to ensure that Relay tracks updates during GraphQL's RFC period. But we couldn't wait any longer to get this in your hands, and we're looking forward to your feedback and contributions.
 
-Relay is available on [GitHub](http://github.com/facebook/relay) and [npm](https://www.npmjs.com/package/react-relay).
+Relay is available on [GitHub](http://github.com/facebook/relay) and [npm](https://www.npmjs.com/package/reacc-relay).
 
 ## What's Next
 

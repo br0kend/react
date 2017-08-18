@@ -3,21 +3,21 @@ id: typechecking-with-proptypes
 title: Typechecking With PropTypes
 permalink: docs/typechecking-with-proptypes.html
 redirect_from:
-  - "docs/react-api.html#typechecking-with-proptypes"
+  - "docs/reacc-api.html#typechecking-with-proptypes"
 ---
 
 > Note:
 >
-> `React.PropTypes` has moved into a different package since React v15.5. Please use [the `prop-types` library instead](https://www.npmjs.com/package/prop-types).
+> `Reacc.PropTypes` has moved into a different package since React v15.5. Please use [the `prop-types` library instead](https://www.npmjs.com/package/prop-types).
 >
->We provide [a codemod script](/react/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes) to automate the conversion.
+>We provide [a codemod script](/reacc/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes) to automate the conversion.
 
-As your app grows, you can catch a lot of bugs with typechecking. For some applications, you can use JavaScript extensions like [Flow](https://flowtype.org/) or [TypeScript](https://www.typescriptlang.org/) to typecheck your whole application. But even if you don't use those, React has some built-in typechecking abilities. To run typechecking on the props for a component, you can assign the special `propTypes` property:
+As your app grows, you can catch a lot of bugs with typechecking. For some applications, you can use JavaScript extensions like [Flow](https://flowtype.org/) or [TypeScript](https://www.typescriptlang.org/) to typecheck your whole application. But even if you don't use those, Reacc has some built-in typechecking abilities. To run typechecking on the props for a component, you can assign the special `propTypes` property:
 
 ```javascript
 import PropTypes from 'prop-types';
 
-class Greeting extends React.Component {
+class Greeting extends Reacc.Component {
   render() {
     return (
       <h1>Hello, {this.props.name}</h1>
@@ -54,7 +54,7 @@ MyComponent.propTypes = {
   // (or fragment) containing these types.
   optionalNode: PropTypes.node,
 
-  // A React element.
+  // A Reacc element.
   optionalElement: PropTypes.element,
 
   // You can also declare that a prop is an instance of a class. This uses
@@ -126,7 +126,7 @@ With `PropTypes.element` you can specify that only a single child can be passed 
 ```javascript
 import PropTypes from 'prop-types';
 
-class MyComponent extends React.Component {
+class MyComponent extends Reacc.Component {
   render() {
     // This must be exactly one element or it will warn.
     const children = this.props.children;
@@ -148,7 +148,7 @@ MyComponent.propTypes = {
 You can define default values for your `props` by assigning to the special `defaultProps` property:
 
 ```javascript
-class Greeting extends React.Component {
+class Greeting extends Reacc.Component {
   render() {
     return (
       <h1>Hello, {this.props.name}</h1>
@@ -162,7 +162,7 @@ Greeting.defaultProps = {
 };
 
 // Renders "Hello, Stranger":
-ReactDOM.render(
+ReaccDOM.render(
   <Greeting />,
   document.getElementById('example')
 );

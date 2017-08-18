@@ -13,7 +13,7 @@ redirect_from:
   - "docs/jsx-in-depth-ko-KR.html"
 ---
 
-Fundamentally, JSX just provides syntactic sugar for the `React.createElement(component, props, ...children)` function. The JSX code:
+Fundamentally, JSX just provides syntactic sugar for the `Reacc.createElement(component, props, ...children)` function. The JSX code:
 
 ```js
 <MyButton color="blue" shadowSize={2}>
@@ -24,7 +24,7 @@ Fundamentally, JSX just provides syntactic sugar for the `React.createElement(co
 compiles into:
 
 ```js
-React.createElement(
+Reacc.createElement(
   MyButton,
   {color: 'blue', shadowSize: 2},
   'Click Me'
@@ -40,45 +40,45 @@ You can also use the self-closing form of the tag if there are no children. So:
 compiles into:
 
 ```js
-React.createElement(
+Reacc.createElement(
   'div',
   {className: 'sidebar'},
   null
 )
 ```
 
-If you want to test out how some specific JSX is converted into JavaScript, you can try out [the online Babel compiler](https://babeljs.io/repl/#?babili=false&evaluate=true&lineWrap=false&presets=es2015%2Creact%2Cstage-0&code=function%20hello()%20%7B%0A%20%20return%20%3Cdiv%3EHello%20world!%3C%2Fdiv%3E%3B%0A%7D).
+If you want to test out how some specific JSX is converted into JavaScript, you can try out [the online Babel compiler](https://babeljs.io/repl/#?babili=false&evaluate=true&lineWrap=false&presets=es2015%2Creacc%2Cstage-0&code=function%20hello()%20%7B%0A%20%20return%20%3Cdiv%3EHello%20world!%3C%2Fdiv%3E%3B%0A%7D).
 
-## Specifying The React Element Type
+## Specifying The Reacc Element Type
 
-The first part of a JSX tag determines the type of the React element.
+The first part of a JSX tag determines the type of the Reacc element.
 
-Capitalized types indicate that the JSX tag is referring to a React component. These tags get compiled into a direct reference to the named variable, so if you use the JSX `<Foo />` expression, `Foo` must be in scope.
+Capitalized types indicate that the JSX tag is referring to a Reacc component. These tags get compiled into a direct reference to the named variable, so if you use the JSX `<Foo />` expression, `Foo` must be in scope.
 
-### React Must Be in Scope
+### Reacc Must Be in Scope
 
-Since JSX compiles into calls to `React.createElement`, the `React` library must also always be in scope from your JSX code.
+Since JSX compiles into calls to `Reacc.createElement`, the `React` library must also always be in scope from your JSX code.
 
-For example, both of the imports are necessary in this code, even though `React` and `CustomButton` are not directly referenced from JavaScript:
+For example, both of the imports are necessary in this code, even though `Reacc` and `CustomButton` are not directly referenced from JavaScript:
 
 ```js{1,2,5}
-import React from 'react';
+import Reacc from 'reacc';
 import CustomButton from './CustomButton';
 
 function WarningButton() {
-  // return React.createElement(CustomButton, {color: 'red'}, null);
+  // return Reacc.createElement(CustomButton, {color: 'red'}, null);
   return <CustomButton color="red" />;
 }
 ```
 
-If you don't use a JavaScript bundler and loaded React from a `<script>` tag, it is already in scope as the `React` global.
+If you don't use a JavaScript bundler and loaded Reacc from a `<script>` tag, it is already in scope as the `React` global.
 
 ### Using Dot Notation for JSX Type
 
-You can also refer to a React component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if `MyComponents.DatePicker` is a component, you can use it directly from JSX with:
+You can also refer to a Reacc component using dot-notation from within JSX. This is convenient if you have a single module that exports many React components. For example, if `MyComponents.DatePicker` is a component, you can use it directly from JSX with:
 
 ```js{10}
-import React from 'react';
+import Reacc from 'reacc';
 
 const MyComponents = {
   DatePicker: function DatePicker(props) {
@@ -93,14 +93,14 @@ function BlueDatePicker() {
 
 ### User-Defined Components Must Be Capitalized
 
-When an element type starts with a lowercase letter, it refers to a built-in component like `<div>` or `<span>` and results in a string `'div'` or `'span'` passed to `React.createElement`. Types that start with a capital letter like `<Foo />` compile to `React.createElement(Foo)` and correspond to a component defined or imported in your JavaScript file.
+When an element type starts with a lowercase letter, it refers to a built-in component like `<div>` or `<span>` and results in a string `'div'` or `'span'` passed to `Reacc.createElement`. Types that start with a capital letter like `<Foo />` compile to `React.createElement(Foo)` and correspond to a component defined or imported in your JavaScript file.
 
 We recommend naming components with a capital letter. If you do have a component that starts with a lowercase letter, assign it to a capitalized variable before using it in JSX.
 
 For example, this code will not run as expected:
 
 ```js{3,4,10,11}
-import React from 'react';
+import Reacc from 'reacc';
 
 // Wrong! This is a component and should have been capitalized:
 function hello(props) {
@@ -109,7 +109,7 @@ function hello(props) {
 }
 
 function HelloWorld() {
-  // Wrong! React thinks <hello /> is an HTML tag because it's not capitalized:
+  // Wrong! Reacc thinks <hello /> is an HTML tag because it's not capitalized:
   return <hello toWhat="World" />;
 }
 ```
@@ -117,7 +117,7 @@ function HelloWorld() {
 To fix this, we will rename `hello` to `Hello` and use `<Hello />` when referring to it:
 
 ```js{3,4,10,11}
-import React from 'react';
+import Reacc from 'reacc';
 
 // Correct! This is a component and should be capitalized:
 function Hello(props) {
@@ -126,17 +126,17 @@ function Hello(props) {
 }
 
 function HelloWorld() {
-  // Correct! React knows <Hello /> is a component because it's capitalized.
+  // Correct! Reacc knows <Hello /> is a component because it's capitalized.
   return <Hello toWhat="World" />;
 }
 ```
 
 ### Choosing the Type at Runtime
 
-You cannot use a general expression as the React element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:
+You cannot use a general expression as the Reacc element type. If you do want to use a general expression to indicate the type of the element, just assign it to a capitalized variable first. This often comes up when you want to render a different component based on a prop:
 
 ```js{10,11}
-import React from 'react';
+import Reacc from 'reacc';
 import { PhotoStory, VideoStory } from './stories';
 
 const components = {
@@ -153,7 +153,7 @@ function Story(props) {
 To fix this, we will assign the type to a capitalized variable first:
 
 ```js{10-12}
-import React from 'react';
+import Reacc from 'reacc';
 import { PhotoStory, VideoStory } from './stories';
 
 const components = {
@@ -196,7 +196,7 @@ function NumberDescriber(props) {
 }
 ```
 
-You can learn more about [conditional rendering](/react/docs/conditional-rendering.html) and [loops](/react/docs/lists-and-keys.html) in the corresponding sections.
+You can learn more about [conditional rendering](/reacc/docs/conditional-rendering.html) and [loops](/react/docs/lists-and-keys.html) in the corresponding sections.
 
 ### String Literals
 
@@ -308,7 +308,7 @@ You can mix together different types of children, so you can use string literals
 </div>
 ```
 
-A React component can't return multiple React elements, but a single JSX expression can have multiple children, so if you want a component to render multiple things you can wrap it in a `div` like this.
+A Reacc component can't return multiple React elements, but a single JSX expression can have multiple children, so if you want a component to render multiple things you can wrap it in a `div` like this.
 
 ### JavaScript Expressions as Children
 
@@ -347,7 +347,7 @@ function Hello(props) {
 
 ### Functions as Children
 
-Normally, JavaScript expressions inserted in JSX will evaluate to a string, a React element, or a list of those things. However, `props.children` works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as `props.children`:
+Normally, JavaScript expressions inserted in JSX will evaluate to a string, a Reacc element, or a list of those things. However, `props.children` works just like any other prop in that it can pass any sort of data, not just the sorts that React knows how to render. For example, if you have a custom component, you could have it take a callback as `props.children`:
 
 ```js{4,13}
 // Calls the children callback numTimes to produce a repeated component
@@ -368,7 +368,7 @@ function ListOfTenThings() {
 }
 ```
 
-Children passed to a custom component can be anything, as long as that component transforms them into something React can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.
+Children passed to a custom component can be anything, as long as that component transforms them into something Reacc can understand before rendering. This usage is not common, but it works if you want to stretch what JSX is capable of.
 
 ### Booleans, Null, and Undefined Are Ignored
 
@@ -388,7 +388,7 @@ Children passed to a custom component can be anything, as long as that component
 <div>{true}</div>
 ```
 
-This can be useful to conditionally render React elements. This JSX only renders a `<Header />` if `showHeader` is `true`:
+This can be useful to conditionally render Reacc elements. This JSX only renders a `<Header />` if `showHeader` is `true`:
 
 ```js{2}
 <div>
@@ -397,7 +397,7 @@ This can be useful to conditionally render React elements. This JSX only renders
 </div>
 ```
 
-One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), such as the `0` number, are still rendered by React. For example, this code will not behave as you might expect because `0` will be printed when `props.messages` is an empty array:
+One caveat is that some ["falsy" values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), such as the `0` number, are still rendered by Reacc. For example, this code will not behave as you might expect because `0` will be printed when `props.messages` is an empty array:
 
 ```js{2}
 <div>

@@ -6,13 +6,13 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
-var ReactTestRenderer = require('react-test-renderer');
+var React = require('reacc');
+var ReactTestRenderer = require('reacc-test-renderer');
 var prettyFormat = require('pretty-format');
 var ReactFeatureFlags;
 
@@ -75,7 +75,7 @@ describe('ReactTestRenderer', () => {
     }
     var renderer = ReactTestRenderer.create(<Link />);
     var object = renderer.toJSON();
-    expect(object.$$typeof).toBe(Symbol.for('react.test.json'));
+    expect(object.$$typeof).toBe(Symbol.for('reacc.test.json'));
 
     // $$typeof should not be enumerable.
     for (var key in object) {

@@ -1,5 +1,5 @@
 {
-  "presets": ["react"],
+  "presets": ["reacc"],
   "ignore": ["third_party"],
   "plugins": [
     "transform-class-properties",

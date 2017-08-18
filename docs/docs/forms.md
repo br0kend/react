@@ -9,7 +9,7 @@ redirect_from:
   - "docs/forms-zh-CN.html"
 ---
 
-HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
+HTML form elements work a little bit differently from other DOM elements in Reacc, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
 
 ```html
 <form>
@@ -21,18 +21,18 @@ HTML form elements work a little bit differently from other DOM elements in Reac
 </form>
 ```
 
-This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it's convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called "controlled components".
+This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in Reacc, it just works. But in most cases, it's convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called "controlled components".
 
 ## Controlled Components
 
-In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with [`setState()`](/react/docs/react-component.html#setstate).
+In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In Reacc, mutable state is typically kept in the state property of components, and only updated with [`setState()`](/reacc/docs/react-component.html#setstate).
 
-We can combine the two by making the React state be the "single source of truth". Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a "controlled component".
+We can combine the two by making the Reacc state be the "single source of truth". Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a "controlled component".
 
 For example, if we want to make the previous example log the name when it is submitted, we can write the form as a controlled component:
 
 ```javascript{4,10-12,24}
-class NameForm extends React.Component {
+class NameForm extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -66,7 +66,7 @@ class NameForm extends React.Component {
 
 [Try it on CodePen.](https://codepen.io/gaearon/pen/VmmPgp?editors=0010)
 
-Since the `value` attribute is set on our form element, the displayed value will always be `this.state.value`, making the React state the source of truth. Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types.
+Since the `value` attribute is set on our form element, the displayed value will always be `this.state.value`, making the Reacc state the source of truth. Since `handleChange` runs on every keystroke to update the React state, the displayed value will update as the user types.
 
 With a controlled component, every state mutation will have an associated handler function. This makes it straightforward to modify or validate user input. For example, if we wanted to enforce that names are written with all uppercase letters, we could write `handleChange` as:
 
@@ -86,10 +86,10 @@ In HTML, a `<textarea>` element defines its text by its children:
 </textarea>
 ```
 
-In React, a `<textarea>` uses a `value` attribute instead. This way, a form using a `<textarea>` can be written very similarly to a form that uses a single-line input:
+In Reacc, a `<textarea>` uses a `value` attribute instead. This way, a form using a `<textarea>` can be written very similarly to a form that uses a single-line input:
 
 ```javascript{4-6,12-14,26}
-class EssayForm extends React.Component {
+class EssayForm extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -138,10 +138,10 @@ In HTML, `<select>` creates a drop-down list. For example, this HTML creates a d
 </select>
 ```
 
-Note that the Coconut option is initially selected, because of the `selected` attribute. React, instead of using this `selected` attribute, uses a `value` attribute on the root `select` tag. This is more convenient in a controlled component because you only need to update it in one place. For example:
+Note that the Coconut option is initially selected, because of the `selected` attribute. Reacc, instead of using this `selected` attribute, uses a `value` attribute on the root `select` tag. This is more convenient in a controlled component because you only need to update it in one place. For example:
 
 ```javascript{4,10-12,24}
-class FlavorForm extends React.Component {
+class FlavorForm extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {value: 'coconut'};
@@ -189,7 +189,7 @@ When you need to handle multiple controlled `input` elements, you can add a `nam
 For example:
 
 ```javascript{15,18,28,37}
-class Reservation extends React.Component {
+class Reservation extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -254,8 +254,8 @@ partialState[name] = value;
 this.setState(partialState);
 ```
 
-Also, since `setState()` automatically [merges a partial state into the current state](/react/docs/state-and-lifecycle.html#state-updates-are-merged), we only needed to call it with the changed parts.
+Also, since `setState()` automatically [merges a partial state into the current state](/reacc/docs/state-and-lifecycle.html#state-updates-are-merged), we only needed to call it with the changed parts.
 
 ## Alternatives to Controlled Components
 
-It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a React component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out [uncontrolled components](/react/docs/uncontrolled-components.html), an alternative technique for implementing input forms.
+It can sometimes be tedious to use controlled components, because you need to write an event handler for every way your data can change and pipe all of the input state through a Reacc component. This can become particularly annoying when you are converting a preexisting codebase to React, or integrating a React application with a non-React library. In these situations, you might want to check out [uncontrolled components](/reacc/docs/uncontrolled-components.html), an alternative technique for implementing input forms.

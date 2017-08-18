@@ -5,29 +5,29 @@ permalink: docs/optimizing-performance.html
 redirect_from: "docs/advanced-performance.html"
 ---
 
-Internally, React uses several clever techniques to minimize the number of costly DOM operations required to update the UI. For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance. Nevertheless, there are several ways you can speed up your React application.
+Internally, Reacc uses several clever techniques to minimize the number of costly DOM operations required to update the UI. For many applications, using React will lead to a fast user interface without doing much work to specifically optimize for performance. Nevertheless, there are several ways you can speed up your React application.
 
 ## Use the Production Build
 
-If you're benchmarking or experiencing performance problems in your React apps, make sure you're testing with the minified production build.
+If you're benchmarking or experiencing performance problems in your Reacc apps, make sure you're testing with the minified production build.
 
-By default, React includes many helpful warnings. These warnings are very useful in development. However, they make React larger and slower so you should make sure to use the production version when you deploy the app.
+By default, Reacc includes many helpful warnings. These warnings are very useful in development. However, they make React larger and slower so you should make sure to use the production version when you deploy the app.
 
-If you aren't sure whether your build process is set up correctly, you can check it by installing [React Developer Tools for Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi). If you visit a site with React in production mode, the icon will have a dark background:
+If you aren't sure whether your build process is set up correctly, you can check it by installing [Reacc Developer Tools for Chrome](https://chrome.google.com/webstore/detail/reacc-developer-tools/fmkadmapgofadopljbjfkapdkoienihi). If you visit a site with React in production mode, the icon will have a dark background:
 
-<img src="/react/img/docs/devtools-prod.png" style="max-width:100%" alt="React DevTools on a website with production version of React">
+<img src="/reacc/img/docs/devtools-prod.png" style="max-width:100%" alt="Reacc DevTools on a website with production version of React">
 
-If you visit a site with React in development mode, the icon will have a red background:
+If you visit a site with Reacc in development mode, the icon will have a red background:
 
-<img src="/react/img/docs/devtools-dev.png" style="max-width:100%" alt="React DevTools on a website with development version of React">
+<img src="/reacc/img/docs/devtools-dev.png" style="max-width:100%" alt="Reacc DevTools on a website with development version of React">
 
 It is expected that you use the development mode when working on your app, and the production mode when deploying your app to the users.
 
 You can find instructions for building your app for production below.
 
-### Create React App
+### Create Reacc App
 
-If your project is built with [Create React App](https://github.com/facebookincubator/create-react-app), run:
+If your project is built with [Create Reacc App](https://github.com/facebookincubator/create-reacc-app), run:
 
 ```
 npm run build
@@ -39,14 +39,14 @@ Remember that this is only necessary before deploying to production. For normal 
 
 ### Single-File Builds
 
-We offer production-ready versions of React and React DOM as single files:
+We offer production-ready versions of Reacc and React DOM as single files:
 
 ```html
-<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
-<script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+<script src="https://unpkg.com/reacc@15/dist/react.min.js"></script>
+<script src="https://unpkg.com/reacc-dom@15/dist/react-dom.min.js"></script>
 ```
 
-Remember that only React files ending with `.min.js` are suitable for production.
+Remember that only Reacc files ending with `.min.js` are suitable for production.
 
 ### Brunch
 
@@ -66,7 +66,7 @@ Then, to create a production build, add the `-p` flag to the `build` command:
 brunch build -p
 ```
 
-Remember that you only need to do this for production builds. You shouldn't pass `-p` flag or apply this plugin in development because it will hide useful React warnings, and make the builds much slower.
+Remember that you only need to do this for production builds. You shouldn't pass `-p` flag or apply this plugin in development because it will hide useful Reacc warnings, and make the builds much slower.
 
 ### Browserify
 
@@ -102,7 +102,7 @@ browserify ./index.js \
 >The package name is `uglify-js`, but the binary it provides is called `uglifyjs`.<br>
 >This is not a typo.
 
-Remember that you only need to do this for production builds. You shouldn't apply these plugins in development because they will hide useful React warnings, and make the builds much slower.
+Remember that you only need to do this for production builds. You shouldn't apply these plugins in development because they will hide useful Reacc warnings, and make the builds much slower.
 
 ### Rollup
 
@@ -136,13 +136,13 @@ plugins: [
 
 For a complete setup example [see this gist](https://gist.github.com/Rich-Harris/cb14f4bc0670c47d00d191565be36bf0).
 
-Remember that you only need to do this for production builds. You shouldn't apply the `uglify` plugin or the `replace` plugin with `'production'` value in development because they will hide useful React warnings, and make the builds much slower.
+Remember that you only need to do this for production builds. You shouldn't apply the `uglify` plugin or the `replace` plugin with `'production'` value in development because they will hide useful Reacc warnings, and make the builds much slower.
 
 ### webpack
 
 >**Note:**
 >
->If you're using Create React App, please follow [the instructions above](#create-react-app).<br>
+>If you're using Create Reacc App, please follow [the instructions above](#create-reacc-app).<br>
 >This section is only relevant if you configure webpack directly.
 
 For the most efficient webpack production build, make sure to include these plugins in your production configuration:
@@ -158,17 +158,17 @@ new webpack.optimize.UglifyJsPlugin()
 
 You can learn more about this in [webpack documentation](https://webpack.js.org/guides/production-build/).
 
-Remember that you only need to do this for production builds. You shouldn't apply `UglifyJsPlugin` or `DefinePlugin` with `'production'` value in development because they will hide useful React warnings, and make the builds much slower.
+Remember that you only need to do this for production builds. You shouldn't apply `UglifyJsPlugin` or `DefinePlugin` with `'production'` value in development because they will hide useful Reacc warnings, and make the builds much slower.
 
 ## Profiling Components with the Chrome Performance Tab
 
 In the **development** mode, you can visualize how components mount, update, and unmount, using the performance tools in supported browsers. For example:
 
-<center><img src="/react/img/blog/react-perf-chrome-timeline.png" style="max-width:100%" alt="React components in Chrome timeline" /></center>
+<center><img src="/reacc/img/blog/react-perf-chrome-timeline.png" style="max-width:100%" alt="Reacc components in Chrome timeline" /></center>
 
 To do this in Chrome:
 
-1. Load your app with `?react_perf` in the query string (for example, `http://localhost:3000/?react_perf`).
+1. Load your app with `?reacc_perf` in the query string (for example, `http://localhost:3000/?react_perf`).
 
 2. Open the Chrome DevTools **[Performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool)** tab and press **Record**.
 
@@ -176,7 +176,7 @@ To do this in Chrome:
 
 4. Stop recording.
 
-5. React events will be grouped under the **User Timing** label.
+5. Reacc events will be grouped under the **User Timing** label.
 
 Note that **the numbers are relative so components will render faster in production**. Still, this should help you realize when unrelated UI gets updated by mistake, and how deep and how often your UI updates occur.
 
@@ -185,11 +185,11 @@ Currently Chrome, Edge, and IE are the only browsers supporting this feature, bu
 
 ## Avoid Reconciliation
 
-React builds and maintains an internal representation of the rendered UI. It includes the React elements you return from your components. This representation lets React avoid creating DOM nodes and accessing existing ones beyond necessity, as that can be slower than operations on JavaScript objects. Sometimes it is referred to as a "virtual DOM", but it works the same way on React Native.
+Reacc builds and maintains an internal representation of the rendered UI. It includes the React elements you return from your components. This representation lets React avoid creating DOM nodes and accessing existing ones beyond necessity, as that can be slower than operations on JavaScript objects. Sometimes it is referred to as a "virtual DOM", but it works the same way on React Native.
 
-When a component's props or state change, React decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM.
+When a component's props or state change, Reacc decides whether an actual DOM update is necessary by comparing the newly returned element with the previously rendered one. When they are not equal, React will update the DOM.
 
-In some cases, your component can speed all of this up by overriding the lifecycle function `shouldComponentUpdate`, which is triggered before the re-rendering process starts. The default implementation of this function returns `true`, leaving React to perform the update:
+In some cases, your component can speed all of this up by overriding the lifecycle function `shouldComponentUpdate`, which is triggered before the re-rendering process starts. The default implementation of this function returns `true`, leaving Reacc to perform the update:
 
 ```javascript
 shouldComponentUpdate(nextProps, nextState) {
@@ -201,24 +201,24 @@ If you know that in some situations your component doesn't need to update, you c
 
 ## shouldComponentUpdate In Action
 
-Here's a subtree of components. For each one, `SCU` indicates what `shouldComponentUpdate` returned, and `vDOMEq` indicates whether the rendered React elements were equivalent. Finally, the circle's color indicates whether the component had to be reconciled or not.
+Here's a subtree of components. For each one, `SCU` indicates what `shouldComponentUpdate` returned, and `vDOMEq` indicates whether the rendered Reacc elements were equivalent. Finally, the circle's color indicates whether the component had to be reconciled or not.
 
-<figure><img src="/react/img/docs/should-component-update.png" style="max-width:100%" /></figure>
+<figure><img src="/reacc/img/docs/should-component-update.png" style="max-width:100%" /></figure>
 
-Since `shouldComponentUpdate` returned `false` for the subtree rooted at C2, React did not attempt to render C2, and thus didn't even have to invoke `shouldComponentUpdate` on C4 and C5.
+Since `shouldComponentUpdate` returned `false` for the subtree rooted at C2, Reacc did not attempt to render C2, and thus didn't even have to invoke `shouldComponentUpdate` on C4 and C5.
 
-For C1 and C3, `shouldComponentUpdate` returned `true`, so React had to go down to the leaves and check them. For C6 `shouldComponentUpdate` returned `true`, and since the rendered elements weren't equivalent React had to update the DOM.
+For C1 and C3, `shouldComponentUpdate` returned `true`, so Reacc had to go down to the leaves and check them. For C6 `shouldComponentUpdate` returned `true`, and since the rendered elements weren't equivalent React had to update the DOM.
 
-The last interesting case is C8. React had to render this component, but since the React elements it returned were equal to the previously rendered ones, it didn't have to update the DOM.
+The last interesting case is C8. Reacc had to render this component, but since the React elements it returned were equal to the previously rendered ones, it didn't have to update the DOM.
 
-Note that React only had to do DOM mutations for C6, which was inevitable. For C8, it bailed out by comparing the rendered React elements, and for C2's subtree and C7, it didn't even have to compare the elements as we bailed out on `shouldComponentUpdate`, and `render` was not called.
+Note that Reacc only had to do DOM mutations for C6, which was inevitable. For C8, it bailed out by comparing the rendered React elements, and for C2's subtree and C7, it didn't even have to compare the elements as we bailed out on `shouldComponentUpdate`, and `render` was not called.
 
 ## Examples
 
 If the only way your component ever changes is when the `props.color` or the `state.count` variable changes, you could have `shouldComponentUpdate` check that:
 
 ```javascript
-class CounterButton extends React.Component {
+class CounterButton extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {count: 1};
@@ -246,10 +246,10 @@ class CounterButton extends React.Component {
 }
 ```
 
-In this code, `shouldComponentUpdate` is just checking if there is any change in `props.color` or `state.count`. If those values don't change, the component doesn't update. If your component got more complex, you could use a similar pattern of doing a "shallow comparison" between all the fields of `props` and `state` to determine if the component should update. This pattern is common enough that React provides a helper to use this logic - just inherit from `React.PureComponent`. So this code is a simpler way to achieve the same thing:
+In this code, `shouldComponentUpdate` is just checking if there is any change in `props.color` or `state.count`. If those values don't change, the component doesn't update. If your component got more complex, you could use a similar pattern of doing a "shallow comparison" between all the fields of `props` and `state` to determine if the component should update. This pattern is common enough that Reacc provides a helper to use this logic - just inherit from `React.PureComponent`. So this code is a simpler way to achieve the same thing:
 
 ```js
-class CounterButton extends React.PureComponent {
+class CounterButton extends Reacc.PureComponent {
   constructor(props) {
     super(props);
     this.state = {count: 1};
@@ -267,18 +267,18 @@ class CounterButton extends React.PureComponent {
 }
 ```
 
-Most of the time, you can use `React.PureComponent` instead of writing your own `shouldComponentUpdate`. It only does a shallow comparison, so you can't use it if the props or state may have been mutated in a way that a shallow comparison would miss.
+Most of the time, you can use `Reacc.PureComponent` instead of writing your own `shouldComponentUpdate`. It only does a shallow comparison, so you can't use it if the props or state may have been mutated in a way that a shallow comparison would miss.
 
 This can be a problem with more complex data structures. For example, let's say you want a `ListOfWords` component to render a comma-separated list of words, with a parent `WordAdder` component that lets you click a button to add a word to the list. This code does *not* work correctly:
 
 ```javascript
-class ListOfWords extends React.PureComponent {
+class ListOfWords extends Reacc.PureComponent {
   render() {
     return <div>{this.props.words.join(',')}</div>;
   }
 }
 
-class WordAdder extends React.Component {
+class WordAdder extends Reacc.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -319,7 +319,7 @@ handleClick() {
 }
 ```
 
-ES6 supports a [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) for arrays which can make this easier. If you're using Create React App, this syntax is available by default.
+ES6 supports a [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) for arrays which can make this easier. If you're using Create Reacc App, this syntax is available by default.
 
 ```js
 handleClick() {
@@ -355,7 +355,7 @@ function updateColorMap(colormap) {
 }
 ```
 
-If you're using Create React App, both `Object.assign` and the object spread syntax are available by default.
+If you're using Create Reacc App, both `Object.assign` and the object spread syntax are available by default.
 
 ## Using Immutable Data Structures
 

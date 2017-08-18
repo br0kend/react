@@ -1,10 +1,10 @@
 /**
  * Take a version from the window query string and load a specific
- * version of React.
+ * version of Reacc.
  *
  * @example
  * http://localhost:3000?version=15.4.1
- * (Loads React 15.4.1)
+ * (Loads Reacc 15.4.1)
  */
 
 function parseQuery(qstr) {
@@ -34,28 +34,28 @@ function loadScript(src) {
   });
 }
 
-export default function loadReact() {
-  let REACT_PATH = 'react.development.js';
-  let DOM_PATH = 'react-dom.development.js';
+export default function loadReacc() {
+  let REACT_PATH = 'reacc.development.js';
+  let DOM_PATH = 'reacc-dom.development.js';
 
   let query = parseQuery(window.location.search);
   let version = query.version || 'local';
 
   if (version !== 'local') {
-    REACT_PATH = 'https://unpkg.com/react@' + version + '/dist/react.js';
-    DOM_PATH = 'https://unpkg.com/react-dom@' + version + '/dist/react-dom.js';
+    REACT_PATH = 'https://unpkg.com/reacc@' + version + '/dist/react.js';
+    DOM_PATH = 'https://unpkg.com/reacc-dom@' + version + '/dist/react-dom.js';
   }
 
-  const needsReactDOM = version === 'local' || parseFloat(version, 10) > 0.13;
+  const needsReaccDOM = version === 'local' || parseFloat(version, 10) > 0.13;
 
   let request = loadScript(REACT_PATH);
 
-  if (needsReactDOM) {
+  if (needsReaccDOM) {
     request = request.then(() => loadScript(DOM_PATH));
   } else {
-    // Aliasing React to ReactDOM for compatibility.
+    // Aliasing Reacc to ReactDOM for compatibility.
     request = request.then(() => {
-      window.ReactDOM = window.React;
+      window.ReaccDOM = window.React;
     });
   }
 

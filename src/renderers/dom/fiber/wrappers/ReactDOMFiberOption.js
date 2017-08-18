@@ -12,7 +12,7 @@
 
 'use strict';
 
-var React = require('react');
+var React = require('reacc');
 
 if (__DEV__) {
   var warning = require('fbjs/lib/warning');

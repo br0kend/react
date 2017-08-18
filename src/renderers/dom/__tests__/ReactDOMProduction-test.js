@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 'use strict';
 
@@ -30,9 +30,9 @@ describe('ReactDOMProduction', () => {
     };
 
     jest.resetModules();
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
   });
 
   afterEach(() => {
@@ -208,7 +208,7 @@ describe('ReactDOMProduction', () => {
       ReactDOM.render(<Component />, container);
     }).toThrowError(
       'Minified React error #109; visit ' +
-        'http://facebook.github.io/react/docs/error-decoder.html?invariant=109&args[]=Component' +
+        'http://facebook.github.io/reacc/docs/error-decoder.html?invariant=109&args[]=Component' +
         ' for the full message or use the non-minified dev environment' +
         ' for full errors and additional helpful warnings.',
     );
@@ -223,8 +223,8 @@ describe('ReactDOMProduction', () => {
         supportsFiber: true,
       };
       jest.resetModules();
-      React = require('react');
-      ReactDOM = require('react-dom');
+      React = require('reacc');
+      ReactDOM = require('reacc-dom');
       class Component extends React.Component {
         render() {
           return <div />;

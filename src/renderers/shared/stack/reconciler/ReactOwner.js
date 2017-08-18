@@ -86,7 +86,7 @@ var ReactOwner = {
         'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' +
           "be adding a ref to a component that was not created inside a component's " +
           '`render` method, or you have multiple copies of React loaded ' +
-          '(details: https://fb.me/react-refs-must-have-owner).',
+          '(details: https://fb.me/reacc-refs-must-have-owner).',
       );
       (owner: any).attachRef(ref, component);
     }
@@ -117,7 +117,7 @@ var ReactOwner = {
         'removeComponentAsRefFrom(...): Only a ReactOwner can have refs. You might ' +
           "be removing a ref to a component that was not created inside a component's " +
           '`render` method, or you have multiple copies of React loaded ' +
-          '(details: https://fb.me/react-refs-must-have-owner).',
+          '(details: https://fb.me/reacc-refs-must-have-owner).',
       );
       var ownerPublicInstance = (owner: any).getPublicInstance();
       // Check that `component`'s owner is still alive and that `component` is still the current ref

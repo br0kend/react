@@ -3,7 +3,7 @@ title: "Create Apps with No Configuration"
 author: gaearon
 ---
 
-**[Create React App](https://github.com/facebookincubator/create-react-app)** is a new officially supported way to create single-page React applications. It offers a modern build setup with no configuration.
+**[Create React App](https://github.com/facebookincubator/create-reacc-app)** is a new officially supported way to create single-page React applications. It offers a modern build setup with no configuration.
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ author: gaearon
 First, install the global package:
 
 ```sh
-npm install -g create-react-app
+npm install -g create-reacc-app
 ```
 
 Node.js 4.x or higher is required.
@@ -22,27 +22,27 @@ Node.js 4.x or higher is required.
 Now you can use it to create a new app:
 
 ```sh
-create-react-app hello-world
+create-reacc-app hello-world
 ```
 
 This will take a while as npm installs the transitive dependencies, but once it’s done, you will see a list of commands you can run in the created folder:
 
-![created folder](/react/img/blog/create-apps-with-no-configuration/created-folder.png)
+![created folder](/reacc/img/blog/create-apps-with-no-configuration/created-folder.png)
 
 ### Starting the Server
 
 Run `npm start` to launch the development server. The browser will open automatically with the created app’s URL.
 
-![compiled successfully](/react/img/blog/create-apps-with-no-configuration/compiled-successfully.png)
+![compiled successfully](/reacc/img/blog/create-apps-with-no-configuration/compiled-successfully.png)
 
 Create React App uses both webpack and Babel under the hood.
 The console output is tuned to be minimal to help you focus on the problems:
 
-![failed to compile](/react/img/blog/create-apps-with-no-configuration/failed-to-compile.png)
+![failed to compile](/reacc/img/blog/create-apps-with-no-configuration/failed-to-compile.png)
 
 ESLint is also integrated so lint warnings are displayed right in the console:
 
-![compiled with warnings](/react/img/blog/create-apps-with-no-configuration/compiled-with-warnings.png)
+![compiled with warnings](/reacc/img/blog/create-apps-with-no-configuration/compiled-with-warnings.png)
 
 We only picked a small subset of lint rules that often lead to bugs.
 
@@ -50,7 +50,7 @@ We only picked a small subset of lint rules that often lead to bugs.
 
 To build an optimized bundle, run `npm run build`:
 
-![npm run build](/react/img/blog/create-apps-with-no-configuration/npm-run-build.png)
+![npm run build](/reacc/img/blog/create-apps-with-no-configuration/npm-run-build.png)
 
 It is minified, correctly envified, and the assets include content hashes for caching.
 
@@ -62,16 +62,16 @@ Your `package.json` contains only a single build dependency and a few scripts:
 {
   "name": "hello-world",
   "dependencies": {
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "reacc": "^15.2.1",
+    "reacc-dom": "^15.2.1"
   },
   "devDependencies": {
-    "react-scripts": "0.1.0"
+    "reacc-scripts": "0.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "reacc-scripts start",
+    "build": "reacc-scripts build",
+    "eject": "reacc-scripts eject"
   }
 }
 ```
@@ -109,15 +109,15 @@ We expect that at early stages, many people will “eject” for one reason or a
 
 ## Try It Out!
 
-You can find [**Create React App**](https://github.com/facebookincubator/create-react-app) with additional instructions on GitHub.
+You can find [**Create React App**](https://github.com/facebookincubator/create-reacc-app) with additional instructions on GitHub.
 
 This is an experiment, and only time will tell if it becomes a popular way of creating and building React apps, or fades into obscurity.
 
-We welcome you to participate in this experiment. Help us build the React tooling that more people can use. We are always [open to feedback](https://github.com/facebookincubator/create-react-app/issues/11).
+We welcome you to participate in this experiment. Help us build the React tooling that more people can use. We are always [open to feedback](https://github.com/facebookincubator/create-reacc-app/issues/11).
 
 ## The Backstory
 
-React was one of the first libraries to embrace transpiling JavaScript. As a result, even though you can [learn React without any tooling](https://github.com/facebook/react/blob/3fd582643ef3d222a00a0c756292c15b88f9f83c/examples/basic-jsx/index.html), the React ecosystem has commonly become associated with an overwhelming explosion of tools.
+React was one of the first libraries to embrace transpiling JavaScript. As a result, even though you can [learn React without any tooling](https://github.com/facebook/reacc/blob/3fd582643ef3d222a00a0c756292c15b88f9f83c/examples/basic-jsx/index.html), the React ecosystem has commonly become associated with an overwhelming explosion of tools.
 
 Eric Clemmons called this phenomenon the “[JavaScript Fatigue](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4)”:
 
@@ -140,7 +140,7 @@ Still, we knew it was frustrating to spend days setting up a project when all yo
 
 We found ourselves in an unusual dilemma.
 
-So far, [our strategy](/react/contributing/design-principles.html#dogfooding) has been to only release the code that we are using at Facebook. This helped us ensure that every project is battle-tested and has clearly defined scope and priorities.
+So far, [our strategy](/reacc/contributing/design-principles.html#dogfooding) has been to only release the code that we are using at Facebook. This helped us ensure that every project is battle-tested and has clearly defined scope and priorities.
 
 However, tooling at Facebook is different than at many smaller companies. Linting, transpilation, and packaging are all handled by powerful remote development servers, and product engineers don’t need to configure them. While we wish we could give a dedicated server to every user of React, even Facebook cannot scale that well!
 
@@ -148,7 +148,7 @@ The React community is very important to us. We knew that we couldn’t fix the 
 
 ## The Quest for a React <abbr title="Command Line Interface">CLI</abbr>
 
-Having just attended [EmberCamp](http://embercamp.com/) a week ago, I was excited about [Ember CLI](https://ember-cli.com/). Ember users have a great “getting started” experience thanks to a curated set of tools united under a single command-line interface. I have heard similar feedback about [Elm Reactor](https://github.com/elm-lang/elm-reactor).
+Having just attended [EmberCamp](http://embercamp.com/) a week ago, I was excited about [Ember CLI](https://ember-cli.com/). Ember users have a great “getting started” experience thanks to a curated set of tools united under a single command-line interface. I have heard similar feedback about [Elm Reactor](https://github.com/elm-lang/elm-reaccor).
 
 Providing a cohesive curated experience is valuable by itself, even if the user could in theory assemble those parts themselves. Kathy Sierra [explains it best](http://seriouspony.com/blog/2013/7/24/your-app-makes-me-fat):
 
@@ -160,6 +160,6 @@ We knew that such projects traditionally haven’t been very successful in the R
 
 Still, we decided it was worth another shot. Christopher and I created a very rough proof of concept on the weekend, and [Kevin](https://twitter.com/lacker) soon joined us.
 
-We invited some of the community members to collaborate with us, and we have spent this week working on this tool. We hope that you’ll enjoy using it! [Let us know what you think.](https://github.com/facebookincubator/create-react-app/issues/11)
+We invited some of the community members to collaborate with us, and we have spent this week working on this tool. We hope that you’ll enjoy using it! [Let us know what you think.](https://github.com/facebookincubator/create-reacc-app/issues/11)
 
 We would like to express our gratitude to [Max Stoiber](https://twitter.com/mxstbr), [Jonny Buchanan](https://twitter.com/jbscript), [Ean Platter](https://twitter.com/eanplatter), [Tyler McGinnis](https://github.com/tylermcginnis), [Kent C. Dodds](https://github.com/kentcdodds), and [Eric Clemmons](https://twitter.com/ericclemmons) for their early feedback, ideas, and contributions.

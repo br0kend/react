@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 /*jslint evil: true */
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ReactTestUtils = require('react-dom/test-utils');
+var React = require('reacc');
+var ReactDOM = require('reacc-dom');
+var ReactTestUtils = require('reacc-dom/test-utils');
 
 var Group;
 var Shape;
@@ -24,7 +24,7 @@ var TestComponent;
 
 var Missing = {};
 
-var ReactART = require('react-art');
+var ReactART = require('reacc-art');
 var ARTSVGMode = require('art/modes/svg');
 var ARTCurrentMode = require('art/modes/current');
 

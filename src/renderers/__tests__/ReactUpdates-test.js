@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -18,10 +18,10 @@ var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
 
 describe('ReactUpdates', () => {
   beforeEach(() => {
-    React = require('react');
-    ReactDOM = require('react-dom');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
     ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-    ReactTestUtils = require('react-dom/test-utils');
+    ReactTestUtils = require('reacc-dom/test-utils');
   });
 
   it('should batch state when updating state twice', () => {
@@ -668,7 +668,7 @@ describe('ReactUpdates', () => {
   });
 
   it('should queue nested updates', () => {
-    // See https://github.com/facebook/react/issues/1147
+    // See https://github.com/facebook/reacc/issues/1147
 
     class X extends React.Component {
       state = {s: 0};
@@ -724,7 +724,7 @@ describe('ReactUpdates', () => {
   });
 
   it('should queue updates from during mount', () => {
-    // See https://github.com/facebook/react/issues/1353
+    // See https://github.com/facebook/reacc/issues/1353
     var a;
 
     class A extends React.Component {

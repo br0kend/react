@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -21,7 +21,7 @@ describeFiber('ReactDOMFrameScheduling', () => {
       global.requestAnimationFrame = undefined;
       jest.resetModules();
       spyOn(console, 'error');
-      require('react-dom');
+      require('reacc-dom');
       expect(console.error.calls.count()).toBe(1);
       expect(console.error.calls.argsFor(0)[0]).toContain(
         'React depends on requestAnimationFrame.',
@@ -44,7 +44,7 @@ describeFiber('ReactDOMFrameScheduling', () => {
       delete global.window;
       jest.resetModules();
       expect(() => {
-        require('react-dom');
+        require('reacc-dom');
       }).not.toThrow();
     } finally {
       global.requestAnimationFrame = previousRAF;

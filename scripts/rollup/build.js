@@ -32,7 +32,7 @@ const FB_PROD = Bundles.bundleTypes.FB_PROD;
 const RN_DEV = Bundles.bundleTypes.RN_DEV;
 const RN_PROD = Bundles.bundleTypes.RN_PROD;
 
-const reactVersion = require('../../package.json').version;
+const reaccVersion = require('../../package.json').version;
 const requestedBundleTypes = (argv.type || '')
   .split(',')
   .map(type => type.toUpperCase());
@@ -69,7 +69,7 @@ function getHeaderSanityCheck(bundleType, hasteName) {
       return hasteFinalName;
     case UMD_DEV:
     case UMD_PROD:
-      return reactVersion;
+      return reaccVersion;
     default:
       return null;
   }
@@ -80,7 +80,7 @@ function getBanner(bundleType, hasteName, filename) {
     // UMDs are not wrapped in conditions.
     case UMD_DEV:
     case UMD_PROD:
-      return Header.getUMDHeader(filename, reactVersion);
+      return Header.getUMDHeader(filename, reaccVersion);
     // CommonJS DEV bundle is guarded to help weak dead code elimination.
     case NODE_DEV:
       // Wrap the contents of the if-DEV check with an IIFE.
@@ -194,7 +194,7 @@ function getFormat(bundleType) {
 }
 
 function getFilename(name, hasteName, bundleType) {
-  // we do this to replace / to -, for react-dom/server
+  // we do this to replace / to -, for reacc-dom/server
   name = name.replace('/', '-');
   switch (bundleType) {
     case UMD_DEV:
@@ -512,7 +512,7 @@ rimraf('build', () => {
   }
   if (syncFbsource) {
     tasks.push(() =>
-      syncReactNative(join('build', 'react-native'), syncFbsource)
+      syncReactNative(join('build', 'reacc-native'), syncFbsource)
     );
   }
   // rather than run concurently, opt to run them serially

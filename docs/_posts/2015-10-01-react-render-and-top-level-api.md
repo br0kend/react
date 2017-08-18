@@ -9,7 +9,7 @@ When you're in React's world you are just building components that fit into othe
 The primary API for rendering into the DOM looks like this:
 
 ```js
-ReactDOM.render(reactElement, domContainerNode)
+ReactDOM.render(reaccElement, domContainerNode)
 ```
 
 To update the properties of an existing component, you call render again with a new element.

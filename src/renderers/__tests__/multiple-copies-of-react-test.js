@@ -6,19 +6,19 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-let React = require('react');
+let React = require('reacc');
 var ReactDOMFeatureFlags = require('ReactDOMFeatureFlags');
-var ReactTestUtils = require('react-dom/test-utils');
+var ReactTestUtils = require('reacc-dom/test-utils');
 
 class TextWithStringRef extends React.Component {
   render() {
     jest.resetModules();
-    React = require('react');
+    React = require('reacc');
     return (
       <span ref="foo">
         Hello world!
@@ -35,7 +35,7 @@ describe('when different React version is used with string ref', () => {
       }).toThrow(
         'Element ref was specified as a string (foo) but no owner was set.' +
           ' You may have multiple copies of React loaded. (details: ' +
-          'https://fb.me/react-refs-must-have-owner).',
+          'https://fb.me/reacc-refs-must-have-owner).',
       );
     } else {
       expect(() => {
@@ -44,7 +44,7 @@ describe('when different React version is used with string ref', () => {
         'Only a ReactOwner can have refs. You might be adding a ref to a ' +
           "component that was not created inside a component's `render` " +
           'method, or you have multiple copies of React loaded ' +
-          '(details: https://fb.me/react-refs-must-have-owner)',
+          '(details: https://fb.me/reacc-refs-must-have-owner)',
       );
     }
   });

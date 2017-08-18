@@ -12,8 +12,8 @@
 'use strict';
 
 var BrowserEventConstants = require('BrowserEventConstants');
-var React = require('react');
-var ReactDOM = require('react-dom');
+var React = require('reacc');
+var ReactDOM = require('reacc-dom');
 var ReactFiberTreeReflection = require('ReactFiberTreeReflection');
 var ReactInstanceMap = require('ReactInstanceMap');
 var ReactShallowRenderer = require('ReactShallowRendererEntry'); // TODO (bvaughn) Remove this import before 16.0.0
@@ -50,7 +50,7 @@ let warnedAboutShallowRenderer = false;
 function createRendererWithWarning() {
   warning(
     warnedAboutShallowRenderer,
-    'Shallow renderer has been moved to react-test-renderer/shallow. ' +
+    'Shallow renderer has been moved to reacc-test-renderer/shallow. ' +
       'Update references to remove this warning. ' +
       'TestUtils.createRenderer will be removed completely in React 16.',
   );
@@ -139,7 +139,7 @@ function findAllInRenderedFiberTreeInternal(fiber, test) {
 /**
  * Utilities for making it easy to test React components.
  *
- * See https://facebook.github.io/react/docs/test-utils.html
+ * See https://facebook.github.io/reacc/docs/test-utils.html
  *
  * Todo: Support the entire DOM.scry query syntax. For now, these simple
  * utilities will suffice for testing purposes.

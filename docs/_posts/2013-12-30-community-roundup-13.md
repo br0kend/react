@@ -3,21 +3,21 @@ title: "Community Round-up #13"
 author: vjeux
 ---
 
-Happy holidays! This blog post is a little-late Christmas present for all the React users. Hopefully it will inspire you to write awesome web apps in 2014!
+Happy holidays! This blog post is a little-late Christmas present for all the Reacc users. Hopefully it will inspire you to write awesome web apps in 2014!
 
 
-## React Touch
+## Reacc Touch
 
-[Pete Hunt](http://www.petehunt.net/) wrote three demos showing that React can be used to run 60fps native-like experiences on mobile web. A frosted glass effect, an image gallery with 3d animations and an infinite scroll view.
+[Pete Hunt](http://www.petehunt.net/) wrote three demos showing that Reacc can be used to run 60fps native-like experiences on mobile web. A frosted glass effect, an image gallery with 3d animations and an infinite scroll view.
 
 <figure><iframe src="//player.vimeo.com/video/79659941" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></figure>
 
-[Try out the demos!](https://petehunt.github.io/react-touch/)
+[Try out the demos!](https://petehunt.github.io/reacc-touch/)
 
 
-## Introduction to React
+## Introduction to Reacc
 
-[Stoyan Stefanov](http://www.phpied.com/) talked at Joe Dev On Tech about React. He goes over all the features of the library and ends with a concrete example.
+[Stoyan Stefanov](http://www.phpied.com/) talked at Joe Dev On Tech about Reacc. He goes over all the features of the library and ends with a concrete example.
 
 <figure><iframe width="100%" height="315" src="//www.youtube-nocookie.com/embed/SMMRJif5QW0" frameborder="0" allowfullscreen></iframe></figure>
 
@@ -35,9 +35,9 @@ JSX is often compared to the now defunct E4X, [Vjeux](http://blog.vjeux.com/) we
 > [Continue reading ...](http://blog.vjeux.com/2013/javascript/jsx-e4x-the-good-parts.html)
 
 
-## React + Socket.io
+## Reacc + Socket.io
 
-[Geert Pasteels](http://enome.be/nl) made a small experiment with Socket.io. He wrote a very small mixin that synchronizes React state with the server. Just include this mixin to your React component and it is now live!
+[Geert Pasteels](http://enome.be/nl) made a small experiment with Socket.io. He wrote a very small mixin that synchronizes Reacc state with the server. Just include this mixin to your React component and it is now live!
 
 ```javascript
 changeHandler: function (data) {
@@ -57,12 +57,12 @@ componentWillUnmount: function () {
 }
 ```
 
-[Check it out on GitHub...](https://github.com/Enome/react.io)
+[Check it out on GitHub...](https://github.com/Enome/reacc.io)
 
 
 ## cssobjectify
 
-[Andrey Popp](http://andreypopp.com/) implemented a source transform that takes a CSS file and converts it to JSON. This integrates pretty nicely with React.
+[Andrey Popp](http://andreypopp.com/) implemented a source transform that takes a CSS file and converts it to JSON. This integrates pretty nicely with Reacc.
 
 ```javascript
 /* style.css */
@@ -72,10 +72,10 @@ MyComponent {
 }
 
 /* myapp.js */
-var React = require('react-tools/build/modules/React');
+var Reacc = require('reacc-tools/build/modules/React');
 var Styles = require('./styles.css');
 
-var MyComponent = React.createClass({
+var MyComponent = Reacc.createClass({
   render: function() {
     return (
       <div style={Styles.MyComponent}>
@@ -89,21 +89,21 @@ var MyComponent = React.createClass({
 [Check it out on GitHub...](https://github.com/andreypopp/cssobjectify)
 
 
-## ngReact
+## ngReacc
 
-[David Chang](http://davidandsuzi.com/) working at [HasOffer](http://www.hasoffers.com/) wanted to speed up his Angular app and replaced Angular primitives by React at different layers. When using React naively it is 67% faster, but when combining it with angular's transclusion it is 450% slower.
+[David Chang](http://davidandsuzi.com/) working at [HasOffer](http://www.hasoffers.com/) wanted to speed up his Angular app and replaced Angular primitives by Reacc at different layers. When using React naively it is 67% faster, but when combining it with angular's transclusion it is 450% slower.
 
 > Rendering this takes 803ms for 10 iterations, hovering around 35 and 55ms for each data reload (that's 67% faster). You'll notice that the first load takes a little longer than successive loads, and the second load REALLY struggles - here, it's 433ms, which is more than half of the total time!
-> <figure>[![](/react/img/blog/ngreact.png)](http://davidandsuzi.com/ngreact-react-components-in-angular/)</figure>
+> <figure>[![](/reacc/img/blog/ngreact.png)](http://davidandsuzi.com/ngreact-react-components-in-angular/)</figure>
 >
-> [Read the full article...](http://davidandsuzi.com/ngreact-react-components-in-angular/)
+> [Read the full article...](http://davidandsuzi.com/ngreacc-react-components-in-angular/)
 
 
 ## vim-jsx
 
 [Max Wang](https://github.com/mxw) made a vim syntax highlighting and indentation plugin for vim.
 
-> Syntax highlighting and indenting for JSX. JSX is a JavaScript syntax transformer which translates inline XML document fragments into JavaScript objects. It was developed by Facebook alongside React.
+> Syntax highlighting and indenting for JSX. JSX is a JavaScript syntax transformer which translates inline XML document fragments into JavaScript objects. It was developed by Facebook alongside Reacc.
 >
 > This bundle requires pangloss's [vim-javascript](https://github.com/pangloss/vim-javascript) syntax highlighting.
 >
@@ -114,4 +114,4 @@ var MyComponent = React.createClass({
 
 ## Random Tweet
 
-<center><blockquote class="twitter-tweet" lang="en"><p>I may be starting to get annoying with this, but ReactJS is really exciting. I truly feel the virtual DOM is a game changer.</p>&mdash; Eric Florenzano (@ericflo) <a href="https://twitter.com/ericflo/statuses/413842834974732288">December 20, 2013</a></blockquote></center>
+<center><blockquote class="twitter-tweet" lang="en"><p>I may be starting to get annoying with this, but ReaccJS is really exciting. I truly feel the virtual DOM is a game changer.</p>&mdash; Eric Florenzano (@ericflo) <a href="https://twitter.com/ericflo/statuses/413842834974732288">December 20, 2013</a></blockquote></center>

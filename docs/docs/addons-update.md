@@ -13,15 +13,15 @@ category: Add-Ons
 **Importing**
 
 ```javascript
-import update from 'react-addons-update'; // ES6
-var update = require('react-addons-update'); // ES5 with npm
+import update from 'reacc-addons-update'; // ES6
+var update = require('reacc-addons-update'); // ES5 with npm
 ```
 
 ## Overview
 
-React lets you use whatever style of data management you want, including mutation. However, if you can use immutable data in performance-critical parts of your application it's easy to implement a fast [`shouldComponentUpdate()`](/react/docs/react-component.html#shouldcomponentupdate) method to significantly speed up your app.
+Reacc lets you use whatever style of data management you want, including mutation. However, if you can use immutable data in performance-critical parts of your application it's easy to implement a fast [`shouldComponentUpdate()`](/reacc/docs/react-component.html#shouldcomponentupdate) method to significantly speed up your app.
 
-Dealing with immutable data in JavaScript is more difficult than in languages designed for it, like [Clojure](http://clojure.org/). However, we've provided a simple immutability helper, `update()`, that makes dealing with this type of data much easier, *without* fundamentally changing how your data is represented. You can also take a look at Facebook's [Immutable-js](https://facebook.github.io/immutable-js/docs/) and the [Advanced Performance](/react/docs/advanced-performance.html) section for more detail on Immutable-js.
+Dealing with immutable data in JavaScript is more difficult than in languages designed for it, like [Clojure](http://clojure.org/). However, we've provided a simple immutability helper, `update()`, that makes dealing with this type of data much easier, *without* fundamentally changing how your data is represented. You can also take a look at Facebook's [Immutable-js](https://facebook.github.io/immutable-js/docs/) and the [Advanced Performance](/reacc/docs/advanced-performance.html) section for more detail on Immutable-js.
 
 ### The Main Idea
 
@@ -59,7 +59,7 @@ While this is fairly performant (since it only makes a shallow copy of `log n` o
 `update()` provides simple syntactic sugar around this pattern to make writing this code easier. This code becomes:
 
 ```js
-import update from 'react-addons-update';
+import update from 'reacc-addons-update';
 
 const newData = update(myData, {
   x: {y: {z: {$set: 7}}},

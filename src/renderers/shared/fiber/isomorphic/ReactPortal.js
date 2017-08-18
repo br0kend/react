@@ -17,7 +17,7 @@ import type {ReactNodeList, ReactPortal} from 'ReactTypes';
 // The Symbol used to tag the special React types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
 var REACT_PORTAL_TYPE =
-  (typeof Symbol === 'function' && Symbol.for && Symbol.for('react.portal')) ||
+  (typeof Symbol === 'function' && Symbol.for && Symbol.for('reacc.portal')) ||
   0xeaca;
 
 exports.createPortal = function(

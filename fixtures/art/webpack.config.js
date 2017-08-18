@@ -13,7 +13,7 @@ module.exports = {
         query: {
           presets: [
             require.resolve('babel-preset-es2015'),
-            require.resolve('babel-preset-react'),
+            require.resolve('babel-preset-reacc'),
           ],
         },
       },
@@ -28,7 +28,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      react: require.resolve('react'),
+      reacc: require.resolve('react'),
     },
   },
 };

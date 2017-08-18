@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -26,10 +26,10 @@ describe('ReactMount', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactDOMServer = require('react-dom/server');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactDOMServer = require('reacc-dom/server');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     try {
       if (WebComponents === undefined && typeof jest !== 'undefined') {
@@ -294,7 +294,7 @@ describe('ReactMount', () => {
 
   it('should warn if the unmounted node was rendered by another copy of React', () => {
     jest.resetModules();
-    var ReactDOMOther = require('react-dom');
+    var ReactDOMOther = require('reacc-dom');
     var container = document.createElement('div');
 
     class Component extends React.Component {
@@ -405,7 +405,7 @@ describe('ReactMount', () => {
         ReactFeatureFlags.disableNewFiberFeatures = false;
 
         containerDiv = document.createElement('div');
-        containerDiv.innerHTML = 'A<!-- react-mount-point-unstable -->B';
+        containerDiv.innerHTML = 'A<!-- reacc-mount-point-unstable -->B';
         mountPoint = containerDiv.childNodes[1];
         invariant(mountPoint.nodeType === COMMENT_NODE, 'Expected comment');
       });
@@ -420,17 +420,17 @@ describe('ReactMount', () => {
 
         ReactDOM.render(list('aeiou'), mountPoint);
         expect(containerDiv.innerHTML).toBe(
-          'Aaeiou<!-- react-mount-point-unstable -->B',
+          'Aaeiou<!-- reacc-mount-point-unstable -->B',
         );
 
         ReactDOM.render(list('yea'), mountPoint);
         expect(containerDiv.innerHTML).toBe(
-          'Ayea<!-- react-mount-point-unstable -->B',
+          'Ayea<!-- reacc-mount-point-unstable -->B',
         );
 
         ReactDOM.render(list(''), mountPoint);
         expect(containerDiv.innerHTML).toBe(
-          'A<!-- react-mount-point-unstable -->B',
+          'A<!-- reacc-mount-point-unstable -->B',
         );
       });
     });

@@ -156,8 +156,8 @@ var ATTRIBUTE_NAME_START_CHAR =
  * @see http://jsperf.com/key-missing
  */
 var DOMProperty = {
-  ID_ATTRIBUTE_NAME: 'data-reactid',
-  ROOT_ATTRIBUTE_NAME: 'data-reactroot',
+  ID_ATTRIBUTE_NAME: 'data-reaccid',
+  ROOT_ATTRIBUTE_NAME: 'data-reaccroot',
 
   ATTRIBUTE_NAME_START_CHAR: ATTRIBUTE_NAME_START_CHAR,
   ATTRIBUTE_NAME_CHAR: ATTRIBUTE_NAME_START_CHAR +

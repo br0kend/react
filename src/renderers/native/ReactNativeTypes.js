@@ -11,7 +11,7 @@
  */
 'use strict';
 
-import type React from 'react';
+import type React from 'reacc';
 
 export type MeasureOnSuccessCallback = (
   x: number,

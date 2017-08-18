@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -18,8 +18,8 @@ describe('ReactDOMInvalidARIAHook', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    React = require('react');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     mountComponent = function(props) {
       ReactTestUtils.renderIntoDocument(<div {...props} />);

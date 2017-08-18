@@ -20,7 +20,7 @@ let views = new Map();
 
 function autoCreateRoot(tag) {
   // Seriously, this is how we distinguish roots in RN.
-  if (!views.has(tag) && ReactNativeTagHandles.reactTagIsNativeTopRootID(tag)) {
+  if (!views.has(tag) && ReactNativeTagHandles.reaccTagIsNativeTopRootID(tag)) {
     roots.push(tag);
     views.set(tag, {
       children: [],
@@ -75,13 +75,13 @@ var RCTUIManager = {
     }
   },
   clearJSResponder: jest.fn(),
-  createView: jest.fn(function createView(reactTag, viewName, rootTag, props) {
+  createView: jest.fn(function createView(reaccTag, viewName, rootTag, props) {
     invariant(
-      !views.has(reactTag),
+      !views.has(reaccTag),
       'Created two native views with tag %s',
-      reactTag,
+      reaccTag,
     );
-    views.set(reactTag, {
+    views.set(reaccTag, {
       children: [],
       parent: null,
       props: props,
@@ -89,7 +89,7 @@ var RCTUIManager = {
     });
   }),
   setJSResponder: jest.fn(),
-  setChildren: jest.fn(function setChildren(parentTag, reactTags) {
+  setChildren: jest.fn(function setChildren(parentTag, reaccTags) {
     autoCreateRoot(parentTag);
     // Native doesn't actually check this but it seems like a good idea
     invariant(
@@ -98,7 +98,7 @@ var RCTUIManager = {
       parentTag,
     );
     // This logic ported from iOS (RCTUIManager.m)
-    reactTags.forEach((tag, i) => {
+    reaccTags.forEach((tag, i) => {
       insertSubviewAtIndex(parentTag, tag, i);
     });
   }),

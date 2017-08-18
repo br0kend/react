@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -20,8 +20,8 @@ describe('ReactNative', () => {
   beforeEach(() => {
     jest.resetModules();
 
-    React = require('react');
-    ReactNative = require('react-native');
+    React = require('reacc');
+    ReactNative = require('reacc-native');
     UIManager = require('UIManager');
     createReactNativeComponentClass = require('createReactNativeComponentClass');
   });

@@ -1,11 +1,11 @@
 {
-  "name": "react-fixtures-ssr",
+  "name": "reacc-fixtures-ssr",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "concurrently": "3.1.0",
     "http-proxy-middleware": "0.17.3",
-    "react-scripts": "0.9.5"
+    "reacc-scripts": "0.9.5"
   },
   "dependencies": {
     "express": "^4.14.0",
@@ -15,11 +15,11 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "start:client": "NODE_PATH=../../build/packages PORT=3001 react-scripts start",
+    "start:client": "NODE_PATH=../../build/packages PORT=3001 reacc-scripts start",
     "start:server": "NODE_PATH=../../build/packages NODE_ENV=development node server",
-    "start:prod": "NODE_PATH=../../build/packages react-scripts build && NODE_PATH=../../build/packages NODE_ENV=production node server",
-    "build": "NODE_PATH=../../build/packages react-scripts build",
-    "test": "NODE_PATH=../../build/packages react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start:prod": "NODE_PATH=../../build/packages reacc-scripts build && NODE_PATH=../../build/packages NODE_ENV=production node server",
+    "build": "NODE_PATH=../../build/packages reacc-scripts build",
+    "test": "NODE_PATH=../../build/packages reacc-scripts test --env=jsdom",
+    "eject": "reacc-scripts eject"
   }
 }

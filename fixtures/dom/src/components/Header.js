@@ -34,7 +34,7 @@ class Header extends React.Component {
         <div className="header__inner">
           <span className="header__logo">
             <img
-              src="https://facebook.github.io/react/img/logo.svg"
+              src="https://facebook.github.io/reacc/img/logo.svg"
               alt=""
               width="32"
               height="32"
@@ -64,7 +64,7 @@ class Header extends React.Component {
                 <option value="/event-pooling">Event Pooling</option>
               </select>
             </label>
-            <label htmlFor="react_version">
+            <label htmlFor="reacc_version">
               <span className="sr-only">Select a version to test</span>
               <select
                 value={this.state.version}

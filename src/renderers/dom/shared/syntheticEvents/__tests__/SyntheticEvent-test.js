@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -22,9 +22,9 @@ describe('SyntheticEvent', () => {
   beforeEach(() => {
     // TODO: can we express this test with only public API?
     SyntheticEvent = require('SyntheticEvent');
-    React = require('react');
-    ReactDOM = require('react-dom');
-    ReactTestUtils = require('react-dom/test-utils');
+    React = require('reacc');
+    ReactDOM = require('reacc-dom');
+    ReactTestUtils = require('reacc-dom/test-utils');
 
     createEvent = function(nativeEvent) {
       var target = require('getEventTarget')(nativeEvent);
@@ -95,7 +95,7 @@ describe('SyntheticEvent', () => {
         "you're seeing this, you're accessing the property `type` on a " +
         'released/nullified synthetic event. This is set to null. If you must ' +
         'keep the original synthetic event around, use event.persist(). ' +
-        'See https://fb.me/react-event-pooling for more information.',
+        'See https://fb.me/reacc-event-pooling for more information.',
     );
   });
 
@@ -111,7 +111,7 @@ describe('SyntheticEvent', () => {
         "you're seeing this, you're setting the property `type` on a " +
         'released/nullified synthetic event. This is effectively a no-op. If you must ' +
         'keep the original synthetic event around, use event.persist(). ' +
-        'See https://fb.me/react-event-pooling for more information.',
+        'See https://fb.me/reacc-event-pooling for more information.',
     );
   });
 
@@ -126,7 +126,7 @@ describe('SyntheticEvent', () => {
         "you're seeing this, you're accessing the method `preventDefault` on a " +
         'released/nullified synthetic event. This is a no-op function. If you must ' +
         'keep the original synthetic event around, use event.persist(). ' +
-        'See https://fb.me/react-event-pooling for more information.',
+        'See https://fb.me/reacc-event-pooling for more information.',
     );
   });
 
@@ -141,7 +141,7 @@ describe('SyntheticEvent', () => {
         "you're seeing this, you're accessing the method `stopPropagation` on a " +
         'released/nullified synthetic event. This is a no-op function. If you must ' +
         'keep the original synthetic event around, use event.persist(). ' +
-        'See https://fb.me/react-event-pooling for more information.',
+        'See https://fb.me/reacc-event-pooling for more information.',
     );
   });
 
@@ -170,7 +170,7 @@ describe('SyntheticEvent', () => {
           "you're seeing this, you're accessing the property `nativeEvent` on a " +
           'released/nullified synthetic event. This is set to null. If you must ' +
           'keep the original synthetic event around, use event.persist(). ' +
-          'See https://fb.me/react-event-pooling for more information.',
+          'See https://fb.me/reacc-event-pooling for more information.',
       );
     },
   );
@@ -187,7 +187,7 @@ describe('SyntheticEvent', () => {
         'Warning: This synthetic event is reused for performance reasons. If ' +
           "you're seeing this, you're adding a new property in the synthetic " +
           'event object. The property is never released. ' +
-          'See https://fb.me/react-event-pooling for more information.',
+          'See https://fb.me/reacc-event-pooling for more information.',
       );
     } else {
       expectDev(console.error.calls.count()).toBe(0);

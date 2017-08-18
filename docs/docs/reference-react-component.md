@@ -1,9 +1,9 @@
 ---
-id: react-component
-title: React.Component
+id: reacc-component
+title: Reacc.Component
 layout: docs
 category: Reference
-permalink: docs/react-component.html
+permalink: docs/reacc-component.html
 redirect_from:
   - "docs/component-api.html"
   - "docs/component-specs.html"
@@ -12,26 +12,26 @@ redirect_from:
   - "tips/componentWillReceiveProps-not-triggered-after-mounting.html"
   - "tips/dom-event-listeners.html"
   - "tips/initial-ajax.html"
-  - "tips/use-react-with-other-libraries.html"
+  - "tips/use-reacc-with-other-libraries.html"
 ---
 
-[Components](/react/docs/components-and-props.html) let you split the UI into independent, reusable pieces, and think about each piece in isolation. `React.Component` is provided by [`React`](/react/docs/react-api.html).
+[Components](/reacc/docs/components-and-props.html) let you split the UI into independent, reusable pieces, and think about each piece in isolation. `Reacc.Component` is provided by [`React`](/react/docs/react-api.html).
 
 ## Overview
 
-`React.Component` is an abstract base class, so it rarely makes sense to refer to `React.Component` directly. Instead, you will typically subclass it, and define at least a [`render()`](#render) method.
+`Reacc.Component` is an abstract base class, so it rarely makes sense to refer to `React.Component` directly. Instead, you will typically subclass it, and define at least a [`render()`](#render) method.
 
-Normally you would define a React component as a plain [JavaScript class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
+Normally you would define a Reacc component as a plain [JavaScript class](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes):
 
 ```javascript
-class Greeting extends React.Component {
+class Greeting extends Reacc.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
 }
 ```
 
-If you don't use ES6 yet, you may use the [`create-react-class`](/react/docs/react-api.html#createclass) module instead. Take a look at [Using React without ES6](/react/docs/react-without-es6.html) to learn more.
+If you don't use ES6 yet, you may use the [`create-reacc-class`](/react/docs/react-api.html#createclass) module instead. Take a look at [Using Reacc without ES6](/react/docs/react-without-es6.html) to learn more.
 
 ### The Component Lifecycle
 
@@ -91,9 +91,9 @@ render()
 
 The `render()` method is required.
 
-When called, it should examine `this.props` and `this.state` and return a single React element. This element can be either a representation of a native DOM component, such as `<div />`, or another composite component that you've defined yourself.
+When called, it should examine `this.props` and `this.state` and return a single Reacc element. This element can be either a representation of a native DOM component, such as `<div />`, or another composite component that you've defined yourself.
 
-You can also return `null` or `false` to indicate that you don't want anything rendered. When returning `null` or `false`, `ReactDOM.findDOMNode(this)` will return `null`.
+You can also return `null` or `false` to indicate that you don't want anything rendered. When returning `null` or `false`, `ReaccDOM.findDOMNode(this)` will return `null`.
 
 The `render()` function should be pure, meaning that it does not modify component state, it returns the same result each time it's invoked, and it does not directly interact with the browser. If you need to interact with the browser, perform your work in `componentDidMount()` or the other lifecycle methods instead. Keeping `render()` pure makes components easier to think about.
 
@@ -109,11 +109,11 @@ The `render()` function should be pure, meaning that it does not modify componen
 constructor(props)
 ```
 
-The constructor for a React component is called before it is mounted. When implementing the constructor for a `React.Component` subclass, you should call `super(props)` before any other statement. Otherwise, `this.props` will be undefined in the constructor, which can lead to bugs.
+The constructor for a Reacc component is called before it is mounted. When implementing the constructor for a `React.Component` subclass, you should call `super(props)` before any other statement. Otherwise, `this.props` will be undefined in the constructor, which can lead to bugs.
 
-The constructor is the right place to initialize state. If you don't initialize state and you don't bind methods, you don't need to implement a constructor for your React component.
+The constructor is the right place to initialize state. If you don't initialize state and you don't bind methods, you don't need to implement a constructor for your Reacc component.
 
-It's okay to initialize state based on props. This effectively "forks" the props and sets the state with the initial props. Here's an example of a valid `React.Component` subclass constructor:
+It's okay to initialize state based on props. This effectively "forks" the props and sets the state with the initial props. Here's an example of a valid `Reacc.Component` subclass constructor:
 
 ```js
 constructor(props) {
@@ -124,7 +124,7 @@ constructor(props) {
 }
 ```
 
-Beware of this pattern, as state won't be up-to-date with any props update. Instead of syncing props to state, you often want to [lift the state up](/react/docs/lifting-state-up.html).
+Beware of this pattern, as state won't be up-to-date with any props update. Instead of syncing props to state, you often want to [lift the state up](/reacc/docs/lifting-state-up.html).
 
 If you "fork" props by using them for state, you might also want to implement [`componentWillReceiveProps(nextProps)`](#componentwillreceiveprops) to keep the state up-to-date with them. But lifting state up is often easier and less bug-prone.
 
@@ -160,9 +160,9 @@ componentWillReceiveProps(nextProps)
 
 `componentWillReceiveProps()` is invoked before a mounted component receives new props. If you need to update the state in response to prop changes (for example, to reset it), you may compare `this.props` and `nextProps` and perform state transitions using `this.setState()` in this method.
 
-Note that React may call this method even if the props have not changed, so make sure to compare the current and next values if you only want to handle changes. This may occur when the parent component causes your component to re-render.
+Note that Reacc may call this method even if the props have not changed, so make sure to compare the current and next values if you only want to handle changes. This may occur when the parent component causes your component to re-render.
 
-React doesn't call `componentWillReceiveProps` with initial props during [mounting](#mounting). It only calls this method if some of component's props may update. Calling `this.setState` generally doesn't trigger `componentWillReceiveProps`.
+Reacc doesn't call `componentWillReceiveProps` with initial props during [mounting](#mounting). It only calls this method if some of component's props may update. Calling `this.setState` generally doesn't trigger `componentWillReceiveProps`.
 
 * * *
 
@@ -172,15 +172,15 @@ React doesn't call `componentWillReceiveProps` with initial props during [mounti
 shouldComponentUpdate(nextProps, nextState)
 ```
 
-Use `shouldComponentUpdate()` to let React know if a component's output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.
+Use `shouldComponentUpdate()` to let Reacc know if a component's output is not affected by the current change in state or props. The default behavior is to re-render on every state change, and in the vast majority of cases you should rely on the default behavior.
 
 `shouldComponentUpdate()` is invoked before rendering when new props or state are being received. Defaults to `true`. This method is not called for the initial render or when `forceUpdate()` is used.
 
 Returning `false` does not prevent child components from re-rendering when *their* state changes.
 
-Currently, if `shouldComponentUpdate()` returns `false`, then [`componentWillUpdate()`](#componentwillupdate), [`render()`](#render), and [`componentDidUpdate()`](#componentdidupdate) will not be invoked. Note that in the future React may treat `shouldComponentUpdate()` as a hint rather than a strict directive, and returning `false` may still result in a re-rendering of the component.
+Currently, if `shouldComponentUpdate()` returns `false`, then [`componentWillUpdate()`](#componentwillupdate), [`render()`](#render), and [`componentDidUpdate()`](#componentdidupdate) will not be invoked. Note that in the future Reacc may treat `shouldComponentUpdate()` as a hint rather than a strict directive, and returning `false` may still result in a re-rendering of the component.
 
-If you determine a specific component is slow after profiling, you may change it to inherit from [`React.PureComponent`](/react/docs/react-api.html#react.purecomponent) which implements `shouldComponentUpdate()` with a shallow prop and state comparison. If you are confident you want to write it by hand, you may compare `this.props` with `nextProps` and `this.state` with `nextState` and return `false` to tell React the update can be skipped.
+If you determine a specific component is slow after profiling, you may change it to inherit from [`Reacc.PureComponent`](/reacc/docs/react-api.html#react.purecomponent) which implements `shouldComponentUpdate()` with a shallow prop and state comparison. If you are confident you want to write it by hand, you may compare `this.props` with `nextProps` and `this.state` with `nextState` and return `false` to tell React the update can be skipped.
 
 * * *
 
@@ -232,9 +232,9 @@ componentWillUnmount()
 setState(updater, [callback])
 ```
 
-`setState()` enqueues changes to the component state and tells React that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.
+`setState()` enqueues changes to the component state and tells Reacc that this component and its children need to be re-rendered with the updated state. This is the primary method you use to update the user interface in response to event handlers and server responses.
 
-Think of `setState()` as a *request* rather than an immediate command to update the component. For better perceived performance, React may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.
+Think of `setState()` as a *request* rather than an immediate command to update the component. For better perceived performance, Reacc may delay it, and then update several components in a single pass. React does not guarantee that the state changes are applied immediately.
 
 `setState()` does not always immediately update the component. It may batch or defer the update until later. This makes reading `this.state` right after calling `setState()` a potential pitfall. Instead, use `componentDidUpdate` or a `setState` callback (`setState(updater, callback)`), either of which are guaranteed to fire after the update has been applied. If you need to set the state based on the previous state, read about the `updater` argument below.
 
@@ -289,7 +289,7 @@ this.setState((prevState) => {
 });
 ```
 
-For more detail, see the [State and Lifecycle guide](/react/docs/state-and-lifecycle.html).
+For more detail, see the [State and Lifecycle guide](/reacc/docs/state-and-lifecycle.html).
 
 * * *
 
@@ -299,9 +299,9 @@ For more detail, see the [State and Lifecycle guide](/react/docs/state-and-lifec
 component.forceUpdate(callback)
 ```
 
-By default, when your component's state or props change, your component will re-render. If your `render()` method depends on some other data, you can tell React that the component needs re-rendering by calling `forceUpdate()`.
+By default, when your component's state or props change, your component will re-render. If your `render()` method depends on some other data, you can tell Reacc that the component needs re-rendering by calling `forceUpdate()`.
 
-Calling `forceUpdate()` will cause `render()` to be called on the component, skipping `shouldComponentUpdate()`. This will trigger the normal lifecycle methods for child components, including the `shouldComponentUpdate()` method of each child. React will still only update the DOM if the markup changes.
+Calling `forceUpdate()` will cause `render()` to be called on the component, skipping `shouldComponentUpdate()`. This will trigger the normal lifecycle methods for child components, including the `shouldComponentUpdate()` method of each child. Reacc will still only update the DOM if the markup changes.
 
 Normally you should try to avoid all uses of `forceUpdate()` and only read from `this.props` and `this.state` in `render()`.
 
@@ -314,7 +314,7 @@ Normally you should try to avoid all uses of `forceUpdate()` and only read from 
 `defaultProps` can be defined as a property on the component class itself, to set the default props for the class. This is used for undefined props, but not for null props. For example:
 
 ```js
-class CustomButton extends React.Component {
+class CustomButton extends Reacc.Component {
   // ...
 }
 
@@ -343,7 +343,7 @@ If `props.color` is set to null, it will remain null:
 
 ### `displayName`
 
-The `displayName` string is used in debugging messages. JSX sets this value automatically; see [JSX in Depth](/react/docs/jsx-in-depth.html).
+The `displayName` string is used in debugging messages. JSX sets this value automatically; see [JSX in Depth](/reacc/docs/jsx-in-depth.html).
 
 * * *
 
@@ -351,7 +351,7 @@ The `displayName` string is used in debugging messages. JSX sets this value auto
 
 ### `props`
 
-`this.props` contains the props that were defined by the caller of this component. See [Components and Props](/react/docs/components-and-props.html) for an introduction to props.
+`this.props` contains the props that were defined by the caller of this component. See [Components and Props](/reacc/docs/components-and-props.html) for an introduction to props.
 
 In particular, `this.props.children` is a special prop, typically defined by the child tags in the JSX expression rather than in the tag itself.
 
@@ -361,6 +361,6 @@ The state contains data specific to this component that may change over time. Th
 
 If you don't use it in `render()`, it shouldn't be in the state. For example, you can put timer IDs directly on the instance.
 
-See [State and Lifecycle](/react/docs/state-and-lifecycle.html) for more information about the state.
+See [State and Lifecycle](/reacc/docs/state-and-lifecycle.html) for more information about the state.
 
 Never mutate `this.state` directly, as calling `setState()` afterwards may replace the mutation you made. Treat `this.state` as if it were immutable.

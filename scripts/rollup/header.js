@@ -15,9 +15,9 @@ function getProvidesHeader(hasteFinalName) {
 `;
 }
 
-function getUMDHeader(filename, reactVersion) {
+function getUMDHeader(filename, reaccVersion) {
   return `/**
- * ${filename} v${reactVersion}
+ * ${filename} v${reaccVersion}
  */
 `;
 }

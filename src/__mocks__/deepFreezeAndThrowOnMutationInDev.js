@@ -9,7 +9,7 @@
 
 'use strict';
 
-// TODO: move into react or fbjs
+// TODO: move into reacc or fbjs
 
 var deepFreezeAndThrowOnMutationInDev = function() {};
 

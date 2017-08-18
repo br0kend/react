@@ -4,7 +4,7 @@ module.exports = {
   out: 'output.js',
   optimize: 'none',
   paths: {
-    react: '../../../../build/dist/react.production.min',
-    'react-dom': '../../../../build/dist/react-dom.production.min',
+    reacc: '../../../../build/dist/react.production.min',
+    'reacc-dom': '../../../../build/dist/react-dom.production.min',
   },
 };

@@ -29,7 +29,7 @@ Next, we will create a component called `Calculator`. It renders an `<input>` th
 Additionally, it renders the `BoilingVerdict` for the current input value.
 
 ```js{5,9,13,17-21}
-class Calculator extends React.Component {
+class Calculator extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -70,7 +70,7 @@ const scaleNames = {
   f: 'Fahrenheit'
 };
 
-class TemperatureInput extends React.Component {
+class TemperatureInput extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -98,7 +98,7 @@ class TemperatureInput extends React.Component {
 We can now change the `Calculator` to render two separate temperature inputs:
 
 ```js{5,6}
-class Calculator extends React.Component {
+class Calculator extends Reacc.Component {
   render() {
     return (
       <div>
@@ -153,7 +153,7 @@ For example, `tryConvert('abc', toCelsius)` returns an empty string, and `tryCon
 Currently, both `TemperatureInput` components independently keep their values in the local state:
 
 ```js{5,9,13}
-class TemperatureInput extends React.Component {
+class TemperatureInput extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -170,7 +170,7 @@ class TemperatureInput extends React.Component {
 
 However, we want these two inputs to be in sync with each other. When we update the Celsius input, the Fahrenheit input should reflect the converted temperature, and vice versa.
 
-In React, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called "lifting state up". We will remove the local state from the `TemperatureInput` and move it into the `Calculator` instead.
+In Reacc, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called "lifting state up". We will remove the local state from the `TemperatureInput` and move it into the `Calculator` instead.
 
 If the `Calculator` owns the shared state, it becomes the "source of truth" for the current temperature in both inputs. It can instruct them both to have values that are consistent with each other. Since the props of both `TemperatureInput` components are coming from the same parent `Calculator` component, the two inputs will always be in sync.
 
@@ -184,9 +184,9 @@ First, we will replace `this.state.temperature` with `this.props.temperature` in
     const temperature = this.props.temperature;
 ```
 
-We know that [props are read-only](/react/docs/components-and-props.html#props-are-read-only). When the `temperature` was in the local state, the `TemperatureInput` could just call `this.setState()` to change it. However, now that the `temperature` is coming from the parent as a prop, the `TemperatureInput` has no control over it.
+We know that [props are read-only](/reacc/docs/components-and-props.html#props-are-read-only). When the `temperature` was in the local state, the `TemperatureInput` could just call `this.setState()` to change it. However, now that the `temperature` is coming from the parent as a prop, the `TemperatureInput` has no control over it.
 
-In React, this is usually solved by making a component "controlled". Just like the DOM `<input>` accepts both a `value` and an `onChange` prop, so can the custom `TemperatureInput` accept both `temperature` and `onTemperatureChange` props from its parent `Calculator`.
+In Reacc, this is usually solved by making a component "controlled". Just like the DOM `<input>` accepts both a `value` and an `onChange` prop, so can the custom `TemperatureInput` accept both `temperature` and `onTemperatureChange` props from its parent `Calculator`.
 
 Now, when the `TemperatureInput` wants to update its temperature, it calls `this.props.onTemperatureChange`:
 
@@ -205,7 +205,7 @@ The `onTemperatureChange` prop will be provided together with the `temperature` 
 Before diving into the changes in the `Calculator`, let's recap our changes to the `TemperatureInput` component. We have removed the local state from it, and instead of reading `this.state.temperature`, we now read `this.props.temperature`. Instead of calling `this.setState()` when we want to make a change, we now call `this.props.onTemperatureChange()`, which will be provided by the `Calculator`:
 
 ```js{8,12}
-class TemperatureInput extends React.Component {
+class TemperatureInput extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -256,7 +256,7 @@ We could have stored the value of both inputs but it turns out to be unnecessary
 The inputs stay in sync because their values are computed from the same state:
 
 ```js{6,10,14,18-21,27-28,31-32,34}
-class Calculator extends React.Component {
+class Calculator extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
@@ -302,24 +302,24 @@ Now, no matter which input you edit, `this.state.temperature` and `this.state.sc
 
 Let's recap what happens when you edit an input:
 
-* React calls the function specified as `onChange` on the DOM `<input>`. In our case, this is the `handleChange` method in `TemperatureInput` component.
+* Reacc calls the function specified as `onChange` on the DOM `<input>`. In our case, this is the `handleChange` method in `TemperatureInput` component.
 * The `handleChange` method in the `TemperatureInput` component calls `this.props.onTemperatureChange()` with the new desired value. Its props, including `onTemperatureChange`, were provided by its parent component, the `Calculator`.
 * When it previously rendered, the `Calculator` has specified that `onTemperatureChange` of the Celsius `TemperatureInput` is the `Calculator`'s `handleCelsiusChange` method, and `onTemperatureChange` of the Fahrenheit `TemperatureInput` is the `Calculator`'s `handleFahrenheitChange` method. So either of these two `Calculator` methods gets called depending on which input we edited.
-* Inside these methods, the `Calculator` component asks React to re-render itself by calling `this.setState()` with the new input value and the current scale of the input we just edited.
-* React calls the `Calculator` component's `render` method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.
-* React calls the `render` methods of the individual `TemperatureInput` components with their new props specified by the `Calculator`. It learns what their UI should look like.
-* React DOM updates the DOM to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion.
+* Inside these methods, the `Calculator` component asks Reacc to re-render itself by calling `this.setState()` with the new input value and the current scale of the input we just edited.
+* Reacc calls the `Calculator` component's `render` method to learn what the UI should look like. The values of both inputs are recomputed based on the current temperature and the active scale. The temperature conversion is performed here.
+* Reacc calls the `render` methods of the individual `TemperatureInput` components with their new props specified by the `Calculator`. It learns what their UI should look like.
+* Reacc DOM updates the DOM to match the desired input values. The input we just edited receives its current value, and the other input is updated to the temperature after conversion.
 
 Every update goes through the same steps so the inputs stay in sync.
 
 ## Lessons Learned
 
-There should be a single "source of truth" for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the [top-down data flow](/react/docs/state-and-lifecycle.html#the-data-flows-down).
+There should be a single "source of truth" for any data that changes in a Reacc application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the [top-down data flow](/reacc/docs/state-and-lifecycle.html#the-data-flows-down).
 
 Lifting state involves writing more "boilerplate" code than two-way binding approaches, but as a benefit, it takes less work to find and isolate bugs. Since any state "lives" in some component and that component alone can change it, the surface area for bugs is greatly reduced. Additionally, you can implement any custom logic to reject or transform user input.
 
 If something can be derived from either props or state, it probably shouldn't be in the state. For example, instead of storing both `celsiusValue` and `fahrenheitValue`, we store just the last edited `temperature` and its `scale`. The value of the other input can always be calculated from them in the `render()` method. This lets us clear or apply rounding to the other field without losing any precision in the user input.
 
-When you see something wrong in the UI, you can use [React Developer Tools](https://github.com/facebook/react-devtools) to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:
+When you see something wrong in the UI, you can use [Reacc Developer Tools](https://github.com/facebook/reacc-devtools) to inspect the props and move up the tree until you find the component responsible for updating the state. This lets you trace the bugs to their source:
 
-<img src="/react/img/docs/react-devtools-state.gif" alt="Monitoring State in React DevTools" width="100%">
+<img src="/reacc/img/docs/react-devtools-state.gif" alt="Monitoring State in Reacc DevTools" width="100%">

@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -17,9 +17,9 @@ let React;
 
 describe('ReactShallowRenderer', () => {
   beforeEach(() => {
-    createRenderer = require('react-test-renderer/shallow').createRenderer;
+    createRenderer = require('reacc-test-renderer/shallow').createRenderer;
     PropTypes = require('prop-types');
-    React = require('react');
+    React = require('reacc');
   });
 
   it('should call all of the lifecycle hooks', () => {

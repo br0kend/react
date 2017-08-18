@@ -21,9 +21,9 @@ eslint-rules/__tests__/warning-and-invariant-args-test.js
 * warning(true, '%s %s, %s %s: %s (%s)', 1, 2, 3, 4, 5, 6);
 
 scripts/error-codes/__tests__/dev-expression-with-codes-test.js
-* should add `reactProdInvariant` when it finds `require('invariant')`
+* should add `reaccProdInvariant` when it finds `require('invariant')`
 * should replace simple invariant calls
-* should only add `reactProdInvariant` once
+* should only add `reaccProdInvariant` once
 * should support invariant calls with args
 * should support invariant calls with a concatenated template string and args
 
@@ -368,7 +368,7 @@ src/renderers/__tests__/ReactCompositeComponent-test.js
 * should support module pattern components
 * should support rendering to different child types over time
 * should not thrash a server rendered layout with client side one
-* should react to state changes from callbacks
+* should reacc to state changes from callbacks
 * should rewire refs when rendering to different child types
 * should not cache old DOM nodes when switching constructors
 * should use default values for undefined props
@@ -607,7 +607,7 @@ src/renderers/__tests__/ReactUpdates-test.js
 * does not fall into an infinite update loop
 * does not fall into an infinite error loop
 
-src/renderers/__tests__/multiple-copies-of-react-test.js
+src/renderers/__tests__/multiple-copies-of-reacc-test.js
 * throws the "Refs must have owner" warning
 
 src/renderers/__tests__/refs-destruction-test.js
@@ -1721,8 +1721,8 @@ src/renderers/dom/shared/__tests__/ReactDOMTextComponent-test.js
 * can reconcile text from pre-rendered markup
 
 src/renderers/dom/shared/__tests__/ReactEventIndependence-test.js
-* does not crash with other react inside
-* does not crash with other react outside
+* does not crash with other reacc inside
+* does not crash with other reacc outside
 * does not when event fired on unmounted tree
 
 src/renderers/dom/shared/__tests__/ReactMount-test.js
@@ -1746,7 +1746,7 @@ src/renderers/dom/shared/__tests__/ReactMount-test.js
 * renders at a comment node
 
 src/renderers/dom/shared/__tests__/ReactMountDestruction-test.js
-* should destroy a react root upon request
+* should destroy a reacc root upon request
 * should warn when unmounting a non-container root node
 * should warn when unmounting a non-container, non-root node
 
@@ -1793,8 +1793,8 @@ src/renderers/dom/shared/__tests__/ReactServerRendering-test.js
 * should warn when children are mutated during render
 
 src/renderers/dom/shared/__tests__/ReactServerRenderingBrowser-test.js
-* provides the same top-level API as react-dom/server
-* returns the same results as react-dom/server
+* provides the same top-level API as reacc-dom/server
+* returns the same results as reacc-dom/server
 * throws meaningfully for server-only APIs
 
 src/renderers/dom/shared/__tests__/escapeTextContentForBrowser-test.js
@@ -2472,5 +2472,5 @@ src/renderers/testing/__tests__/ReactTestRendererTraversal-test.js
 * searches via .findByType() / .findAllByType()
 * searches via .findByProps() / .findAllByProps()
 
-src/shared/utils/__tests__/reactProdInvariant-test.js
+src/shared/utils/__tests__/reaccProdInvariant-test.js
 * should throw with the correct number of `%s`s in the URL

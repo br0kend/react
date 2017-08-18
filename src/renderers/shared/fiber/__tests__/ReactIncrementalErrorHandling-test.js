@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
@@ -20,8 +20,8 @@ describe('ReactIncrementalErrorHandling', () => {
   beforeEach(() => {
     jest.resetModules();
     PropTypes = require('prop-types');
-    React = require('react');
-    ReactNoop = require('react-noop-renderer');
+    React = require('reacc');
+    ReactNoop = require('reacc-noop-renderer');
     ReactFeatureFlags = require('ReactFeatureFlags');
     ReactFeatureFlags.disableNewFiberFeatures = false;
   });
@@ -944,8 +944,8 @@ describe('ReactIncrementalErrorHandling', () => {
       } else {
         jest.unmock('ReactFiberErrorLogger');
       }
-      React = require('react');
-      ReactNoop = require('react-noop-renderer');
+      React = require('reacc');
+      ReactNoop = require('reacc-noop-renderer');
     }
 
     function normalizeCodeLocInfo(str) {

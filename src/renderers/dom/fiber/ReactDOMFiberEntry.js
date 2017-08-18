@@ -31,7 +31,7 @@ var ReactInputSelection = require('ReactInputSelection');
 var ReactInstanceMap = require('ReactInstanceMap');
 var ReactPortal = require('ReactPortal');
 var ReactVersion = require('ReactVersion');
-var {isValidElement} = require('react');
+var {isValidElement} = require('reacc');
 var {injectInternals} = require('ReactFiberDevToolsHook');
 var {
   ELEMENT_NODE,
@@ -78,7 +78,7 @@ if (__DEV__) {
     warning(
       false,
       'React depends on Map and Set built-in types. Make sure that you load a ' +
-        'polyfill in older browsers. http://fb.me/react-polyfills',
+        'polyfill in older browsers. http://fb.me/reacc-polyfills',
     );
   }
 }
@@ -94,10 +94,10 @@ findDOMNode._injectFiber(function(fiber: Fiber) {
 
 type DOMContainer =
   | (Element & {
-    _reactRootContainer: ?Object,
+    _reaccRootContainer: ?Object,
   })
   | (Document & {
-    _reactRootContainer: ?Object,
+    _reaccRootContainer: ?Object,
   });
 
 type Container = Element | Document;
@@ -132,7 +132,7 @@ function isValidContainer(node) {
       node.nodeType === DOCUMENT_NODE ||
       node.nodeType === DOCUMENT_FRAGMENT_NODE ||
       (node.nodeType === COMMENT_NODE &&
-        node.nodeValue === ' react-mount-point-unstable ')));
+        node.nodeValue === ' reacc-mount-point-unstable ')));
 }
 
 function getReactRootElementInContainer(container: any) {
@@ -558,9 +558,9 @@ function renderSubtreeIntoContainer(
   );
 
   if (__DEV__) {
-    if (container._reactRootContainer && container.nodeType !== COMMENT_NODE) {
+    if (container._reaccRootContainer && container.nodeType !== COMMENT_NODE) {
       const hostInstance = DOMRenderer.findHostInstanceWithNoPortals(
-        container._reactRootContainer.current,
+        container._reaccRootContainer.current,
       );
       if (hostInstance) {
         warning(
@@ -573,7 +573,7 @@ function renderSubtreeIntoContainer(
       }
     }
 
-    const isRootRenderedBySomeReact = !!container._reactRootContainer;
+    const isRootRenderedBySomeReact = !!container._reaccRootContainer;
     const rootEl = getReactRootElementInContainer(container);
     const hasNonRootReactChild = !!(rootEl &&
       ReactDOMComponentTree.getInstanceFromNode(rootEl));
@@ -598,7 +598,7 @@ function renderSubtreeIntoContainer(
     );
   }
 
-  let root = container._reactRootContainer;
+  let root = container._reaccRootContainer;
   if (!root) {
     const shouldHydrate =
       forceHydrate || shouldHydrateDueToLegacyHeuristic(container);
@@ -637,7 +637,7 @@ function renderSubtreeIntoContainer(
       }
     }
     const newRoot = DOMRenderer.createContainer(container);
-    root = container._reactRootContainer = newRoot;
+    root = container._reaccRootContainer = newRoot;
     // Initial mount should not be batched.
     DOMRenderer.unbatchedUpdates(() => {
       DOMRenderer.updateContainer(children, newRoot, parentComponent, callback);
@@ -729,7 +729,7 @@ var ReactDOMFiber = {
       'unmountComponentAtNode(...): Target container is not a DOM element.',
     );
 
-    if (container._reactRootContainer) {
+    if (container._reaccRootContainer) {
       if (__DEV__) {
         const rootEl = getReactRootElementInContainer(container);
         const renderedByDifferentReact =
@@ -744,7 +744,7 @@ var ReactDOMFiber = {
       // Unmount should not be batched.
       DOMRenderer.unbatchedUpdates(() => {
         renderSubtreeIntoContainer(null, null, container, false, () => {
-          container._reactRootContainer = null;
+          container._reaccRootContainer = null;
         });
       });
       // If you call unmountComponentAtNode twice in quick succession, you'll
@@ -760,7 +760,7 @@ var ReactDOMFiber = {
         const isContainerReactRoot =
           container.nodeType === 1 &&
           isValidContainer(container.parentNode) &&
-          !!container.parentNode._reactRootContainer;
+          !!container.parentNode._reaccRootContainer;
 
         warning(
           !hasNonRootReactChild,
@@ -833,10 +833,10 @@ if (__DEV__) {
         console.info(
           '%cDownload the React DevTools ' +
             'for a better development experience: ' +
-            'https://fb.me/react-devtools' +
+            'https://fb.me/reacc-devtools' +
             (protocol === 'file:'
               ? '\nYou might need to use a local HTTP server (instead of file://): ' +
-                  'https://fb.me/react-devtools-faq'
+                  'https://fb.me/reacc-devtools-faq'
               : ''),
           'font-weight:bold',
         );

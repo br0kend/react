@@ -58,7 +58,7 @@ function assertValidProps(
       typeof props.dangerouslySetInnerHTML === 'object' &&
         HTML in props.dangerouslySetInnerHTML,
       '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' +
-        'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' +
+        'Please visit https://fb.me/reacc-invariant-dangerously-set-inner-html ' +
         'for more information.',
     );
   }

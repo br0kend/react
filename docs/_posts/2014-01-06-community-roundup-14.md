@@ -15,31 +15,31 @@ React is only one-piece of your web application stack. [Mark Lussier](https://gi
 >
 > My current opinion is using tools like Grunt, Browserify, Bower and multiple grunt plugins to get the job done. I also opted for Zepto over jQuery and the Flatiron Project's Director when I need a router. Oh and for the last little bit of tech that makes you mad, I am in the SASS camp when it comes to stylesheets
 >
-> [Check it out on GitHub...](https://github.com/intabulas/reactjs-baseline)
+> [Check it out on GitHub...](https://github.com/intabulas/reaccjs-baseline)
 
 
 ## Animal Sounds
 
 [Josh Duck](http://joshduck.com/) used React in order to build a Windows 8 tablet app. This is a good example of a touch app written in React.
-<figure>[![](/react/img/blog/animal-sounds.jpg)](http://apps.microsoft.com/windows/en-us/app/baby-play-animal-sounds/9280825c-2ed9-41c0-ba38-aa9a5b890bb9)</figure>
+<figure>[![](/reacc/img/blog/animal-sounds.jpg)](http://apps.microsoft.com/windows/en-us/app/baby-play-animal-sounds/9280825c-2ed9-41c0-ba38-aa9a5b890bb9)</figure>
 
 [Download the app...](http://apps.microsoft.com/windows/en-us/app/baby-play-animal-sounds/9280825c-2ed9-41c0-ba38-aa9a5b890bb9)
 
 
 ## React Rails Tutorial
 
-[Selem Delul](http://selem.im) bundled the [React Tutorial](/react/tutorial/tutorial.html) into a rails app. This is a good example on how to get started with a rails project.
+[Selem Delul](http://selem.im) bundled the [React Tutorial](/reacc/tutorial/tutorial.html) into a rails app. This is a good example on how to get started with a rails project.
 
 > ```
-git clone https://github.com/necrodome/react-rails-tutorial
-cd react-rails-tutorial
+git clone https://github.com/necrodome/reacc-rails-tutorial
+cd reacc-rails-tutorial
 bundle install
 rake db:migrate
 rails s
 ```
 > Then visit http://localhost:3000/app to see the React application that is explained in the React Tutorial. Try opening multiple tabs!
 >
-> [View on GitHub...](https://github.com/necrodome/react-rails-tutorial)
+> [View on GitHub...](https://github.com/necrodome/reacc-rails-tutorial)
 
 ## Mixing with Backbone
 
@@ -47,7 +47,7 @@ rails s
 
 [View code on JSFiddle](http://jsfiddle.net/djkojb/qZf48/13/)
 
-[Check out the blog post...](http://eldar.djafarov.com/2013/11/reactjs-mixing-with-backbone/)
+[Check out the blog post...](http://eldar.djafarov.com/2013/11/reaccjs-mixing-with-backbone/)
 
 
 ## React Infinite Scroll
@@ -64,7 +64,7 @@ rails s
 </InfiniteScroll>
 ```
 
-[Try it out on GitHub!](https://github.com/guillaumervls/react-infinite-scroll)
+[Try it out on GitHub!](https://github.com/guillaumervls/reacc-infinite-scroll)
 
 
 ## Web Components Style
@@ -75,13 +75,13 @@ rails s
 
 ## React vs Angular
 
-React is often compared with Angular. [Pete Hunt](http://skulbuny.com/2013/10/31/react-vs-angular/) wrote an opinionated post on the subject.
+React is often compared with Angular. [Pete Hunt](http://skulbuny.com/2013/10/31/reacc-vs-angular/) wrote an opinionated post on the subject.
 
 > First of all I think it’s important to evaluate technologies on objective rather than subjective features. “It feels nicer” or “it’s cleaner” aren’t valid reasons: performance, modularity, community size and ease of testing / integration with other tools are.
 >
 > I’ve done a lot of work benchmarking, building apps, and reading the code of Angular to try to come up with a reasonable comparison between their ways of doing things.
 >
-> [Read the full post...](http://skulbuny.com/2013/10/31/react-vs-angular/)
+> [Read the full post...](http://skulbuny.com/2013/10/31/reacc-vs-angular/)
 
 
 

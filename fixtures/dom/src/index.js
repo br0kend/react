@@ -1,5 +1,5 @@
 import './polyfills';
-import loadReact from './react-loader';
+import loadReact from './reacc-loader';
 
 loadReact().then(() => import('./components/App')).then(App => {
   const {React, ReactDOM} = window;

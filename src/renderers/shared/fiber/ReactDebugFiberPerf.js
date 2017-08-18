@@ -39,7 +39,7 @@ if (__DEV__) {
 
   // Prefix measurements so that it's possible to filter them.
   // Longer prefixes are hard to read in DevTools.
-  const reactEmoji = '\u269B';
+  const reaccEmoji = '\u269B';
   const warningEmoji = '\u26D4';
   const supportsUserTiming =
     typeof performance !== 'undefined' &&
@@ -70,11 +70,11 @@ if (__DEV__) {
   const labelsInCurrentCommit: Set<string> = new Set();
 
   const formatMarkName = (markName: string) => {
-    return `${reactEmoji} ${markName}`;
+    return `${reaccEmoji} ${markName}`;
   };
 
   const formatLabel = (label: string, warning: string | null) => {
-    const prefix = warning ? `${warningEmoji} ` : `${reactEmoji} `;
+    const prefix = warning ? `${warningEmoji} ` : `${reaccEmoji} `;
     const suffix = warning ? ` Warning: ${warning}` : '';
     return `${prefix}${label}${suffix}`;
   };

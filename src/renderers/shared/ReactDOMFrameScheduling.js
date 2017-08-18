@@ -34,7 +34,7 @@ if (__DEV__) {
     warning(
       false,
       'React depends on requestAnimationFrame. Make sure that you load a ' +
-        'polyfill in older browsers. http://fb.me/react-polyfills',
+        'polyfill in older browsers. http://fb.me/reacc-polyfills',
     );
   }
 }
@@ -84,7 +84,7 @@ if (!ExecutionEnvironment.canUseDOM) {
   };
 
   // We use the postMessage trick to defer idle work until after the repaint.
-  var messageKey = '__reactIdleCallback$' + Math.random().toString(36).slice(2);
+  var messageKey = '__reaccIdleCallback$' + Math.random().toString(36).slice(2);
   var idleTick = function(event) {
     if (event.source !== window || event.data !== messageKey) {
       return;

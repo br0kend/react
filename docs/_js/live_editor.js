@@ -91,7 +91,7 @@ var ReactPlayground = React.createClass({
   getDefaultProps: function() {
     return {
       transformer: function(code, options) {
-        var presets = ['react'];
+        var presets = ['reacc'];
         if (!options || !options.skipES2015Transform) {
           presets.push('es2015');
         }

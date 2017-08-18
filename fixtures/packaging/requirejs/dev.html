@@ -5,14 +5,14 @@
     <script>
       requirejs.config({
         paths: {
-          react: '../../../build/dist/react.development',
-          'react-dom': '../../../build/dist/react-dom.development'
+          reacc: '../../../build/dist/react.development',
+          'reacc-dom': '../../../build/dist/react-dom.development'
         }
       });
 
-      require(['react', 'react-dom'], function(React, ReactDOM) {
-        ReactDOM.render(
-          React.createElement('h1', null, 'Hello World!'),
+      require(['reacc', 'react-dom'], function(Reacc, ReactDOM) {
+        ReaccDOM.render(
+          Reacc.createElement('h1', null, 'Hello World!'),
           document.getElementById('container')
         );
       });

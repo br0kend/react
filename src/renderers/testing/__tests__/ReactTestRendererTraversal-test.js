@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-const React = require('react');
+const React = require('reacc');
 let ReactTestRenderer;
 
 const RCTView = 'RCTView';
@@ -20,7 +20,7 @@ const View = props => <RCTView {...props} />;
 describe('ReactTestRendererTraversal', () => {
   beforeEach(() => {
     jest.resetModules();
-    ReactTestRenderer = require('react-test-renderer');
+    ReactTestRenderer = require('reacc-test-renderer');
   });
 
   class Example extends React.Component {

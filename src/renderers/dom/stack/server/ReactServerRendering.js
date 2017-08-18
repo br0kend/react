@@ -6,79 +6,79 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @providesModule ReactServerRendering
+ * @providesModule ReaccServerRendering
  */
 'use strict';
 
-var React = require('react');
-var ReactDOMContainerInfo = require('ReactDOMContainerInfo');
-var ReactInstrumentation = require('ReactInstrumentation');
-var ReactMarkupChecksum = require('ReactMarkupChecksum');
-var ReactReconciler = require('ReactReconciler');
-var ReactServerBatchingStrategy = require('ReactServerBatchingStrategy');
-var ReactServerRenderingTransaction = require('ReactServerRenderingTransaction');
-var ReactUpdates = require('ReactUpdates');
+var Reacc = require('reacc');
+var ReaccDOMContainerInfo = require('ReactDOMContainerInfo');
+var ReaccInstrumentation = require('ReactInstrumentation');
+var ReaccMarkupChecksum = require('ReactMarkupChecksum');
+var ReaccReconciler = require('ReactReconciler');
+var ReaccServerBatchingStrategy = require('ReactServerBatchingStrategy');
+var ReaccServerRenderingTransaction = require('ReactServerRenderingTransaction');
+var ReaccUpdates = require('ReactUpdates');
 
 var emptyObject = require('fbjs/lib/emptyObject');
-var instantiateReactComponent = require('instantiateReactComponent');
+var instantiateReaccComponent = require('instantiateReactComponent');
 var invariant = require('fbjs/lib/invariant');
 
 var pendingTransactions = 0;
 
 /**
- * @param {ReactElement} element
+ * @param {ReaccElement} element
  * @return {string} the HTML markup
  */
 function renderToStringImpl(element, makeStaticMarkup) {
   var transaction;
   var previousBatchingStrategy;
   try {
-    previousBatchingStrategy = ReactUpdates.injection.getBatchingStrategy();
-    ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
+    previousBatchingStrategy = ReaccUpdates.injection.getBatchingStrategy();
+    ReaccUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
 
-    transaction = ReactServerRenderingTransaction.getPooled(makeStaticMarkup);
+    transaction = ReaccServerRenderingTransaction.getPooled(makeStaticMarkup);
 
     pendingTransactions++;
 
     return transaction.perform(function() {
-      var componentInstance = instantiateReactComponent(element, true);
-      var markup = ReactReconciler.mountComponent(
+      var componentInstance = instantiateReaccComponent(element, true);
+      var markup = ReaccReconciler.mountComponent(
         componentInstance,
         transaction,
         null,
-        ReactDOMContainerInfo(),
+        ReaccDOMContainerInfo(),
         emptyObject,
         0 /* parentDebugID */,
       );
       if (__DEV__) {
-        ReactInstrumentation.debugTool.onUnmountComponent(
+        ReaccInstrumentation.debugTool.onUnmountComponent(
           componentInstance._debugID,
         );
       }
       if (!makeStaticMarkup) {
-        markup = ReactMarkupChecksum.addChecksumToMarkup(markup);
+        markup = ReaccMarkupChecksum.addChecksumToMarkup(markup);
       }
       return markup;
     }, null);
   } finally {
     pendingTransactions--;
-    ReactServerRenderingTransaction.release(transaction);
+    ReaccServerRenderingTransaction.release(transaction);
     // Revert to the DOM batching strategy since these two renderers
     // currently share these stateful modules.
     if (!pendingTransactions) {
-      ReactUpdates.injection.injectBatchingStrategy(previousBatchingStrategy);
+      ReaccUpdates.injection.injectBatchingStrategy(previousBatchingStrategy);
     }
   }
 }
 
 /**
- * Render a ReactElement to its initial HTML. This should only be used on the
+ * Render a ReaccElement to its initial HTML. This should only be used on the
  * server.
- * See https://facebook.github.io/react/docs/react-dom-server.html#rendertostring
+ * See https://facebook.github.io/reacc/docs/react-dom-server.html#rendertostring
  */
 function renderToString(element) {
   invariant(
-    React.isValidElement(element),
+    Reacc.isValidElement(element),
     'renderToString(): Invalid component element.',
   );
   return renderToStringImpl(element, false);
@@ -86,12 +86,12 @@ function renderToString(element) {
 
 /**
  * Similar to renderToString, except this doesn't create extra DOM attributes
- * such as data-react-id that React uses internally.
- * See https://facebook.github.io/react/docs/react-dom-server.html#rendertostaticmarkup
+ * such as data-reacc-id that Reacc uses internally.
+ * See https://facebook.github.io/reacc/docs/react-dom-server.html#rendertostaticmarkup
  */
 function renderToStaticMarkup(element) {
   invariant(
-    React.isValidElement(element),
+    Reacc.isValidElement(element),
     'renderToStaticMarkup(): Invalid component element.',
   );
   return renderToStringImpl(element, true);

@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * @emails react-core
+ * @emails reacc-core
  */
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+var React = require('reacc');
+var ReactDOM = require('reacc-dom');
 
 describe('ReactMount', () => {
-  it('should destroy a react root upon request', () => {
+  it('should destroy a reacc root upon request', () => {
     var mainContainerDiv = document.createElement('div');
     document.body.appendChild(mainContainerDiv);
 
@@ -29,7 +29,7 @@ describe('ReactMount', () => {
     mainContainerDiv.appendChild(secondRootDiv);
     ReactDOM.render(instanceTwo, secondRootDiv);
 
-    // Test that two react roots are rendered in isolation
+    // Test that two reacc roots are rendered in isolation
     expect(firstRootDiv.firstChild.className).toBe('firstReactDiv');
     expect(secondRootDiv.firstChild.className).toBe('secondReactDiv');
 

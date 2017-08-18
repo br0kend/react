@@ -7,12 +7,12 @@ module.exports = {
   extends: 'fbjs',
 
   plugins: [
-    'react',
-    'react-internal',
+    'reacc',
+    'reacc-internal',
   ],
 
   // We're stricter than the default config, mostly. We'll override a few rules
-  // and then enable some React specific ones.
+  // and then enable some Reacc specific ones.
   rules: {
     'accessor-pairs': OFF,
     'brace-style': [ERROR, '1tbs'],
@@ -37,25 +37,25 @@ module.exports = {
     'space-before-blocks': ERROR,
     'space-before-function-paren': OFF,
 
-    // React & JSX
+    // Reacc & JSX
     // Our transforms set this automatically
-    'react/jsx-boolean-value': [ERROR, 'always'],
-    'react/jsx-no-undef': ERROR,
+    'reacc/jsx-boolean-value': [ERROR, 'always'],
+    'reacc/jsx-no-undef': ERROR,
     // We don't care to do this
-    'react/jsx-sort-prop-types': OFF,
-    'react/jsx-space-before-closing': ERROR,
-    'react/jsx-uses-react': ERROR,
-    'react/no-is-mounted': OFF,
+    'reacc/jsx-sort-prop-types': OFF,
+    'reacc/jsx-space-before-closing': ERROR,
+    'reacc/jsx-uses-reacc': ERROR,
+    'reacc/no-is-mounted': OFF,
     // This isn't useful in our test code
-    'react/react-in-jsx-scope': ERROR,
-    'react/self-closing-comp': ERROR,
+    'reacc/reacc-in-jsx-scope': ERROR,
+    'reacc/self-closing-comp': ERROR,
     // We don't care to do this
-    'react/jsx-wrap-multilines': [ERROR, {declaration: false, assignment: false}],
+    'reacc/jsx-wrap-multilines': [ERROR, {declaration: false, assignment: false}],
 
     // CUSTOM RULES
     // the second argument of warning/invariant should be a literal string
-    'react-internal/warning-and-invariant-args': ERROR,
-    'react-internal/no-primitive-constructors': ERROR,
+    'reacc-internal/warning-and-invariant-args': ERROR,
+    'reacc-internal/no-primitive-constructors': ERROR,
   },
 
   globals: {

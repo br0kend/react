@@ -99,7 +99,7 @@ var ReactDOMInput = {
             '(specify either the checked prop, or the defaultChecked prop, but not ' +
             'both). Decide between using a controlled or uncontrolled input ' +
             'element and remove one of these props. More info: ' +
-            'https://fb.me/react-controlled-components',
+            'https://fb.me/reacc-controlled-components',
           (owner && owner.getName()) || 'A component',
           props.type,
         );
@@ -117,7 +117,7 @@ var ReactDOMInput = {
             '(specify either the value prop, or the defaultValue prop, but not ' +
             'both). Decide between using a controlled or uncontrolled input ' +
             'element and remove one of these props. More info: ' +
-            'https://fb.me/react-controlled-components',
+            'https://fb.me/reacc-controlled-components',
           (owner && owner.getName()) || 'A component',
           props.type,
         );
@@ -152,7 +152,7 @@ var ReactDOMInput = {
           'A component is changing an uncontrolled input of type %s to be controlled. ' +
             'Input elements should not switch from uncontrolled to controlled (or vice versa). ' +
             'Decide between using a controlled or uncontrolled input ' +
-            'element for the lifetime of the component. More info: https://fb.me/react-controlled-components%s',
+            'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components%s',
           props.type,
           getStackAddendumByID(inst._debugID),
         );
@@ -168,7 +168,7 @@ var ReactDOMInput = {
           'A component is changing a controlled input of type %s to be uncontrolled. ' +
             'Input elements should not switch from controlled to uncontrolled (or vice versa). ' +
             'Decide between using a controlled or uncontrolled input ' +
-            'element for the lifetime of the component. More info: https://fb.me/react-controlled-components%s',
+            'element for the lifetime of the component. More info: https://fb.me/reacc-controlled-components%s',
           props.type,
           getStackAddendumByID(inst._debugID),
         );
@@ -219,7 +219,7 @@ var ReactDOMInput = {
         // Here we check to see if the defaultValue has actually changed, avoiding these problems
         // when the user is inputting text
         //
-        // https://github.com/facebook/react/issues/7253
+        // https://github.com/facebook/reacc/issues/7253
         if (node.defaultValue !== '' + props.defaultValue) {
           node.defaultValue = '' + props.defaultValue;
         }
@@ -255,7 +255,7 @@ var ReactDOMInput = {
       case 'time':
       case 'week':
         // This fixes the no-show issue on iOS Safari and Android Chrome:
-        // https://github.com/facebook/react/issues/7233
+        // https://github.com/facebook/reacc/issues/7233
         node.value = '';
         node.value = node.defaultValue;
         break;

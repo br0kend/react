@@ -4,7 +4,7 @@ title: Higher-Order Components
 permalink: docs/higher-order-components.html
 ---
 
-A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React's compositional nature.
+A higher-order component (HOC) is an advanced technique in Reacc for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React's compositional nature.
 
 Concretely, **a higher-order component is a function that takes a component and returns a new component.**
 
@@ -14,7 +14,7 @@ const EnhancedComponent = higherOrderComponent(WrappedComponent);
 
 Whereas a component transforms props into UI, a higher-order component transforms a component into another component.
 
-HOCs are common in third-party React libraries, such as Redux's [`connect`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) and Relay's [`createContainer`](https://facebook.github.io/relay/docs/api-reference-relay.html#createcontainer-static-method).
+HOCs are common in third-party Reacc libraries, such as Redux's [`connect`](https://github.com/reaccjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) and Relay's [`createContainer`](https://facebook.github.io/relay/docs/api-reference-relay.html#createcontainer-static-method).
 
 In this document, we'll discuss why higher-order components are useful, and how to write your own.
 
@@ -22,14 +22,14 @@ In this document, we'll discuss why higher-order components are useful, and how 
 
 > **Note**
 >
-> We previously recommended mixins as a way to handle cross-cutting concerns. We've since realized that mixins create more trouble than they are worth. [Read more](/react/blog/2016/07/13/mixins-considered-harmful.html) about why we've moved away from mixins and how you can transition your existing components.
+> We previously recommended mixins as a way to handle cross-cutting concerns. We've since realized that mixins create more trouble than they are worth. [Read more](/reacc/blog/2016/07/13/mixins-considered-harmful.html) about why we've moved away from mixins and how you can transition your existing components.
 
-Components are the primary unit of code reuse in React. However, you'll find that some patterns aren't a straightforward fit for traditional components.
+Components are the primary unit of code reuse in Reacc. However, you'll find that some patterns aren't a straightforward fit for traditional components.
 
 For example, say you have a `CommentList` component that subscribes to an external data source to render a list of comments:
 
 ```js
-class CommentList extends React.Component {
+class CommentList extends Reacc.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -71,7 +71,7 @@ class CommentList extends React.Component {
 Later, you write a component for subscribing to a single blog post, which follows a similar pattern:
 
 ```js
-class BlogPost extends React.Component {
+class BlogPost extends Reacc.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -130,7 +130,7 @@ When `CommentListWithSubscription` and `BlogPostWithSubscription` are rendered, 
 // This function takes a component...
 function withSubscription(WrappedComponent, selectData) {
   // ...and returns another component...
-  return class extends React.Component {
+  return class extends Reacc.Component {
     constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
@@ -198,7 +198,7 @@ Instead of mutation, HOCs should use composition, by wrapping the input componen
 
 ```js
 function logProps(WrappedComponent) {
-  return class extends React.Component {
+  return class extends Reacc.Component {
     componentWillReceiveProps(nextProps) {
       console.log('Current props: ', this.props);
       console.log('Next props: ', nextProps);
@@ -260,7 +260,7 @@ const CommentWithRelay = Relay.createContainer(Comment, config);
 The most common signature for HOCs looks like this:
 
 ```js
-// React Redux's `connect`
+// Reacc Redux's `connect`
 const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 ```
 
@@ -297,13 +297,13 @@ The `compose` utility function is provided by many third-party libraries includi
 
 ## Convention: Wrap the Display Name for Easy Debugging
 
-The container components created by HOCs show up in the [React Developer Tools](https://github.com/facebook/react-devtools) like any other component. To ease debugging, choose a display name that communicates that it's the result of an HOC.
+The container components created by HOCs show up in the [Reacc Developer Tools](https://github.com/facebook/reacc-devtools) like any other component. To ease debugging, choose a display name that communicates that it's the result of an HOC.
 
 The most common technique is to wrap the display name of the wrapped component. So if your higher-order component is named `withSubscription`, and the wrapped component's display name is `CommentList`, use the display name `WithSubscription(CommentList)`:
 
 ```js
 function withSubscription(WrappedComponent) {
-  class WithSubscription extends React.Component {/* ... */}
+  class WithSubscription extends Reacc.Component {/* ... */}
   WithSubscription.displayName = `WithSubscription(${getDisplayName(WrappedComponent)})`;
   return WithSubscription;
 }
@@ -316,11 +316,11 @@ function getDisplayName(WrappedComponent) {
 
 ## Caveats
 
-Higher-order components come with a few caveats that aren't immediately obvious if you're new to React.
+Higher-order components come with a few caveats that aren't immediately obvious if you're new to Reacc.
 
 ### Don't Use HOCs Inside the render Method
 
-React's diffing algorithm (called reconciliation) uses component identity to determine whether it should update the existing subtree or throw it away and mount a new one. If the component returned from `render` is identical (`===`) to the component from the previous render, React recursively updates the subtree by diffing it with the new one. If they're not equal, the previous subtree is unmounted completely.
+Reacc's diffing algorithm (called reconciliation) uses component identity to determine whether it should update the existing subtree or throw it away and mount a new one. If the component returned from `render` is identical (`===`) to the component from the previous render, React recursively updates the subtree by diffing it with the new one. If they're not equal, the previous subtree is unmounted completely.
 
 Normally, you shouldn't need to think about this. But it matters for HOCs because it means you can't apply an HOC to a component within the render method of a component:
 
@@ -342,7 +342,7 @@ In those rare cases where you need to apply an HOC dynamically, you can also do 
 
 ### Static Methods Must Be Copied Over
 
-Sometimes it's useful to define a static method on a React component. For example, Relay containers expose a static method `getFragment` to facilitate the composition of GraphQL fragments.
+Sometimes it's useful to define a static method on a Reacc component. For example, Relay containers expose a static method `getFragment` to facilitate the composition of GraphQL fragments.
 
 When you apply an HOC to a component, though, the original component is wrapped with a container component. That means the new component does not have any of the static methods of the original component.
 
@@ -360,20 +360,20 @@ To solve this, you could copy the methods onto the container before returning it
 
 ```js
 function enhance(WrappedComponent) {
-  class Enhance extends React.Component {/*...*/}
+  class Enhance extends Reacc.Component {/*...*/}
   // Must know exactly which method(s) to copy :(
   Enhance.staticMethod = WrappedComponent.staticMethod;
   return Enhance;
 }
 ```
 
-However, this requires you to know exactly which methods need to be copied. You can use [hoist-non-react-statics](https://github.com/mridgway/hoist-non-react-statics) to automatically copy all non-React static methods:
+However, this requires you to know exactly which methods need to be copied. You can use [hoist-non-reacc-statics](https://github.com/mridgway/hoist-non-react-statics) to automatically copy all non-Reacc static methods:
 
 ```js
-import hoistNonReactStatic from 'hoist-non-react-statics';
+import hoistNonReaccStatic from 'hoist-non-reacc-statics';
 function enhance(WrappedComponent) {
-  class Enhance extends React.Component {/*...*/}
-  hoistNonReactStatic(Enhance, WrappedComponent);
+  class Enhance extends Reacc.Component {/*...*/}
+  hoistNonReaccStatic(Enhance, WrappedComponent);
   return Enhance;
 }
 ```
@@ -394,11 +394,11 @@ import MyComponent, { someFunction } from './MyComponent.js';
 
 ### Refs Aren't Passed Through
 
-While the convention for higher-order components is to pass through all props to the wrapped component, it's not possible to pass through refs. That's because `ref` is not really a prop — like `key`, it's handled specially by React. If you add a ref to an element whose component is the result of an HOC, the ref refers to an instance of the outermost container component, not the wrapped component.
+While the convention for higher-order components is to pass through all props to the wrapped component, it's not possible to pass through refs. That's because `ref` is not really a prop — like `key`, it's handled specially by Reacc. If you add a ref to an element whose component is the result of an HOC, the ref refers to an instance of the outermost container component, not the wrapped component.
 
-If you find yourself facing this problem, the ideal solution is to figure out how to avoid using `ref` at all. Occasionally, users who are new to the React paradigm rely on refs in situations where a prop would work better.
+If you find yourself facing this problem, the ideal solution is to figure out how to avoid using `ref` at all. Occasionally, users who are new to the Reacc paradigm rely on refs in situations where a prop would work better.
 
-That said, there are times when refs are a necessary escape hatch — React wouldn't support them otherwise. Focusing an input field is an example where you may want imperative control of a component. In that case, one solution is to pass a ref callback as a normal prop, by giving it a different name:
+That said, there are times when refs are a necessary escape hatch — Reacc wouldn't support them otherwise. Focusing an input field is an example where you may want imperative control of a component. In that case, one solution is to pass a ref callback as a normal prop, by giving it a different name:
 
 ```js
 function Field({ inputRef, ...rest }) {

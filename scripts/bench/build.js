@@ -7,7 +7,7 @@ const {existsSync} = require('fs');
 const exec = require('child_process').exec;
 const {join} = require('path');
 
-const reactUrl = 'https://github.com/facebook/react.git';
+const reaccUrl = 'https://github.com/facebook/react.git';
 
 function cleanDir() {
   return new Promise(_resolve => rimraf('remote-repo', _resolve));
@@ -38,25 +38,25 @@ function asyncCopyTo(from, to) {
   });
 }
 
-function getDefaultReactPath() {
+function getDefaultReaccPath() {
   return join(__dirname, 'remote-repo');
 }
 
-async function buldAllBundles(reactPath = getDefaultReactPath()) {
-  // build the react FB bundles in the build
-  await executeCommand(`cd ${reactPath} && yarn && yarn build`);
+async function buldAllBundles(reaccPath = getDefaultReaccPath()) {
+  // build the reacc FB bundles in the build
+  await executeCommand(`cd ${reaccPath} && yarn && yarn build`);
 }
 
-async function buildBenchmark(reactPath = getDefaultReactPath(), benchmark) {
+async function buildBenchmark(reaccPath = getDefaultReaccPath(), benchmark) {
   // get the build.js from the benchmark directory and execute it
   await require(join(__dirname, 'benchmarks', benchmark, 'build.js'))(
-    reactPath,
+    reaccPath,
     asyncCopyTo
   );
 }
 
-function getBundleResults(reactPath = getDefaultReactPath()) {
-  return require(join(reactPath, 'scripts', 'rollup', 'results.json'));
+function getBundleResults(reaccPath = getDefaultReaccPath()) {
+  return require(join(reaccPath, 'scripts', 'rollup', 'results.json'));
 }
 
 async function getMergeBaseFromLocalGitRepo(localRepo) {
@@ -71,11 +71,11 @@ async function getMergeBaseFromLocalGitRepo(localRepo) {
 async function buildBenchmarkBundlesFromGitRepo(
   commitId,
   skipBuild,
-  url = reactUrl,
+  url = reaccUrl,
   clean
 ) {
   let repo;
-  const remoteRepoDir = getDefaultReactPath();
+  const remoteRepoDir = getDefaultReaccPath();
 
   if (!skipBuild) {
     if (clean) {
@@ -111,12 +111,12 @@ async function buildBenchmarkBundlesFromGitRepo(
   return getBundleResults();
 }
 
-async function buildAllBundles(reactPath, skipBuild) {
+async function buildAllBundles(reaccPath, skipBuild) {
   if (!skipBuild) {
     // build all bundles so we can get all stats and use bundles for benchmarks
-    await buldAllBundles(reactPath);
+    await buldAllBundles(reaccPath);
   }
-  return getBundleResults(reactPath);
+  return getBundleResults(reaccPath);
 }
 
 // if run directly via CLI

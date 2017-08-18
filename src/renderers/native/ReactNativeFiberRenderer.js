@@ -93,7 +93,7 @@ const NativeRenderer = ReactFiberReconciler({
     const childTag = typeof child === 'number' ? child : child._nativeTag;
     UIManager.setChildren(
       parentInstance, // containerTag
-      [childTag], // reactTags
+      [childTag], // reaccTags
     );
   },
 
@@ -110,7 +110,7 @@ const NativeRenderer = ReactFiberReconciler({
     newText: string,
   ): void {
     UIManager.updateView(
-      textInstance, // reactTag
+      textInstance, // reaccTag
       'RCTRawText', // viewName
       {text: newText}, // props
     );
@@ -144,7 +144,7 @@ const NativeRenderer = ReactFiberReconciler({
     );
 
     UIManager.updateView(
-      instance._nativeTag, // reactTag
+      instance._nativeTag, // reaccTag
       viewConfig.uiViewClassName, // viewName
       updatePayload, // props
     );
@@ -174,7 +174,7 @@ const NativeRenderer = ReactFiberReconciler({
     );
 
     UIManager.createView(
-      tag, // reactTag
+      tag, // reaccTag
       viewConfig.uiViewClassName, // viewName
       rootContainerInstance, // rootTag
       updatePayload, // props
@@ -199,7 +199,7 @@ const NativeRenderer = ReactFiberReconciler({
     const tag = ReactNativeTagHandles.allocateTag();
 
     UIManager.createView(
-      tag, // reactTag
+      tag, // reaccTag
       'RCTRawText', // viewName
       rootContainerInstance, // rootTag
       {text: text}, // props
@@ -232,7 +232,7 @@ const NativeRenderer = ReactFiberReconciler({
 
     UIManager.setChildren(
       parentInstance._nativeTag, // containerTag
-      nativeTags, // reactTags
+      nativeTags, // reaccTags
     );
 
     return false;
@@ -371,7 +371,7 @@ const NativeRenderer = ReactFiberReconciler({
     // But creates an additional child Fiber for raw text children.
     // No additional native views are created though.
     // It's not clear to me which is better so I'm deferring for now.
-    // More context @ github.com/facebook/react/pull/8560#discussion_r92111303
+    // More context @ github.com/facebook/reacc/pull/8560#discussion_r92111303
     return false;
   },
 

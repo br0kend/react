@@ -14,7 +14,7 @@
 
 type ReactNodeType = 0 | 1 | 2;
 
-var React = require('react');
+var React = require('reacc');
 
 var invariant = require('fbjs/lib/invariant');
 
